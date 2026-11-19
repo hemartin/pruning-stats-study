@@ -1,0 +1,1306 @@
+--- a/src/function/table/table_scan.cpp
++++ b/src/function/table/table_scan.cpp
+@@ -31,6 +31,7 @@
+ #include "duckdb/common/types/value_map.hpp"
+ #include "duckdb/main/settings.hpp"
+ #include "duckdb/storage/table/pruning_stats.hpp"
++#include "duckdb/storage/table/predicate_cache.hpp"
+ #include "duckdb/storage/table/row_group_collection.hpp"
+ #include <list>
+ 
+@@ -268,6 +269,8 @@
+ 	ParallelTableScanState state;
+ 	//! Pruning-study counters of this scan (only when DUCKDB_PRUNING_STATS is set)
+ 	shared_ptr<PruningScanStats> pruning;
++	//! Predicate cache of this scan (only when PRUNING_PREDICATE_CACHE is set and the scan is cacheable)
++	shared_ptr<PredicateCacheScan> predcache;
+ 
+ private:
+ 	const TableScanBindData &bind_data;
+@@ -291,6 +294,10 @@
+ 			l_state->scan_state.pruning_local = make_shared_ptr<PruningScanLocal>(context.client, pruning);
+ 			l_state->scan_state.table_state.pruning_local = l_state->scan_state.pruning_local.get();
+ 		}
++		if (predcache) {
++			l_state->scan_state.predcache = predcache;
++			l_state->scan_state.table_state.predcache = predcache.get();
++		}
+ 
+ 		storage.NextParallelScan(context.client, state, l_state->scan_state);
+ 		if (input.CanRemoveFilterColumns()) {
+@@ -375,6 +382,19 @@
+ 		g_state->pruning = PruningScanStats::Create(context, bind_data.table, *g_state->state.scan_state.collection,
+ 		                                            input.column_indexes, input.filters, input.op);
+ 	}
++	if (PredicateCache::Enabled() && !bind_data.is_create_index && g_state->state.scan_state.collection) {
++		vector<StorageIndex> storage_ids;
++		for (auto &col : input.column_indexes) {
++			storage_ids.push_back(GetStorageIndex(bind_data.table, col));
++		}
++		string info_json;
++		g_state->predcache =
++		    PredicateCacheScan::Create(context, *g_state->state.scan_state.collection, storage_ids, input.filters,
++		                               input.op, input.sample_options != nullptr, info_json);
++		if (g_state->pruning) {
++			g_state->pruning->predcache_json = info_json;
++		}
++	}
+ 	if (!input.CanRemoveFilterColumns()) {
+ 		return std::move(g_state);
+ 	}
+--- a/src/include/duckdb/storage/table/pruning_stats.hpp
++++ b/src/include/duckdb/storage/table/pruning_stats.hpp
+@@ -69,7 +69,7 @@
+ 
+ struct PruningRowGroupStat {
+ 	//! 0 = never reached, 1 = pruned by the row-group zonemap (min/max), 2 = entered (passed the zonemap check),
+-	//! 3 = pruned by a selective (additional) statistic
++	//! 3 = pruned by a selective (additional) statistic, 4 = pruned by the predicate cache
+ 	atomic<uint8_t> state;
+ 	atomic<uint32_t> vectors_total;
+ 	atomic<uint32_t> vectors_done;
+@@ -104,6 +104,8 @@
+ 	vector<idx_t> filter_columns;
+ 	vector<string> filter_column_names;
+ 	unique_ptr<atomic<idx_t>[]> additional_first_by_column;
++	//! predicate cache info of this scan (JSON object; empty if the cache is off)
++	string predcache_json;
+ 
+ 	string ToJSON(idx_t seq, const string &tag, const string &session) const;
+ 	PruningRowGroupStat *GetRowGroup(RowGroup &row_group);
+@@ -116,6 +118,7 @@
+ 	~PruningScanLocal();
+ 
+ 	void OnPruned(RowGroup &row_group, ScanFilterInfo &filters, bool by_additional = false);
++	void OnPrunedPredicateCache(RowGroup &row_group);
+ 	void OnEnter(RowGroup &row_group, idx_t max_row_group_row);
+ 	void OnSegmentSkip(RowGroup &row_group, idx_t vectors);
+ 	void OnVector(RowGroup &row_group, idx_t rows_scanned, idx_t rows_passed, idx_t rows_passed_incl_optional);
+--- a/src/include/duckdb/storage/table/row_group.hpp
++++ b/src/include/duckdb/storage/table/row_group.hpp
+@@ -31,6 +31,7 @@
+ struct DataTableInfo;
+ class ExpressionExecutor;
+ class RowGroupCollection;
++class PredicateCacheScan;
+ class RowGroupWriter;
+ class UpdateSegment;
+ class TableStatistics;
+@@ -73,6 +74,7 @@
+ public:
+ 	friend class ColumnData;
+ 	friend class PruningScanLocal;
++	friend class PredicateCacheScan;
+ 
+ public:
+ 	RowGroup(RowGroupCollection &collection, idx_t start, idx_t count);
+@@ -124,6 +126,9 @@
+ 	bool CheckZonemap(ScanFilterInfo &filters);
+ 	//! Same; pruned_by_additional is set if min/max could not prune but a selective statistic could
+ 	bool CheckZonemap(ScanFilterInfo &filters, bool &pruned_by_additional);
++	//! cause: 1 = min/max zonemap, 3 = selective statistic, 4 = predicate cache (consulted after min/max, before the
++	//! selective statistics)
++	bool CheckZonemap(ScanFilterInfo &filters, uint8_t &cause, PredicateCacheScan *predcache);
+ 	//! Checks the given set of table filters against the per-segment statistics. Returns false if any segments were
+ 	//! skipped.
+ 	bool CheckZonemapSegments(CollectionScanState &state);
+--- a/src/include/duckdb/storage/table/row_group_collection.hpp
++++ b/src/include/duckdb/storage/table/row_group_collection.hpp
+@@ -37,6 +37,7 @@
+ class CheckpointTask;
+ class TableIOManager;
+ class DataTable;
++class PredicateCacheTable;
+ 
+ class RowGroupCollection {
+ public:
+@@ -149,6 +150,10 @@
+ 		return row_group_size;
+ 	}
+ 	void SetAppendRequiresNewRowGroup();
++	//! Predicate cache of this table (pruning study; only when PRUNING_PREDICATE_CACHE is set)
++	shared_ptr<PredicateCacheTable> predicate_cache;
++	//! Any write: invalidates the predicate cache
++	void PredicateCacheOnWrite();
+ 
+ private:
+ 	bool IsEmpty(SegmentLock &) const;
+--- a/src/include/duckdb/storage/table/scan_state.hpp
++++ b/src/include/duckdb/storage/table/scan_state.hpp
+@@ -43,6 +43,7 @@
+ struct ScanSamplingInfo;
+ struct TableFilterState;
+ class PruningScanLocal;
++class PredicateCacheScan;
+ 
+ struct SegmentScanState {
+ 	virtual ~SegmentScanState() {
+@@ -203,6 +204,9 @@
+ 	RandomEngine random;
+ 	//! Pruning-study counters (only set for the main table state of a query scan when DUCKDB_PRUNING_STATS is set)
+ 	PruningScanLocal *pruning_local = nullptr;
++	//! Predicate cache of the scan (only set for the main table state of a query scan when PRUNING_PREDICATE_CACHE
++	//! is set)
++	PredicateCacheScan *predcache = nullptr;
+ 
+ public:
+ 	void Initialize(const vector<LogicalType> &types);
+@@ -258,6 +262,8 @@
+ 	ScanSamplingInfo sampling_info;
+ 	//! Owner of table_state.pruning_local (pruning-study counters)
+ 	shared_ptr<PruningScanLocal> pruning_local;
++	//! Owner of table_state.predcache (predicate cache)
++	shared_ptr<PredicateCacheScan> predcache;
+ 
+ public:
+ 	void Initialize(vector<StorageIndex> column_ids, optional_ptr<ClientContext> context = nullptr,
+--- a/src/storage/table/CMakeLists.txt
++++ b/src/storage/table/CMakeLists.txt
+@@ -12,6 +12,7 @@
+   update_segment.cpp
+   persistent_table_data.cpp
+   pruning_stats.cpp
++  predicate_cache.cpp
+   selective_stats.cpp
+   row_id_column_data.cpp
+   row_group.cpp
+--- a/src/storage/table/pruning_stats.cpp
++++ b/src/storage/table/pruning_stats.cpp
+@@ -495,7 +495,7 @@
+ }
+ 
+ string PruningScanStats::ToJSON(idx_t seq, const string &tag, const string &session) const {
+-	idx_t pruned = 0, pruned_additional = 0, entered = 0, not_reached = 0;
++	idx_t pruned = 0, pruned_additional = 0, pruned_predcache = 0, entered = 0, not_reached = 0;
+ 	idx_t no_rows = 0, no_rows_all_seg_skipped = 0, no_rows_some_seg_skipped = 0;
+ 	idx_t with_rows = 0, partial_with_rows = 0, partial_no_rows = 0;
+ 	idx_t opt_with_rows = 0, opt_no_rows = 0, opt_partial_no_rows = 0;
+@@ -507,11 +507,14 @@
+ 			not_reached++;
+ 			continue;
+ 		}
+-		if (state == 1 || state == 3) {
++		if (state == 1 || state == 3 || state == 4) {
+ 			pruned++;
+ 			if (state == 3) {
+ 				pruned_additional++;
+ 			}
++			if (state == 4) {
++				pruned_predcache++;
++			}
+ 			continue;
+ 		}
+ 		entered++;
+@@ -550,8 +553,10 @@
+ 	             ",\"table\":" + JSONEscape(table_name) + ",\"total_rows\":" + to_string(total_rows) +
+ 	             ",\"total_row_groups\":" + to_string(total_row_groups) + ",\"has_filters\":" + JSONBool(has_filters) +
+ 	             ",\"has_optional\":" + JSONBool(has_optional) + ",\"pruned\":" + to_string(pruned) +
+-	             ",\"pruned_minmax\":" + to_string(pruned - pruned_additional) +
++	             ",\"pruned_minmax\":" + to_string(pruned - pruned_additional - pruned_predcache) +
+ 	             ",\"pruned_additional\":" + to_string(pruned_additional) +
++	             ",\"pruned_predicate_cache\":" + to_string(pruned_predcache) +
++	             (predcache_json.empty() ? string() : ",\"predicate_cache\":" + predcache_json) +
+ 	             ",\"pruned_additional_no_single_leaf\":" + to_string(pruned_additional_no_single_leaf.load()) +
+ 	             ",\"scanned\":" + to_string(entered) + ",\"scanned_no_rows\":" + to_string(no_rows) +
+ 	             ",\"scanned_no_rows_all_segments_skipped\":" + to_string(no_rows_all_seg_skipped) +
+@@ -712,6 +717,15 @@
+ 	}
+ }
+ 
++void PruningScanLocal::OnPrunedPredicateCache(RowGroup &row_group) {
++	auto rg = stats->GetRowGroup(row_group);
++	if (!rg) {
++		return;
++	}
++	uint8_t expected = 0;
++	rg->state.compare_exchange_strong(expected, 4);
++}
++
+ void PruningScanLocal::OnEnter(RowGroup &row_group, idx_t max_row_group_row) {
+ 	auto rg = stats->GetRowGroup(row_group);
+ 	if (!rg) {
+--- a/src/storage/table/row_group.cpp
++++ b/src/storage/table/row_group.cpp
+@@ -1,3 +1,4 @@
++#include "duckdb/storage/table/predicate_cache.hpp"
+ #include "duckdb/storage/table/row_group.hpp"
+ #include "duckdb/storage/table/pruning_stats.hpp"
+ #include "duckdb/storage/table/selective_stats.hpp"
+@@ -261,10 +262,17 @@
+ bool RowGroup::InitializeScanWithOffset(CollectionScanState &state, idx_t vector_offset) {
+ 	auto &column_ids = state.GetColumnIds();
+ 	auto &filters = state.GetFilterInfo();
+-	bool pruned_by_additional;
+-	if (!CheckZonemap(filters, pruned_by_additional)) {
++	uint8_t prune_cause;
++	if (!CheckZonemap(filters, prune_cause, state.predcache)) {
++		if (state.predcache) {
++			state.predcache->OnPruned(*this, prune_cause);
++		}
+ 		if (state.pruning_local) {
+-			state.pruning_local->OnPruned(*this, filters, pruned_by_additional);
++			if (prune_cause == 4) {
++				state.pruning_local->OnPrunedPredicateCache(*this);
++			} else {
++				state.pruning_local->OnPruned(*this, filters, prune_cause == 3);
++			}
+ 		}
+ 		return false;
+ 	}
+@@ -281,6 +289,9 @@
+ 	if (state.pruning_local) {
+ 		state.pruning_local->OnEnter(*this, state.max_row_group_row);
+ 	}
++	if (state.predcache) {
++		state.predcache->OnEnter(*this, state.max_row_group_row);
++	}
+ 	D_ASSERT(state.column_scans);
+ 	for (idx_t i = 0; i < column_ids.size(); i++) {
+ 		const auto &column = column_ids[i];
+@@ -294,10 +305,17 @@
+ bool RowGroup::InitializeScan(CollectionScanState &state) {
+ 	auto &column_ids = state.GetColumnIds();
+ 	auto &filters = state.GetFilterInfo();
+-	bool pruned_by_additional;
+-	if (!CheckZonemap(filters, pruned_by_additional)) {
++	uint8_t prune_cause;
++	if (!CheckZonemap(filters, prune_cause, state.predcache)) {
++		if (state.predcache) {
++			state.predcache->OnPruned(*this, prune_cause);
++		}
+ 		if (state.pruning_local) {
+-			state.pruning_local->OnPruned(*this, filters, pruned_by_additional);
++			if (prune_cause == 4) {
++				state.pruning_local->OnPrunedPredicateCache(*this);
++			} else {
++				state.pruning_local->OnPruned(*this, filters, prune_cause == 3);
++			}
+ 		}
+ 		return false;
+ 	}
+@@ -311,6 +329,9 @@
+ 	if (state.pruning_local) {
+ 		state.pruning_local->OnEnter(*this, state.max_row_group_row);
+ 	}
++	if (state.predcache) {
++		state.predcache->OnEnter(*this, state.max_row_group_row);
++	}
+ 	D_ASSERT(state.column_scans);
+ 	for (idx_t i = 0; i < column_ids.size(); i++) {
+ 		auto column = column_ids[i];
+@@ -459,7 +480,14 @@
+ }
+ 
+ bool RowGroup::CheckZonemap(ScanFilterInfo &filters, bool &pruned_by_additional) {
+-	pruned_by_additional = false;
++	uint8_t cause = 0;
++	auto result = CheckZonemap(filters, cause, nullptr);
++	pruned_by_additional = !result && cause == 3;
++	return result;
++}
++
++bool RowGroup::CheckZonemap(ScanFilterInfo &filters, uint8_t &cause, PredicateCacheScan *predcache) {
++	cause = 1;
+ 	auto &filter_list = filters.GetFilterList();
+ 	// new row group - label all filters as up for grabs again
+ 	filters.CheckAllFilters();
+@@ -486,6 +514,11 @@
+ 			filters.SetFilterAlwaysTrue(i);
+ 		}
+ 	}
++	if (predcache && predcache->KnownEmpty(index)) {
++		// predicate cache: a previous scan with the same static filter conjunction found no qualifying row
++		cause = 4;
++		return false;
++	}
+ 	if (!SelectiveStats::Enabled()) {
+ 		return true;
+ 	}
+@@ -512,7 +545,7 @@
+ 		SelectiveStats::consultations.fetch_add(1, std::memory_order_relaxed);
+ 		if (prune) {
+ 			SelectiveStats::pruned.fetch_add(1, std::memory_order_relaxed);
+-			pruned_by_additional = true;
++			cause = 3;
+ 			return false;
+ 		}
+ 	}
+@@ -575,6 +608,7 @@
+ 	const auto &column_ids = state.GetColumnIds();
+ 	auto &filter_info = state.GetFilterInfo();
+ 	auto pruning_local = state.pruning_local;
++	auto predcache = state.predcache;
+ 	while (true) {
+ 		if (state.vector_index * STANDARD_VECTOR_SIZE >= state.max_row_group_row) {
+ 			// exceeded the amount of rows to scan
+@@ -589,6 +623,9 @@
+ 			if (pruning_local) {
+ 				pruning_local->OnVector(*this, 0, 0, 0);
+ 			}
++			if (predcache) {
++				predcache->OnVector(*this, 0, false);
++			}
+ 			NextVector(state);
+ 			continue;
+ 		}
+@@ -599,7 +636,9 @@
+ 			if (pruning_local) {
+ 				pruning_local->OnSegmentSkip(*this, state.vector_index - vector_index_before);
+ 			}
+-
++			if (predcache) {
++				predcache->OnSegmentSkip(*this, state.vector_index - vector_index_before);
++			}
+ 			continue;
+ 		}
+ 
+@@ -612,6 +651,9 @@
+ 				if (pruning_local) {
+ 					pruning_local->OnVector(*this, max_count, 0, 0);
+ 				}
++				if (predcache) {
++					predcache->OnVector(*this, 0, false);
++				}
+ 				NextVector(state);
+ 				continue;
+ 			}
+@@ -623,12 +665,16 @@
+ 				if (pruning_local) {
+ 					pruning_local->OnVector(*this, max_count, 0, 0);
+ 				}
++				if (predcache) {
++					predcache->OnVector(*this, 0, false);
++				}
+ 				NextVector(state);
+ 				continue;
+ 			}
+ 		} else {
+ 			count = max_count;
+ 		}
++		const bool all_rows_visible = count == max_count;
+ 		auto &block_manager = GetBlockManager();
+ #ifndef DUCKDB_ALTERNATIVE_VERIFY
+ 		// // in regular operation we only prefetch from remote file systems
+@@ -710,6 +756,9 @@
+ 				if (pruning_local) {
+ 					pruning_local->OnVector(*this, max_count, 0, 0);
+ 				}
++				if (predcache) {
++					predcache->OnVector(*this, 0, all_rows_visible);
++				}
+ 				result.Reset();
+ 				// skip this vector in all the scans that were not scanned yet
+ 				for (idx_t i = 0; i < column_ids.size(); i++) {
+@@ -748,7 +797,9 @@
+ 		if (pruning_local) {
+ 			pruning_local->OnVector(*this, max_count, count, pruning_local->CountOptional(*this, result, count));
+ 		}
+-
++		if (predcache) {
++			predcache->OnVector(*this, count, all_rows_visible);
++		}
+ 		state.vector_index++;
+ 		break;
+ 	}
+--- a/src/storage/table/row_group_collection.cpp
++++ b/src/storage/table/row_group_collection.cpp
+@@ -1,3 +1,4 @@
++#include "duckdb/storage/table/predicate_cache.hpp"
+ #include "duckdb/storage/table/row_group_collection.hpp"
+ 
+ #include "duckdb/common/serializer/binary_deserializer.hpp"
+@@ -68,6 +69,15 @@
+     : block_manager(block_manager), row_group_size(row_group_size_p), total_rows(total_rows_p), info(std::move(info_p)),
+       types(std::move(types_p)), row_start(row_start_p), allocation_size(0), requires_new_row_group(false) {
+ 	row_groups = make_shared_ptr<RowGroupSegmentTree>(*this);
++	if (PredicateCache::Enabled()) {
++		predicate_cache = make_shared_ptr<PredicateCacheTable>();
++	}
++}
++
++void RowGroupCollection::PredicateCacheOnWrite() {
++	if (predicate_cache) {
++		predicate_cache->OnWrite();
++	}
+ }
+ 
+ idx_t RowGroupCollection::GetTotalRows() const {
+@@ -356,6 +366,7 @@
+ }
+ 
+ void RowGroupCollection::InitializeAppend(TransactionData transaction, TableAppendState &state) {
++	PredicateCacheOnWrite();
+ 	state.row_start = UnsafeNumericCast<row_t>(total_rows.load());
+ 	state.current_row = state.row_start;
+ 	state.total_append_count = 0;
+@@ -382,6 +393,7 @@
+ }
+ 
+ bool RowGroupCollection::Append(DataChunk &chunk, TableAppendState &state) {
++	PredicateCacheOnWrite();
+ 	const idx_t row_group_size = GetRowGroupSize();
+ 	D_ASSERT(chunk.ColumnCount() == types.size());
+ 	chunk.Verify();
+@@ -438,6 +450,7 @@
+ }
+ 
+ void RowGroupCollection::FinalizeAppend(TransactionData transaction, TableAppendState &state) {
++	PredicateCacheOnWrite();
+ 	const idx_t row_group_size = GetRowGroupSize();
+ 
+ 	auto remaining = state.total_append_count;
+@@ -471,6 +484,7 @@
+ }
+ 
+ void RowGroupCollection::CommitAppend(transaction_t commit_id, idx_t row_start, idx_t count) {
++	PredicateCacheOnWrite();
+ 	auto row_group = row_groups->GetSegment(row_start);
+ 	D_ASSERT(row_group);
+ 	idx_t current_row = row_start;
+@@ -491,6 +505,7 @@
+ }
+ 
+ void RowGroupCollection::RevertAppendInternal(idx_t start_row) {
++	PredicateCacheOnWrite();
+ 	total_rows = start_row;
+ 
+ 	auto l = row_groups->Lock();
+@@ -555,6 +570,7 @@
+ 
+ void RowGroupCollection::MergeStorage(RowGroupCollection &data, optional_ptr<DataTable> table,
+                                       optional_ptr<StorageCommitState> commit_state) {
++	PredicateCacheOnWrite();
+ 	D_ASSERT(data.types == types);
+ 	auto start_index = row_start + total_rows.load();
+ 	auto index = start_index;
+@@ -601,6 +617,7 @@
+ // Delete
+ //===--------------------------------------------------------------------===//
+ idx_t RowGroupCollection::Delete(TransactionData transaction, DataTable &table, row_t *ids, idx_t count) {
++	PredicateCacheOnWrite();
+ 	idx_t delete_count = 0;
+ 	// delete is in the row groups
+ 	// we need to figure out for each id to which row group it belongs
+@@ -656,6 +673,7 @@
+ 
+ void RowGroupCollection::Update(TransactionData transaction, DataTable &data_table, row_t *ids,
+                                 const vector<PhysicalIndex> &column_ids, DataChunk &updates) {
++	PredicateCacheOnWrite();
+ 	D_ASSERT(updates.size() >= 1);
+ 	idx_t pos = 0;
+ 	do {
+@@ -784,6 +802,7 @@
+ 
+ void RowGroupCollection::UpdateColumn(TransactionData transaction, DataTable &data_table, Vector &row_ids,
+                                       const vector<column_t> &column_path, DataChunk &updates) {
++	PredicateCacheOnWrite();
+ 	D_ASSERT(updates.size() >= 1);
+ 	auto ids = FlatVector::GetData<row_t>(row_ids);
+ 	idx_t pos = 0;
+@@ -1099,6 +1118,7 @@
+ }
+ 
+ void RowGroupCollection::Checkpoint(TableDataWriter &writer, TableStatistics &global_stats) {
++	PredicateCacheOnWrite();
+ 	auto l = row_groups->Lock();
+ 	auto segments = row_groups->MoveSegments(l);
+ 
+@@ -1339,6 +1359,7 @@
+ // CommitDrop
+ //===--------------------------------------------------------------------===//
+ void RowGroupCollection::CommitDropColumn(const idx_t column_index) {
++	PredicateCacheOnWrite();
+ 	for (auto &row_group : row_groups->Segments()) {
+ 		row_group.CommitDropColumn(column_index);
+ 	}
+@@ -1378,6 +1399,7 @@
+ //===--------------------------------------------------------------------===//
+ shared_ptr<RowGroupCollection> RowGroupCollection::AddColumn(ClientContext &context, ColumnDefinition &new_column,
+                                                              ExpressionExecutor &default_executor) {
++	PredicateCacheOnWrite();
+ 	idx_t new_column_idx = types.size();
+ 	auto new_types = types;
+ 	new_types.push_back(new_column.GetType());
+@@ -1405,6 +1427,7 @@
+ }
+ 
+ shared_ptr<RowGroupCollection> RowGroupCollection::RemoveColumn(idx_t col_idx) {
++	PredicateCacheOnWrite();
+ 	D_ASSERT(col_idx < types.size());
+ 	auto new_types = types;
+ 	new_types.erase_at(col_idx);
+@@ -1427,6 +1450,7 @@
+                                                              const LogicalType &target_type,
+                                                              vector<StorageIndex> bound_columns,
+                                                              Expression &cast_expr) {
++	PredicateCacheOnWrite();
+ 	D_ASSERT(changed_idx < types.size());
+ 	auto new_types = types;
+ 	new_types[changed_idx] = target_type;
+--- a/src/storage/table/selective_stats.cpp
++++ b/src/storage/table/selective_stats.cpp
+@@ -1,3 +1,4 @@
++#include "duckdb/storage/table/predicate_cache.hpp"
+ #include "duckdb/storage/table/selective_stats.hpp"
+ 
+ #include "duckdb/common/error_data.hpp"
+@@ -983,6 +984,7 @@
+ 	uint64_t consult_ns_start = 0;
+ 	uint64_t consultations_start = 0;
+ 	uint64_t pruned_start = 0;
++	uint64_t pc_start[PredicateCache::SNAPSHOT_SIZE] = {};
+ 
+ 	void QueryBegin(ClientContext &context) override {
+ 		lock_guard<mutex> guard(lock);
+@@ -992,6 +994,7 @@
+ 		consult_ns_start = SelectiveStats::consult_ns.load();
+ 		consultations_start = SelectiveStats::consultations.load();
+ 		pruned_start = SelectiveStats::pruned.load();
++		PredicateCache::Snapshot(pc_start);
+ 		start = std::chrono::steady_clock::now();
+ 	}
+ 
+@@ -1020,7 +1023,7 @@
+ 			       ",\"consultations\":" + to_string(SelectiveStats::consultations.load() - consultations_start) +
+ 			       ",\"consult_ns\":" + to_string(SelectiveStats::consult_ns.load() - consult_ns_start) +
+ 			       ",\"pruned_additional\":" + to_string(SelectiveStats::pruned.load() - pruned_start) +
+-			       ",\"sql\":" + Escape(sql.size() > 300 ? sql.substr(0, 300) + "..." : sql) + "}\n";
++			       PredicateCache::TimingFields(pc_start) + ",\"sql\":" + Escape(sql.size() > 300 ? sql.substr(0, 300) + "..." : sql) + "}\n";
+ 			// ingest accumulators of all selected columns (statement level)
+ 			auto &config = Config::Get();
+ 			lock_guard<mutex> config_guard(config.lock);
+--- /dev/null
++++ b/src/include/duckdb/storage/table/predicate_cache.hpp
+@@ -0,0 +1,149 @@
++//===----------------------------------------------------------------------===//
++//                         DuckDB
++//
++// duckdb/storage/table/predicate_cache.hpp
++//
++// Predicate cache (study instrumentation, not part of upstream DuckDB), after Schmidt et al., "Predicate Caching:
++// Query-Driven Secondary Indexing for Cloud Data Warehouses" (SIGMOD 2024) and ClickHouse's query condition cache.
++//
++// Enabled only when the environment variable PRUNING_PREDICATE_CACHE is set to 1/on/exact (whole-conjunction keys)
++// or 2/subset (additionally: an entry whose conjunct set is a subset of the scan's conjunct set may prune).
++// In-process, in-memory, empty at process start. Per table (RowGroupCollection) a map
++//   canonical static (plan-time) pushed-down filter conjunction -> per row group {known, has >= 1 qualifying row}.
++// Dynamic filters (join filters, top-N) and OptionalFilters are not part of the key. A row group's bit is recorded
++// only when it was decided: pruned by the static filters' zonemaps / selective statistics, or completely scanned
++// with the whole conjunction evaluated on all its rows (and all rows visible, no updates). A known "no rows" bit
++// lets later scans skip the row group. Any write to the table (append, delete, update, checkpoint, ...) clears the
++// table's entries (epoch). When the variable is unset no state is created.
++//===----------------------------------------------------------------------===//
++
++#pragma once
++
++#include "duckdb/common/common.hpp"
++#include "duckdb/common/atomic.hpp"
++#include "duckdb/common/mutex.hpp"
++#include "duckdb/common/optional_ptr.hpp"
++#include "duckdb/common/unordered_map.hpp"
++#include "duckdb/storage/storage_index.hpp"
++
++namespace duckdb {
++
++class ClientContext;
++class RowGroup;
++class RowGroupCollection;
++class TableFilter;
++class TableFilterSet;
++class PhysicalOperator;
++
++enum class PredicateCacheMode : uint8_t { OFF = 0, EXACT = 1, SUBSET = 2 };
++
++struct PredicateCache {
++	//! PRUNING_PREDICATE_CACHE (evaluated once and cached)
++	static PredicateCacheMode Mode();
++	static bool Enabled() {
++		return Mode() != PredicateCacheMode::OFF;
++	}
++	//! process-wide counters (reported per statement in the PRUNING_STATS_TIMING log)
++	static atomic<uint64_t> scans_cacheable;
++	static atomic<uint64_t> scans_uncacheable;
++	static atomic<uint64_t> pruned;
++	static atomic<uint64_t> recorded_empty;
++	static atomic<uint64_t> recorded_rows;
++	static atomic<uint64_t> conflicts;
++	static atomic<uint64_t> lookup_ns;
++	static atomic<uint64_t> record_ns;
++	static atomic<uint64_t> recheck_ns;
++	static atomic<uint64_t> invalidations;
++	//! current cache size over all tables
++	static atomic<int64_t> entries;
++	static atomic<int64_t> bytes;
++	//! JSON fields for the timing log: ",\"pc_...\":..."
++	static string TimingFields(const uint64_t *start);
++	static void Snapshot(uint64_t *out);
++	static constexpr idx_t SNAPSHOT_SIZE = 10;
++};
++
++struct PredicateCacheEntry {
++	//! canonical key (length-prefixed serialized leaves, sorted) and readable rendering
++	string key;
++	string readable;
++	vector<string> leaves;
++	uint64_t epoch = 0;
++	//! one bit per row group
++	vector<uint64_t> known;
++	vector<uint64_t> has_rows;
++	idx_t Bytes() const {
++		return key.size() + (known.size() + has_rows.size()) * sizeof(uint64_t);
++	}
++};
++
++//! The cache of one table (lives in its RowGroupCollection)
++class PredicateCacheTable {
++public:
++	~PredicateCacheTable();
++	//! any write to the table: all entries become invalid
++	void OnWrite();
++
++	mutex lock;
++	atomic<uint64_t> epoch {1};
++	unordered_map<string, unique_ptr<PredicateCacheEntry>> entries;
++};
++
++//! One table scan (shared by the scan's threads)
++class PredicateCacheScan {
++public:
++	static shared_ptr<PredicateCacheScan> Create(ClientContext &context, RowGroupCollection &collection,
++	                                             const vector<StorageIndex> &storage_ids,
++	                                             optional_ptr<TableFilterSet> filters,
++	                                             optional_ptr<const PhysicalOperator> op, bool sampling,
++	                                             string &info_json);
++	~PredicateCacheScan();
++
++	//! a known "no qualifying row" entry for this row group
++	bool KnownEmpty(idx_t row_group_index) const {
++		return row_group_index < n_row_groups && (known_empty[row_group_index / 64] >> (row_group_index % 64)) & 1;
++	}
++	//! cause: 1 = min/max zonemap, 3 = selective statistic, 4 = this cache
++	void OnPruned(RowGroup &row_group, uint8_t cause);
++	void OnEnter(RowGroup &row_group, idx_t max_row_group_row);
++	void OnSegmentSkip(RowGroup &row_group, idx_t vectors);
++	void OnVector(RowGroup &row_group, idx_t rows_passed, bool all_visible);
++
++	//! JSON object for the pruning counters
++	string InfoJSON() const;
++
++private:
++	struct RowGroupState {
++		//! 0 untouched, 1 pruned (static filters alone prune), 2 entered, 4 pruned by the cache, 5 pruned, but not
++		//! by the static filters alone (unknown)
++		atomic<uint8_t> state;
++		atomic<uint32_t> vectors_total;
++		atomic<uint32_t> vectors_done;
++		atomic<bool> any_rows;
++		atomic<bool> not_all_visible;
++		atomic<uint64_t> count_at_enter;
++	};
++	void Finish();
++	bool StaticFiltersPrune(RowGroup &row_group);
++
++	shared_ptr<PredicateCacheTable> table;
++	string key;
++	string readable;
++	vector<string> leaves;
++	uint64_t epoch = 0;
++	//! the filters applied to rows are exactly the static key filters (no dynamic join filters)
++	bool exact_applied = false;
++	//! the scan has optional or dynamic filters: a pruned row group must be re-checked with the static filters
++	bool needs_recheck = false;
++	//! static non-optional filters per storage column (re-check, update check)
++	vector<std::pair<StorageIndex, unique_ptr<TableFilter>>> static_filters;
++	idx_t n_row_groups = 0;
++	unique_ptr<uint64_t[]> known_empty;
++	idx_t known_empty_at_start = 0;
++	idx_t entries_used = 0;
++	unique_ptr<RowGroupState[]> row_groups;
++
++	PredicateCacheScan() = default;
++};
++
++} // namespace duckdb
+--- /dev/null
++++ b/src/storage/table/predicate_cache.cpp
+@@ -0,0 +1,580 @@
++#include "duckdb/storage/table/predicate_cache.hpp"
++
++#include "duckdb/common/exception.hpp"
++#include "duckdb/common/string_util.hpp"
++#include "duckdb/common/serializer/binary_serializer.hpp"
++#include "duckdb/common/serializer/memory_stream.hpp"
++#include "duckdb/execution/operator/scan/physical_table_scan.hpp"
++#include "duckdb/execution/physical_operator.hpp"
++#include "duckdb/planner/filter/conjunction_filter.hpp"
++#include "duckdb/planner/filter/optional_filter.hpp"
++#include "duckdb/planner/filter/struct_filter.hpp"
++#include "duckdb/planner/table_filter.hpp"
++#include "duckdb/storage/table/column_data.hpp"
++#include "duckdb/storage/table/row_group.hpp"
++#include "duckdb/storage/table/row_group_collection.hpp"
++#include "duckdb/storage/table/selective_stats.hpp"
++
++#include <algorithm>
++#include <chrono>
++#include <cstdio>
++#include <cstdlib>
++#include <cstring>
++
++namespace duckdb {
++
++atomic<uint64_t> PredicateCache::scans_cacheable {0};
++atomic<uint64_t> PredicateCache::scans_uncacheable {0};
++atomic<uint64_t> PredicateCache::pruned {0};
++atomic<uint64_t> PredicateCache::recorded_empty {0};
++atomic<uint64_t> PredicateCache::recorded_rows {0};
++atomic<uint64_t> PredicateCache::conflicts {0};
++atomic<uint64_t> PredicateCache::lookup_ns {0};
++atomic<uint64_t> PredicateCache::record_ns {0};
++atomic<uint64_t> PredicateCache::recheck_ns {0};
++atomic<uint64_t> PredicateCache::invalidations {0};
++atomic<int64_t> PredicateCache::entries {0};
++atomic<int64_t> PredicateCache::bytes {0};
++
++namespace {
++
++PredicateCacheMode PCReadMode() {
++	auto env = std::getenv("PRUNING_PREDICATE_CACHE");
++	if (!env || !*env) {
++		return PredicateCacheMode::OFF;
++	}
++	string v = StringUtil::Lower(env);
++	if (v == "0" || v == "off" || v == "false" || v == "no") {
++		return PredicateCacheMode::OFF;
++	}
++	if (v == "2" || v == "subset") {
++		return PredicateCacheMode::SUBSET;
++	}
++	return PredicateCacheMode::EXACT;
++}
++
++string PCEscape(const string &input) {
++	string out = "\"";
++	for (auto c : input) {
++		switch (c) {
++		case '"':
++			out += "\\\"";
++			break;
++		case '\\':
++			out += "\\\\";
++			break;
++		case '\n':
++			out += "\\n";
++			break;
++		case '\r':
++			out += "\\r";
++			break;
++		case '\t':
++			out += "\\t";
++			break;
++		default:
++			if (static_cast<unsigned char>(c) < 0x20) {
++				char buf[8];
++				snprintf(buf, sizeof(buf), "\\u%04x", static_cast<unsigned char>(c));
++				out += buf;
++			} else {
++				out += c;
++			}
++		}
++	}
++	return out + "\"";
++}
++
++//! true if an OptionalFilter or a DynamicFilter occurs anywhere inside the filter
++bool PCContainsOptionalOrDynamic(const TableFilter &filter) {
++	switch (filter.filter_type) {
++	case TableFilterType::OPTIONAL_FILTER:
++	case TableFilterType::DYNAMIC_FILTER:
++		return true;
++	case TableFilterType::STRUCT_EXTRACT:
++		return PCContainsOptionalOrDynamic(*filter.Cast<StructFilter>().child_filter);
++	case TableFilterType::CONJUNCTION_AND:
++	case TableFilterType::CONJUNCTION_OR:
++		for (auto &child : static_cast<const ConjunctionFilter &>(filter).child_filters) {
++			if (PCContainsOptionalOrDynamic(*child)) {
++				return true;
++			}
++		}
++		return false;
++	default:
++		return false;
++	}
++}
++
++void PCFlattenAnd(const TableFilter &filter, vector<reference<const TableFilter>> &result) {
++	if (filter.filter_type == TableFilterType::CONJUNCTION_AND) {
++		for (auto &child : filter.Cast<ConjunctionAndFilter>().child_filters) {
++			PCFlattenAnd(*child, result);
++		}
++		return;
++	}
++	result.push_back(filter);
++}
++
++string PCColumnKey(const StorageIndex &index) {
++	string result = to_string(index.GetPrimaryIndex());
++	for (auto &child : index.GetChildIndexes()) {
++		result += "." + PCColumnKey(child);
++	}
++	return result;
++}
++
++struct PCLeaf {
++	string key;
++	string readable;
++};
++
++//! Canonical leaves of a filter set: (storage column, serialized non-optional leaf). Optional leaves are skipped and
++//! reported via has_optional. Returns false (with a reason) if the set cannot be cached.
++bool PCCanonicalLeaves(const TableFilterSet &filters, const vector<StorageIndex> &storage_ids, idx_t column_count,
++                     vector<PCLeaf> &leaves, bool &has_optional, string &reason,
++                     vector<std::pair<StorageIndex, unique_ptr<TableFilter>>> *per_column) {
++	for (auto &entry : filters.filters) {
++		auto scan_col = entry.first;
++		if (scan_col >= storage_ids.size()) {
++			reason = "unknown_column";
++			return false;
++		}
++		auto &storage = storage_ids[scan_col];
++		if (storage.IsRowIdColumn() || storage.GetPrimaryIndex() >= column_count) {
++			reason = "rowid_or_virtual_column";
++			return false;
++		}
++		vector<reference<const TableFilter>> flat;
++		PCFlattenAnd(*entry.second, flat);
++		vector<unique_ptr<TableFilter>> kept;
++		for (auto &leaf_ref : flat) {
++			auto &leaf = leaf_ref.get();
++			if (leaf.filter_type == TableFilterType::OPTIONAL_FILTER) {
++				has_optional = true;
++				continue;
++			}
++			if (PCContainsOptionalOrDynamic(leaf)) {
++				reason = "nested_optional_or_dynamic";
++				return false;
++			}
++			MemoryStream stream;
++			try {
++				BinarySerializer::Serialize(leaf, stream);
++			} catch (std::exception &) {
++				reason = "not_serializable";
++				return false;
++			}
++			auto col = PCColumnKey(storage);
++			PCLeaf l;
++			l.key = col + ":" + string(const_char_ptr_cast(stream.GetData()), stream.GetPosition());
++			l.key = to_string(l.key.size()) + "#" + l.key;
++			l.readable = leaf.ToString("#" + col);
++			leaves.push_back(std::move(l));
++			if (per_column) {
++				kept.push_back(leaf.Copy());
++			}
++		}
++		if (per_column && !kept.empty()) {
++			unique_ptr<TableFilter> filter;
++			if (kept.size() == 1) {
++				filter = std::move(kept[0]);
++			} else {
++				auto conj = make_uniq<ConjunctionAndFilter>();
++				conj->child_filters = std::move(kept);
++				filter = std::move(conj);
++			}
++			per_column->emplace_back(storage, std::move(filter));
++		}
++	}
++	std::sort(leaves.begin(), leaves.end(), [](const PCLeaf &a, const PCLeaf &b) { return a.key < b.key; });
++	// duplicates are harmless for a conjunction: remove them so that the key is canonical
++	leaves.erase(std::unique(leaves.begin(), leaves.end(), [](const PCLeaf &a, const PCLeaf &b) { return a.key == b.key; }),
++	             leaves.end());
++	return true;
++}
++
++uint64_t PCNowNs() {
++	return static_cast<uint64_t>(
++	    std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now().time_since_epoch())
++	        .count());
++}
++
++} // namespace
++
++//===--------------------------------------------------------------------===//
++// PredicateCache
++//===--------------------------------------------------------------------===//
++PredicateCacheMode PredicateCache::Mode() {
++	static const PredicateCacheMode mode = PCReadMode();
++	return mode;
++}
++
++void PredicateCache::Snapshot(uint64_t *out) {
++	out[0] = scans_cacheable.load();
++	out[1] = scans_uncacheable.load();
++	out[2] = pruned.load();
++	out[3] = recorded_empty.load();
++	out[4] = recorded_rows.load();
++	out[5] = conflicts.load();
++	out[6] = lookup_ns.load();
++	out[7] = record_ns.load();
++	out[8] = recheck_ns.load();
++	out[9] = invalidations.load();
++}
++
++string PredicateCache::TimingFields(const uint64_t *start) {
++	if (!Enabled()) {
++		return string();
++	}
++	uint64_t now[SNAPSHOT_SIZE];
++	Snapshot(now);
++	static const char *names[SNAPSHOT_SIZE] = {"pc_scans_cacheable", "pc_scans_uncacheable", "pc_pruned",
++	                                           "pc_recorded_empty",  "pc_recorded_rows",     "pc_conflicts",
++	                                           "pc_lookup_ns",       "pc_record_ns",         "pc_recheck_ns",
++	                                           "pc_invalidations"};
++	string out = ",\"pc_mode\":" + to_string(static_cast<int>(Mode()));
++	for (idx_t i = 0; i < SNAPSHOT_SIZE; i++) {
++		out += ",\"" + string(names[i]) + "\":" + to_string(now[i] - start[i]);
++	}
++	out += ",\"pc_entries\":" + to_string(entries.load()) + ",\"pc_bytes\":" + to_string(bytes.load());
++	return out;
++}
++
++//===--------------------------------------------------------------------===//
++// PredicateCacheTable
++//===--------------------------------------------------------------------===//
++PredicateCacheTable::~PredicateCacheTable() {
++	for (auto &e : entries) {
++		PredicateCache::entries--;
++		PredicateCache::bytes -= static_cast<int64_t>(e.second->Bytes());
++	}
++}
++
++void PredicateCacheTable::OnWrite() {
++	lock_guard<mutex> guard(lock);
++	epoch++;
++	if (!entries.empty()) {
++		PredicateCache::invalidations++;
++	}
++	for (auto &e : entries) {
++		PredicateCache::entries--;
++		PredicateCache::bytes -= static_cast<int64_t>(e.second->Bytes());
++	}
++	entries.clear();
++}
++
++//===--------------------------------------------------------------------===//
++// PredicateCacheScan
++//===--------------------------------------------------------------------===//
++shared_ptr<PredicateCacheScan> PredicateCacheScan::Create(ClientContext &context, RowGroupCollection &collection,
++                                                          const vector<StorageIndex> &storage_ids,
++                                                          optional_ptr<TableFilterSet> filters,
++                                                          optional_ptr<const PhysicalOperator> op, bool sampling,
++                                                          string &info_json) {
++	auto start_ns = PCNowNs();
++	auto uncacheable = [&](const string &reason) -> shared_ptr<PredicateCacheScan> {
++		PredicateCache::scans_uncacheable++;
++		info_json = "{\"cacheable\":false,\"reason\":" + PCEscape(reason) + "}";
++		PredicateCache::lookup_ns += PCNowNs() - start_ns;
++		return nullptr;
++	};
++	auto table = collection.predicate_cache;
++	if (!table) {
++		return uncacheable("no_table_cache");
++	}
++	if (sampling) {
++		return uncacheable("sampling");
++	}
++	if (!op || op->type != PhysicalOperatorType::TABLE_SCAN) {
++		return uncacheable("unknown_operator");
++	}
++	auto static_set = op->Cast<PhysicalTableScan>().table_filters.get();
++	if (!static_set || static_set->filters.empty()) {
++		return uncacheable("no_static_filters");
++	}
++	auto column_count = collection.GetTypes().size();
++	auto result = shared_ptr<PredicateCacheScan>(new PredicateCacheScan());
++	vector<PCLeaf> leaves;
++	bool static_optional = false;
++	string reason;
++	if (!PCCanonicalLeaves(*static_set, storage_ids, column_count, leaves, static_optional, reason,
++	                     &result->static_filters)) {
++		return uncacheable(reason);
++	}
++	if (leaves.empty()) {
++		return uncacheable("only_optional_static_filters");
++	}
++	// the filters the scan applies (static + dynamic join filters merged at runtime)
++	vector<PCLeaf> applied;
++	bool applied_optional = false;
++	string applied_reason;
++	bool applied_ok = !filters || PCCanonicalLeaves(*filters, storage_ids, column_count, applied, applied_optional,
++	                                              applied_reason, nullptr);
++	if (!applied_ok) {
++		// e.g. a dynamic filter on rowid (late materialization) or nested dynamic filters: the static leaves are
++		// still a superset condition for "has rows", but a pruned / empty row group is never recorded
++		applied.clear();
++		applied_optional = true;
++	}
++	result->exact_applied = applied_ok && filters && applied.size() == leaves.size();
++	if (result->exact_applied) {
++		for (idx_t i = 0; i < leaves.size(); i++) {
++			if (applied[i].key != leaves[i].key) {
++				result->exact_applied = false;
++				break;
++			}
++		}
++	}
++	result->needs_recheck = static_optional || applied_optional || !result->exact_applied;
++	for (auto &l : leaves) {
++		result->key += l.key;
++		result->readable += (result->readable.empty() ? "" : " AND ") + l.readable;
++		result->leaves.push_back(l.key);
++	}
++	result->table = table;
++	auto last = collection.GetRowGroup(-1);
++	result->n_row_groups = last ? last->index + 1 : 0;
++	idx_t words = (result->n_row_groups + 63) / 64;
++	result->known_empty = unique_ptr<uint64_t[]>(new uint64_t[MaxValue<idx_t>(words, 1)]);
++	memset(result->known_empty.get(), 0, sizeof(uint64_t) * MaxValue<idx_t>(words, 1));
++	result->row_groups = unique_ptr<RowGroupState[]>(new RowGroupState[MaxValue<idx_t>(result->n_row_groups, 1)]);
++	for (idx_t i = 0; i < result->n_row_groups; i++) {
++		auto &rg = result->row_groups[i];
++		rg.state = 0;
++		rg.vectors_total = 0;
++		rg.vectors_done = 0;
++		rg.any_rows = false;
++		rg.not_all_visible = false;
++		rg.count_at_enter = 0;
++	}
++	{
++		lock_guard<mutex> guard(table->lock);
++		result->epoch = table->epoch.load();
++		auto use = [&](const PredicateCacheEntry &entry) {
++			if (entry.epoch != result->epoch) {
++				return;
++			}
++			result->entries_used++;
++			idx_t n = MinValue<idx_t>(words, entry.known.size());
++			for (idx_t w = 0; w < n; w++) {
++				result->known_empty[w] |= entry.known[w] & ~entry.has_rows[w];
++			}
++		};
++		if (PredicateCache::Mode() == PredicateCacheMode::SUBSET) {
++			for (auto &e : table->entries) {
++				auto &entry = *e.second;
++				if (std::includes(result->leaves.begin(), result->leaves.end(), entry.leaves.begin(),
++				                  entry.leaves.end())) {
++					use(entry);
++				}
++			}
++		} else {
++			auto e = table->entries.find(result->key);
++			if (e != table->entries.end()) {
++				use(*e->second);
++			}
++		}
++	}
++	for (idx_t w = 0; w < words; w++) {
++		result->known_empty_at_start += static_cast<idx_t>(__builtin_popcountll(result->known_empty[w]));
++	}
++	PredicateCache::scans_cacheable++;
++	info_json = result->InfoJSON();
++	PredicateCache::lookup_ns += PCNowNs() - start_ns;
++	return result;
++}
++
++string PredicateCacheScan::InfoJSON() const {
++	return "{\"cacheable\":true,\"key\":" + PCEscape(readable) + ",\"leaves\":" + to_string(leaves.size()) +
++	       ",\"exact_applied\":" + (exact_applied ? "true" : "false") +
++	       ",\"needs_recheck\":" + (needs_recheck ? "true" : "false") +
++	       ",\"entries_used\":" + to_string(entries_used) +
++	       ",\"known_empty_at_start\":" + to_string(known_empty_at_start) + "}";
++}
++
++PredicateCacheScan::~PredicateCacheScan() {
++	try {
++		Finish();
++	} catch (...) { // NOLINT
++	}
++}
++
++bool PredicateCacheScan::StaticFiltersPrune(RowGroup &row_group) {
++	for (auto &entry : static_filters) {
++		auto &column = row_group.GetColumn(entry.first.GetPrimaryIndex());
++		if (column.CheckZonemap(*entry.second) == FilterPropagateResult::FILTER_ALWAYS_FALSE) {
++			return true;
++		}
++	}
++	for (auto &entry : static_filters) {
++		auto &column = row_group.GetColumn(entry.first.GetPrimaryIndex());
++		if (!column.selective) {
++			continue;
++		}
++		auto stat = column.selective->stat.load(std::memory_order_acquire);
++		if (stat && SelectiveStats::FilterCanPrune(*entry.second, *stat)) {
++			return true;
++		}
++	}
++	return false;
++}
++
++void PredicateCacheScan::OnPruned(RowGroup &row_group, uint8_t cause) {
++	if (row_group.index >= n_row_groups) {
++		return;
++	}
++	auto &rg = row_groups[row_group.index];
++	uint8_t new_state;
++	if (cause == 4) {
++		new_state = 4;
++		PredicateCache::pruned++;
++	} else if (!needs_recheck) {
++		// the scan's filters are exactly the static non-optional filters: their zonemap / statistic pruned it
++		new_state = 1;
++	} else {
++		auto t0 = PCNowNs();
++		new_state = StaticFiltersPrune(row_group) ? 1 : 5;
++		PredicateCache::recheck_ns += PCNowNs() - t0;
++	}
++	uint8_t expected = 0;
++	rg.state.compare_exchange_strong(expected, new_state);
++}
++
++void PredicateCacheScan::OnEnter(RowGroup &row_group, idx_t max_row_group_row) {
++	if (row_group.index >= n_row_groups) {
++		return;
++	}
++	auto &rg = row_groups[row_group.index];
++	uint8_t expected = 0;
++	rg.state.compare_exchange_strong(expected, 2);
++	auto vectors = static_cast<uint32_t>((max_row_group_row + STANDARD_VECTOR_SIZE - 1) / STANDARD_VECTOR_SIZE);
++	auto current = rg.vectors_total.load();
++	while (current < vectors && !rg.vectors_total.compare_exchange_weak(current, vectors)) {
++	}
++	if (max_row_group_row != row_group.count) {
++		// the scan does not cover the whole row group (rows appended after the scan started)
++		rg.not_all_visible = true;
++	}
++	rg.count_at_enter = row_group.count.load();
++	// "no rows" must not rest on values with pending update information (they may differ between transactions or be
++	// rolled back); any update / delete / append also clears the whole table cache via the epoch
++	for (auto &entry : static_filters) {
++		if (row_group.GetColumn(entry.first.GetPrimaryIndex()).HasUpdates()) {
++			rg.not_all_visible = true;
++			break;
++		}
++	}
++}
++
++void PredicateCacheScan::OnSegmentSkip(RowGroup &row_group, idx_t vectors) {
++	if (row_group.index >= n_row_groups) {
++		return;
++	}
++	auto &rg = row_groups[row_group.index];
++	rg.vectors_done += static_cast<uint32_t>(vectors);
++	if (needs_recheck) {
++		// segment-level zonemap skips use the scan's complete filters, including optional ones (e.g. a top-N
++		// threshold inside an AND with the static filter of the same column) and dynamic join filters: the skipped
++		// vectors may contain rows that pass the static conjunction -> the row group cannot be recorded as empty
++		rg.not_all_visible = true;
++	}
++}
++
++void PredicateCacheScan::OnVector(RowGroup &row_group, idx_t rows_passed, bool all_visible) {
++	if (row_group.index >= n_row_groups) {
++		return;
++	}
++	auto &rg = row_groups[row_group.index];
++	rg.vectors_done++;
++	if (rows_passed > 0) {
++		rg.any_rows = true;
++	}
++	if (!all_visible) {
++		rg.not_all_visible = true;
++	}
++}
++
++void PredicateCacheScan::Finish() {
++	if (!table || n_row_groups == 0) {
++		return;
++	}
++	auto t0 = PCNowNs();
++	idx_t words = (n_row_groups + 63) / 64;
++	vector<uint64_t> known(words, 0), has_rows(words, 0);
++	idx_t n_empty = 0, n_rows = 0;
++	for (idx_t i = 0; i < n_row_groups; i++) {
++		auto &rg = row_groups[i];
++		auto state = rg.state.load();
++		bool k = false, h = false;
++		if (state == 1 || state == 4) {
++			k = true;
++		} else if (state == 2) {
++			if (rg.any_rows) {
++				// >= 1 row passed static AND dynamic filters -> >= 1 row passes the static conjunction
++				k = h = true;
++			} else if (exact_applied && !rg.not_all_visible && rg.vectors_total > 0 &&
++			           rg.vectors_done >= rg.vectors_total) {
++				k = true;
++			}
++		}
++		if (!k) {
++			continue;
++		}
++		known[i / 64] |= 1ULL << (i % 64);
++		if (h) {
++			has_rows[i / 64] |= 1ULL << (i % 64);
++			n_rows++;
++		} else {
++			n_empty++;
++		}
++	}
++	if (n_empty == 0 && n_rows == 0) {
++		PredicateCache::record_ns += PCNowNs() - t0;
++		return;
++	}
++	lock_guard<mutex> guard(table->lock);
++	if (table->epoch.load() != epoch) {
++		PredicateCache::record_ns += PCNowNs() - t0;
++		return;
++	}
++	auto &slot = table->entries[key];
++	if (!slot) {
++		slot = make_uniq<PredicateCacheEntry>();
++		slot->key = key;
++		slot->readable = readable;
++		slot->leaves = leaves;
++		slot->epoch = epoch;
++		PredicateCache::entries++;
++	} else {
++		PredicateCache::bytes -= static_cast<int64_t>(slot->Bytes());
++	}
++	auto &entry = *slot;
++	if (entry.epoch != epoch) {
++		entry.known.clear();
++		entry.has_rows.clear();
++		entry.epoch = epoch;
++	}
++	if (entry.known.size() < words) {
++		entry.known.resize(words, 0);
++		entry.has_rows.resize(words, 0);
++	}
++	for (idx_t w = 0; w < words; w++) {
++		uint64_t both = entry.known[w] & known[w];
++		uint64_t conflict = both & (entry.has_rows[w] ^ has_rows[w]);
++		if (conflict) {
++			PredicateCache::conflicts += static_cast<uint64_t>(__builtin_popcountll(conflict));
++			// keep "has rows" (the safe direction)
++			has_rows[w] |= conflict;
++		}
++		uint64_t added = known[w] & ~entry.known[w];
++		PredicateCache::recorded_empty += static_cast<uint64_t>(__builtin_popcountll(added & ~has_rows[w]));
++		PredicateCache::recorded_rows += static_cast<uint64_t>(__builtin_popcountll(added & has_rows[w]));
++		entry.known[w] |= known[w];
++		entry.has_rows[w] |= has_rows[w];
++	}
++	PredicateCache::bytes += static_cast<int64_t>(entry.Bytes());
++	PredicateCache::record_ns += PCNowNs() - t0;
++}
++
++} // namespace duckdb

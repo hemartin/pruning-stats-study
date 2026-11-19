@@ -1,0 +1,157 @@
+diff --git a/src/include/duckdb/storage/table/row_group.hpp b/src/include/duckdb/storage/table/row_group.hpp
+index 57f87e0..a6b823d 100644
+--- a/src/include/duckdb/storage/table/row_group.hpp
++++ b/src/include/duckdb/storage/table/row_group.hpp
+@@ -194,6 +194,11 @@ public:
+ 	idx_t GetRowGroupSize() const;
+ 
+ 	static FilterPropagateResult CheckRowIdFilter(const TableFilter &filter, idx_t beg_row, idx_t end_row);
++	//! Row-id range check (env PRUNING_ROWID_SKIP=1): true if row-group level pruning on rowid filters is enabled
++	static bool RowIdSkipEnabled();
++	//! Row-group zonemap check of one filter on a table column; for the rowid column (if RowIdSkipEnabled) the filter
++	//! is checked against this row group's row-id range [start, start + count - 1]
++	FilterPropagateResult CheckColumnZonemap(storage_t column_index, TableFilter &filter);
+ 
+ 	vector<MetaBlockPointer> CheckpointDeletes(MetadataManager &manager);
+ 
+diff --git a/src/storage/table/row_group.cpp b/src/storage/table/row_group.cpp
+index 4dbcf3c..6159e9a 100644
+--- a/src/storage/table/row_group.cpp
++++ b/src/storage/table/row_group.cpp
+@@ -23,6 +23,7 @@
+ #include "duckdb/transaction/duck_transaction_manager.hpp"
+ #include "duckdb/storage/table/row_id_column_data.hpp"
+ #include "duckdb/main/settings.hpp"
++#include <cstdlib>
+ 
+ namespace duckdb {
+ 
+@@ -442,6 +443,28 @@ FilterPropagateResult RowGroup::CheckRowIdFilter(const TableFilter &filter, idx_
+ 	return filter.CheckStatistics(dummy_stats);
+ }
+ 
++bool RowGroup::RowIdSkipEnabled() {
++	static const bool enabled = []() {
++		auto env = std::getenv("PRUNING_ROWID_SKIP");
++		return env && env[0] == '1' && env[1] == '\0';
++	}();
++	return enabled;
++}
++
++FilterPropagateResult RowGroup::CheckColumnZonemap(storage_t column_index, TableFilter &filter) {
++	if (column_index == COLUMN_IDENTIFIER_ROW_ID && RowIdSkipEnabled()) {
++		// row-id range check: the row ids of this row group are exactly [start, start + count - 1]
++		// only "no row id can match" is used (skip the row group); otherwise behave like stock (no pruning possible)
++		idx_t rg_count = this->count.load();
++		if (rg_count > 0 &&
++		    CheckRowIdFilter(filter, this->start, this->start + rg_count - 1) == FilterPropagateResult::FILTER_ALWAYS_FALSE) {
++			return FilterPropagateResult::FILTER_ALWAYS_FALSE;
++		}
++		return GetColumn(column_index).CheckZonemap(filter);
++	}
++	return GetColumn(column_index).CheckZonemap(filter);
++}
++
+ bool RowGroup::CheckZonemap(ScanFilterInfo &filters) {
+ 	auto &filter_list = filters.GetFilterList();
+ 	// new row group - label all filters as up for grabs again
+@@ -451,7 +474,7 @@ bool RowGroup::CheckZonemap(ScanFilterInfo &filters) {
+ 		auto &filter = entry.filter;
+ 		auto base_column_index = entry.table_column_index;
+ 
+-		auto prune_result = GetColumn(base_column_index).CheckZonemap(filter);
++		auto prune_result = CheckColumnZonemap(base_column_index, filter);
+ 		if (prune_result == FilterPropagateResult::FILTER_ALWAYS_FALSE) {
+ 			return false;
+ 		}
+diff --git a/src/include/duckdb/storage/table/pruning_stats.hpp b/src/include/duckdb/storage/table/pruning_stats.hpp
+index eae301b..9da45e4 100644
+--- a/src/include/duckdb/storage/table/pruning_stats.hpp
++++ b/src/include/duckdb/storage/table/pruning_stats.hpp
+@@ -92,6 +92,10 @@ public:
+ 	unique_ptr<PruningRowGroupStat[]> row_groups;
+ 	atomic<idx_t> pruned_unattributed;
+ 	atomic<idx_t> out_of_range_row_groups;
++	//! row-id range check (PRUNING_ROWID_SKIP=1): pruned row groups whose first proving leaf is a rowid filter
++	atomic<idx_t> pruned_rowid_range;
++	//! ... and pruned row groups that only rowid leaves can prune (no other leaf alone proves "no match")
++	atomic<idx_t> pruned_rowid_only;
+ 
+ 	string ToJSON(idx_t seq, const string &tag, const string &session) const;
+ 	PruningRowGroupStat *GetRowGroup(RowGroup &row_group);
+diff --git a/src/storage/table/pruning_stats.cpp b/src/storage/table/pruning_stats.cpp
+index 9a5b2b8..3a2c7ee 100644
+--- a/src/storage/table/pruning_stats.cpp
++++ b/src/storage/table/pruning_stats.cpp
+@@ -396,6 +396,8 @@ shared_ptr<PruningScanStats> PruningScanStats::Create(ClientContext &context, Ta
+ 	}
+ 	result->pruned_unattributed = 0;
+ 	result->out_of_range_row_groups = 0;
++	result->pruned_rowid_range = 0;
++	result->pruned_rowid_only = 0;
+ 
+ 	optional_ptr<TableFilterSet> static_filters;
+ 	bool static_known = false;
+@@ -549,7 +551,13 @@ string PruningScanStats::ToJSON(idx_t seq, const string &tag, const string &sess
+ 	             ",\"vectors_scanned\":" + to_string(vectors_done) +
+ 	             ",\"vectors_segment_skipped\":" + to_string(vectors_seg_skipped) +
+ 	             ",\"pruned_unattributed\":" + to_string(pruned_unattributed.load()) +
+-	             ",\"out_of_range_row_groups\":" + to_string(out_of_range_row_groups.load()) + ",\"filters\":[";
++	             ",\"out_of_range_row_groups\":" + to_string(out_of_range_row_groups.load());
++	if (RowGroup::RowIdSkipEnabled()) {
++		// only with the row-id range check on, so that the output with it off equals the stock binary's
++		out += ",\"pruned_rowid_range\":" + to_string(pruned_rowid_range.load()) +
++		       ",\"pruned_rowid_only\":" + to_string(pruned_rowid_only.load());
++	}
++	out += ",\"filters\":[";
+ 	for (idx_t i = 0; i < leaves.size(); i++) {
+ 		auto &leaf = *leaves[i];
+ 		auto sql = RenderFilter(*leaf.filter, KeywordHelper::WriteOptionallyQuoted(leaf.column_name), true);
+@@ -607,27 +615,44 @@ void PruningScanLocal::OnPruned(RowGroup &row_group, ScanFilterInfo &filters) {
+ 	// map scan column index -> storage column index
+ 	auto &filter_list = filters.GetFilterList();
+ 	bool attributed = false;
++	bool rowid_prunes = false;
++	bool other_prunes = false;
+ 	for (auto &leaf_ptr : stats->leaves) {
+ 		auto &leaf = *leaf_ptr;
+-		optional_idx table_column;
++		// note: the rowid column's table index COLUMN_IDENTIFIER_ROW_ID equals INVALID_INDEX, so no optional_idx here
++		bool found = false;
++		storage_t table_column = 0;
+ 		for (auto &entry : filter_list) {
+ 			if (entry.scan_column_index == leaf.scan_column_index) {
+ 				table_column = entry.table_column_index;
++				found = true;
+ 				break;
+ 			}
+ 		}
+-		if (!table_column.IsValid()) {
++		if (!found) {
+ 			continue;
+ 		}
+-		auto result = row_group.GetColumn(table_column.GetIndex()).CheckZonemap(*leaf.filter);
++		auto result = row_group.CheckColumnZonemap(table_column, *leaf.filter);
+ 		if (result == FilterPropagateResult::FILTER_ALWAYS_FALSE) {
++			bool is_rowid = table_column == COLUMN_IDENTIFIER_ROW_ID;
++			if (is_rowid) {
++				rowid_prunes = true;
++			} else {
++				other_prunes = true;
++			}
+ 			leaf.prunable_alone++;
+ 			if (!attributed) {
+ 				leaf.pruned_first++;
+ 				attributed = true;
++				if (is_rowid) {
++					stats->pruned_rowid_range++;
++				}
+ 			}
+ 		}
+ 	}
++	if (rowid_prunes && !other_prunes) {
++		stats->pruned_rowid_only++;
++	}
+ 	if (!attributed) {
+ 		stats->pruned_unattributed++;
+ 	}
