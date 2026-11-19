@@ -107,3 +107,6 @@ pruning_opportunity/db/
 pruning_opportunity/results/raw/
 *.Zone.Identifier
 *:Zone.Identifier
+
+# temporary notes
+pruning_opportunity/ec2-setup-tmp.md
