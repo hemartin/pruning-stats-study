@@ -74,7 +74,6 @@ struct RowGroupWriteData {
 class RowGroup : public SegmentBase<RowGroup> {
 public:
 	friend class ColumnData;
-	friend class PruningScanLocal;
 	friend class PredicateCacheScan;
 
 public:

@@ -11,7 +11,6 @@ add_library_unity(
   in_memory_checkpoint.cpp
   update_segment.cpp
   persistent_table_data.cpp
-  pruning_stats.cpp
   predicate_cache.cpp
   selective_stats.cpp
   row_id_column_data.cpp

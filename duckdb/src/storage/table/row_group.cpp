@@ -1,6 +1,5 @@
 #include "duckdb/storage/table/predicate_cache.hpp"
 #include "duckdb/storage/table/row_group.hpp"
-#include "duckdb/storage/table/pruning_stats.hpp"
 #include "duckdb/storage/table/selective_stats.hpp"
 #include "duckdb/storage/table/data_table_info.hpp"
 
@@ -268,13 +267,6 @@ bool RowGroup::InitializeScanWithOffset(CollectionScanState &state, idx_t vector
 		if (state.predcache) {
 			state.predcache->OnPruned(*this, prune_cause);
 		}
-		if (state.pruning_local) {
-			if (prune_cause == 4) {
-				state.pruning_local->OnPrunedPredicateCache(*this);
-			} else {
-				state.pruning_local->OnPruned(*this, filters, prune_cause == 3);
-			}
-		}
 		return false;
 	}
 
@@ -286,9 +278,6 @@ bool RowGroup::InitializeScanWithOffset(CollectionScanState &state, idx_t vector
 	if (state.max_row_group_row == 0) {
 		// exceeded row groups to scan
 		return false;
-	}
-	if (state.pruning_local) {
-		state.pruning_local->OnEnter(*this, state.max_row_group_row);
 	}
 	if (state.predcache) {
 		state.predcache->OnEnter(*this, state.max_row_group_row);
@@ -311,13 +300,6 @@ bool RowGroup::InitializeScan(CollectionScanState &state) {
 		if (state.predcache) {
 			state.predcache->OnPruned(*this, prune_cause);
 		}
-		if (state.pruning_local) {
-			if (prune_cause == 4) {
-				state.pruning_local->OnPrunedPredicateCache(*this);
-			} else {
-				state.pruning_local->OnPruned(*this, filters, prune_cause == 3);
-			}
-		}
 		return false;
 	}
 	state.row_group = this;
@@ -326,9 +308,6 @@ bool RowGroup::InitializeScan(CollectionScanState &state) {
 	    this->start > state.max_row ? 0 : MinValue<idx_t>(this->count, state.max_row - this->start);
 	if (state.max_row_group_row == 0) {
 		return false;
-	}
-	if (state.pruning_local) {
-		state.pruning_local->OnEnter(*this, state.max_row_group_row);
 	}
 	if (state.predcache) {
 		state.predcache->OnEnter(*this, state.max_row_group_row);
@@ -667,7 +646,6 @@ void RowGroup::TemplatedScan(TransactionData transaction, CollectionScanState &s
 	                           TYPE != TableScanType::TABLE_SCAN_COMMITTED_ROWS_OMIT_PERMANENTLY_DELETED;
 	const auto &column_ids = state.GetColumnIds();
 	auto &filter_info = state.GetFilterInfo();
-	auto pruning_local = state.pruning_local;
 	auto predcache = state.predcache;
 	while (true) {
 		if (state.vector_index * STANDARD_VECTOR_SIZE >= state.max_row_group_row) {
@@ -680,9 +658,6 @@ void RowGroup::TemplatedScan(TransactionData transaction, CollectionScanState &s
 		// check the sampling info if we have to sample this chunk
 		if (state.GetSamplingInfo().do_system_sample &&
 		    state.random.NextRandom() > state.GetSamplingInfo().sample_rate) {
-			if (pruning_local) {
-				pruning_local->OnVector(*this, 0, 0, 0);
-			}
 			if (predcache) {
 				predcache->OnVector(*this, 0, false);
 			}
@@ -693,9 +668,6 @@ void RowGroup::TemplatedScan(TransactionData transaction, CollectionScanState &s
 		//! first check the zonemap if we have to scan this partition
 		const idx_t vector_index_before = state.vector_index;
 		if (!CheckZonemapSegments(state)) {
-			if (pruning_local) {
-				pruning_local->OnSegmentSkip(*this, state.vector_index - vector_index_before);
-			}
 			if (predcache) {
 				predcache->OnSegmentSkip(*this, state.vector_index - vector_index_before);
 			}
@@ -708,9 +680,6 @@ void RowGroup::TemplatedScan(TransactionData transaction, CollectionScanState &s
 			count = state.row_group->GetSelVector(transaction, state.vector_index, state.valid_sel, max_count);
 			if (count == 0) {
 				// nothing to scan for this vector, skip the entire vector
-				if (pruning_local) {
-					pruning_local->OnVector(*this, max_count, 0, 0);
-				}
 				if (predcache) {
 					predcache->OnVector(*this, 0, false);
 				}
@@ -722,9 +691,6 @@ void RowGroup::TemplatedScan(TransactionData transaction, CollectionScanState &s
 			                                               state.vector_index, state.valid_sel, max_count);
 			if (count == 0) {
 				// nothing to scan for this vector, skip the entire vector
-				if (pruning_local) {
-					pruning_local->OnVector(*this, max_count, 0, 0);
-				}
 				if (predcache) {
 					predcache->OnVector(*this, 0, false);
 				}
@@ -813,9 +779,6 @@ void RowGroup::TemplatedScan(TransactionData transaction, CollectionScanState &s
 			if (approved_tuple_count == 0) {
 				// all rows were filtered out by the table filters
 				D_ASSERT(has_filters);
-				if (pruning_local) {
-					pruning_local->OnVector(*this, max_count, 0, 0);
-				}
 				if (predcache) {
 					predcache->OnVector(*this, 0, all_rows_visible);
 				}
@@ -854,9 +817,6 @@ void RowGroup::TemplatedScan(TransactionData transaction, CollectionScanState &s
 			count = approved_tuple_count;
 		}
 		result.SetCardinality(count);
-		if (pruning_local) {
-			pruning_local->OnVector(*this, max_count, count, pruning_local->CountOptional(*this, result, count));
-		}
 		if (predcache) {
 			predcache->OnVector(*this, count, all_rows_visible);
 		}
