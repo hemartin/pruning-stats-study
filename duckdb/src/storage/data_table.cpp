@@ -888,16 +888,6 @@ void DataTable::LocalAppend(LocalAppendState &state, ClientContext &context, Dat
 	LocalStorage::Append(state, chunk, *data_table_info);
 }
 
-void DataTable::FinishInitialiseStats(TableCatalogEntry &table, ClientContext &context, DataChunk &chunk,
-                                      const vector<unique_ptr<BoundConstraint>> &bound_constraints,
-                                      RowGroup &row_group) {
-	LocalAppendState append_state;
-	InitializeLocalAppend(append_state, table, context, bound_constraints);
-	std::cout << append_state.append_state.row_group_append_state.row_group << std::endl;
-	row_group.InitStats(append_state.append_state.row_group_append_state);
-	FinalizeLocalAppend(append_state);
-}
-
 void DataTable::LocalAppend(TableCatalogEntry &table, ClientContext &context, DataChunk &chunk,
                             const vector<unique_ptr<BoundConstraint>> &bound_constraints) {
 	LocalAppendState append_state;

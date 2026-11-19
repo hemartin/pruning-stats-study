@@ -131,7 +131,7 @@ private:
 	static BaseStatistics CreateEmptyType(LogicalType type);
 	static BaseStatistics FromConstantType(const Value &input);
 
-public:
+private:
 	//! The type of the logical segment
 	LogicalType type;
 	//! Whether or not the segment can contain NULL values
@@ -149,10 +149,6 @@ public:
 	} stats_union;
 	//! Child stats (for LIST and STRUCT)
 	unsafe_unique_array<BaseStatistics> child_stats;
-	uint64_t id;
-	bool is_rowgroup = false;
-	static std::atomic<uint64_t> counter;
-	void *additional_stats = NULL;
 };
 
 template <>

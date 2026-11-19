@@ -19,8 +19,6 @@
 #include "duckdb/storage/storage_lock.hpp"
 #include "duckdb/storage/table/segment_base.hpp"
 
-#include <unordered_set>
-
 namespace duckdb {
 
 class BaseStatistics;

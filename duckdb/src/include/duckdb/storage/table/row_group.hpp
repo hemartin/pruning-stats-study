@@ -194,7 +194,6 @@ public:
 
 	static FilterPropagateResult CheckRowIdFilter(const TableFilter &filter, idx_t beg_row, idx_t end_row);
 
-	virtual void InitStats(RowGroupAppendState &state);
 	vector<MetaBlockPointer> CheckpointDeletes(MetadataManager &manager);
 
 private:

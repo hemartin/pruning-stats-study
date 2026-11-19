@@ -21,22 +21,6 @@
 
 namespace duckdb {
 
-std::unordered_map<void *, std::vector<bool>> ColumnData::bool_temp_vectors;
-std::unordered_map<void *, std::vector<int8_t>> ColumnData::int8_temp_vectors;
-std::unordered_map<void *, std::vector<int16_t>> ColumnData::int16_temp_vectors;
-std::unordered_map<void *, std::vector<int32_t>> ColumnData::int32_temp_vectors;
-std::unordered_map<void *, std::vector<int64_t>> ColumnData::int64_temp_vectors;
-std::unordered_map<void *, std::vector<uint8_t>> ColumnData::uint8_temp_vectors;
-std::unordered_map<void *, std::vector<uint16_t>> ColumnData::uint16_temp_vectors;
-std::unordered_map<void *, std::vector<uint32_t>> ColumnData::uint32_temp_vectors;
-std::unordered_map<void *, std::vector<uint64_t>> ColumnData::uint64_temp_vectors;
-std::unordered_map<void *, std::vector<hugeint_t>> ColumnData::hugeint_temp_vectors;
-std::unordered_map<void *, std::vector<uhugeint_t>> ColumnData::uhugeint_temp_vectors;
-std::unordered_map<void *, std::vector<float>> ColumnData::float_temp_vectors;
-std::unordered_map<void *, std::vector<double>> ColumnData::double_temp_vectors;
-std::unordered_map<void *, std::vector<std::string>> ColumnData::string_temp_vectors;
-std::mutex ColumnData::map_mutex;
-
 ColumnData::ColumnData(BlockManager &block_manager, DataTableInfo &info, idx_t column_index, idx_t start_row,
                        LogicalType type_p, optional_ptr<ColumnData> parent)
     : start(start_row), count(0), block_manager(block_manager), info(info), column_index(column_index),
@@ -508,43 +492,9 @@ void ColumnData::InitializeAppend(ColumnAppendState &state) {
 	D_ASSERT(state.current->GetCompressionFunction().append);
 }
 
-void ColumnData::AppendDataWriteTemp(BaseStatistics &append_stats, ColumnAppendState &state, UnifiedVectorFormat &vdata,
-                                     idx_t append_count) {
-	idx_t offset = 0;
-	// const uint64_t *raw_data = vdata.GetData<uint64_t>();
-	// for (int i = offset; i < offset + append_count; i++) {
-	// 	std::cout << "INSERTED " << *(uint64_t *)((void *)(&raw_data[i])) << std::endl;
-	// }
-	while (true) {
-		// append the data from the vector
-		idx_t copied_elements = state.current->Append(state, vdata, offset, append_count);
-		this->count += copied_elements;
-		append_stats.Merge(state.current->stats.statistics);
-		AppendTemp(vdata, offset, copied_elements, stats->statistics);
-		if (copied_elements == append_count) {
-			// finished copying everything
-			break;
-		}
-
-		// we couldn't fit everything we wanted in the current column segment, create a new one
-		{
-			auto l = data.Lock();
-			AppendTransientSegment(l, state.current->start + state.current->count);
-			state.current = data.GetLastSegment(l);
-			state.current->InitializeAppend(state);
-		}
-		offset += copied_elements;
-		append_count -= copied_elements;
-	}
-}
-
 void ColumnData::AppendData(BaseStatistics &append_stats, ColumnAppendState &state, UnifiedVectorFormat &vdata,
                             idx_t append_count) {
 	idx_t offset = 0;
-	// const uint64_t *raw_data = vdata.GetData<uint64_t>();
-	// for (int i = offset; i < offset + append_count; i++) {
-	// 	std::cout << "INSERTED " << *(uint64_t *)((void *)(&raw_data[i])) << std::endl;
-	// }
 	while (true) {
 		// append the data from the vector
 		idx_t copied_elements = state.current->Append(state, vdata, offset, append_count);
