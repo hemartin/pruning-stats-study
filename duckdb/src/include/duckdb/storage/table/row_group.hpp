@@ -193,6 +193,11 @@ public:
 	idx_t GetRowGroupSize() const;
 
 	static FilterPropagateResult CheckRowIdFilter(const TableFilter &filter, idx_t beg_row, idx_t end_row);
+	//! Row-id range check (env PRUNING_ROWID_SKIP=1): true if row-group level pruning on rowid filters is enabled
+	static bool RowIdSkipEnabled();
+	//! Row-group zonemap check of one filter on a table column; for the rowid column (if RowIdSkipEnabled) the filter
+	//! is checked against this row group's row-id range [start, start + count - 1]
+	FilterPropagateResult CheckColumnZonemap(storage_t column_index, TableFilter &filter);
 
 	vector<MetaBlockPointer> CheckpointDeletes(MetadataManager &manager);
 

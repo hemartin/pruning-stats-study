@@ -22,6 +22,7 @@
 #include "duckdb/transaction/duck_transaction_manager.hpp"
 #include "duckdb/storage/table/row_id_column_data.hpp"
 #include "duckdb/main/settings.hpp"
+#include <cstdlib>
 
 namespace duckdb {
 
@@ -429,6 +430,27 @@ FilterPropagateResult RowGroup::CheckRowIdFilter(const TableFilter &filter, idx_
 	return filter.CheckStatistics(dummy_stats);
 }
 
+bool RowGroup::RowIdSkipEnabled() {
+	static const bool enabled = []() {
+		auto env = std::getenv("PRUNING_ROWID_SKIP");
+		return env && env[0] == '1' && env[1] == '\0';
+	}();
+	return enabled;
+}
+
+FilterPropagateResult RowGroup::CheckColumnZonemap(storage_t column_index, TableFilter &filter) {
+	if (column_index == COLUMN_IDENTIFIER_ROW_ID && RowIdSkipEnabled()) {
+		// row-id range check: the row ids of this row group are exactly [start, start + count - 1]
+		// only "no row id can match" is used (skip the row group); otherwise behave like stock (no pruning possible)
+		idx_t rg_count = this->count.load();
+		if (rg_count > 0 &&
+		    CheckRowIdFilter(filter, this->start, this->start + rg_count - 1) == FilterPropagateResult::FILTER_ALWAYS_FALSE) {
+			return FilterPropagateResult::FILTER_ALWAYS_FALSE;
+		}
+	}
+	return GetColumn(column_index).CheckZonemap(filter);
+}
+
 bool RowGroup::CheckZonemap(ScanFilterInfo &filters) {
 	auto &filter_list = filters.GetFilterList();
 	// new row group - label all filters as up for grabs again
@@ -437,7 +459,7 @@ bool RowGroup::CheckZonemap(ScanFilterInfo &filters) {
 		auto &entry = filter_list[i];
 		auto &filter = entry.filter;
 		auto base_column_index = entry.table_column_index;
-		auto prune_result = GetColumn(base_column_index).CheckZonemap(filter);
+		auto prune_result = CheckColumnZonemap(base_column_index, filter);
 		if (prune_result == FilterPropagateResult::FILTER_ALWAYS_FALSE) {
 			return false;
 		}
