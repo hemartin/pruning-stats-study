@@ -23,19 +23,6 @@
 
 namespace duckdb {
 
-atomic<uint64_t> PredicateCache::scans_cacheable {0};
-atomic<uint64_t> PredicateCache::scans_uncacheable {0};
-atomic<uint64_t> PredicateCache::pruned {0};
-atomic<uint64_t> PredicateCache::recorded_empty {0};
-atomic<uint64_t> PredicateCache::recorded_rows {0};
-atomic<uint64_t> PredicateCache::conflicts {0};
-atomic<uint64_t> PredicateCache::lookup_ns {0};
-atomic<uint64_t> PredicateCache::record_ns {0};
-atomic<uint64_t> PredicateCache::recheck_ns {0};
-atomic<uint64_t> PredicateCache::invalidations {0};
-atomic<int64_t> PredicateCache::entries {0};
-atomic<int64_t> PredicateCache::bytes {0};
-
 namespace {
 
 PredicateCacheMode PCReadMode() {
@@ -194,12 +181,6 @@ bool PCCanonicalLeaves(const TableFilterSet &filters, const vector<StorageIndex>
 	return true;
 }
 
-uint64_t PCNowNs() {
-	return static_cast<uint64_t>(
-	    std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now().time_since_epoch())
-	        .count());
-}
-
 } // namespace
 
 //===--------------------------------------------------------------------===//
@@ -210,57 +191,15 @@ PredicateCacheMode PredicateCache::Mode() {
 	return mode;
 }
 
-void PredicateCache::Snapshot(uint64_t *out) {
-	out[0] = scans_cacheable.load();
-	out[1] = scans_uncacheable.load();
-	out[2] = pruned.load();
-	out[3] = recorded_empty.load();
-	out[4] = recorded_rows.load();
-	out[5] = conflicts.load();
-	out[6] = lookup_ns.load();
-	out[7] = record_ns.load();
-	out[8] = recheck_ns.load();
-	out[9] = invalidations.load();
-}
-
-string PredicateCache::TimingFields(const uint64_t *start) {
-	if (!Enabled()) {
-		return string();
-	}
-	uint64_t now[SNAPSHOT_SIZE];
-	Snapshot(now);
-	static const char *names[SNAPSHOT_SIZE] = {"pc_scans_cacheable", "pc_scans_uncacheable", "pc_pruned",
-	                                           "pc_recorded_empty",  "pc_recorded_rows",     "pc_conflicts",
-	                                           "pc_lookup_ns",       "pc_record_ns",         "pc_recheck_ns",
-	                                           "pc_invalidations"};
-	string out = ",\"pc_mode\":" + to_string(static_cast<int>(Mode()));
-	for (idx_t i = 0; i < SNAPSHOT_SIZE; i++) {
-		out += ",\"" + string(names[i]) + "\":" + to_string(now[i] - start[i]);
-	}
-	out += ",\"pc_entries\":" + to_string(entries.load()) + ",\"pc_bytes\":" + to_string(bytes.load());
-	return out;
-}
-
 //===--------------------------------------------------------------------===//
 // PredicateCacheTable
 //===--------------------------------------------------------------------===//
 PredicateCacheTable::~PredicateCacheTable() {
-	for (auto &e : entries) {
-		PredicateCache::entries--;
-		PredicateCache::bytes -= static_cast<int64_t>(e.second->Bytes());
-	}
 }
 
 void PredicateCacheTable::OnWrite() {
 	lock_guard<mutex> guard(lock);
 	epoch++;
-	if (!entries.empty()) {
-		PredicateCache::invalidations++;
-	}
-	for (auto &e : entries) {
-		PredicateCache::entries--;
-		PredicateCache::bytes -= static_cast<int64_t>(e.second->Bytes());
-	}
 	entries.clear();
 }
 
@@ -272,11 +211,8 @@ shared_ptr<PredicateCacheScan> PredicateCacheScan::Create(ClientContext &context
                                                           optional_ptr<TableFilterSet> filters,
                                                           optional_ptr<const PhysicalOperator> op, bool sampling,
                                                           string &info_json) {
-	auto start_ns = PCNowNs();
 	auto uncacheable = [&](const string &reason) -> shared_ptr<PredicateCacheScan> {
-		PredicateCache::scans_uncacheable++;
 		info_json = "{\"cacheable\":false,\"reason\":" + PCEscape(reason) + "}";
-		PredicateCache::lookup_ns += PCNowNs() - start_ns;
 		return nullptr;
 	};
 	auto table = collection.predicate_cache;
@@ -379,9 +315,7 @@ shared_ptr<PredicateCacheScan> PredicateCacheScan::Create(ClientContext &context
 	for (idx_t w = 0; w < words; w++) {
 		result->known_empty_at_start += static_cast<idx_t>(__builtin_popcountll(result->known_empty[w]));
 	}
-	PredicateCache::scans_cacheable++;
 	info_json = result->InfoJSON();
-	PredicateCache::lookup_ns += PCNowNs() - start_ns;
 	return result;
 }
 
@@ -428,14 +362,11 @@ void PredicateCacheScan::OnPruned(RowGroup &row_group, uint8_t cause) {
 	uint8_t new_state;
 	if (cause == 4) {
 		new_state = 4;
-		PredicateCache::pruned++;
 	} else if (!needs_recheck) {
 		// the scan's filters are exactly the static non-optional filters: their zonemap / statistic pruned it
 		new_state = 1;
 	} else {
-		auto t0 = PCNowNs();
 		new_state = StaticFiltersPrune(row_group) ? 1 : 5;
-		PredicateCache::recheck_ns += PCNowNs() - t0;
 	}
 	uint8_t expected = 0;
 	rg.state.compare_exchange_strong(expected, new_state);
@@ -499,7 +430,6 @@ void PredicateCacheScan::Finish() {
 	if (!table || n_row_groups == 0) {
 		return;
 	}
-	auto t0 = PCNowNs();
 	idx_t words = (n_row_groups + 63) / 64;
 	vector<uint64_t> known(words, 0), has_rows(words, 0);
 	idx_t n_empty = 0, n_rows = 0;
@@ -530,12 +460,10 @@ void PredicateCacheScan::Finish() {
 		}
 	}
 	if (n_empty == 0 && n_rows == 0) {
-		PredicateCache::record_ns += PCNowNs() - t0;
 		return;
 	}
 	lock_guard<mutex> guard(table->lock);
 	if (table->epoch.load() != epoch) {
-		PredicateCache::record_ns += PCNowNs() - t0;
 		return;
 	}
 	auto &slot = table->entries[key];
@@ -545,9 +473,6 @@ void PredicateCacheScan::Finish() {
 		slot->readable = readable;
 		slot->leaves = leaves;
 		slot->epoch = epoch;
-		PredicateCache::entries++;
-	} else {
-		PredicateCache::bytes -= static_cast<int64_t>(slot->Bytes());
 	}
 	auto &entry = *slot;
 	if (entry.epoch != epoch) {
@@ -563,18 +488,12 @@ void PredicateCacheScan::Finish() {
 		uint64_t both = entry.known[w] & known[w];
 		uint64_t conflict = both & (entry.has_rows[w] ^ has_rows[w]);
 		if (conflict) {
-			PredicateCache::conflicts += static_cast<uint64_t>(__builtin_popcountll(conflict));
 			// keep "has rows" (the safe direction)
 			has_rows[w] |= conflict;
 		}
-		uint64_t added = known[w] & ~entry.known[w];
-		PredicateCache::recorded_empty += static_cast<uint64_t>(__builtin_popcountll(added & ~has_rows[w]));
-		PredicateCache::recorded_rows += static_cast<uint64_t>(__builtin_popcountll(added & has_rows[w]));
 		entry.known[w] |= known[w];
 		entry.has_rows[w] |= has_rows[w];
 	}
-	PredicateCache::bytes += static_cast<int64_t>(entry.Bytes());
-	PredicateCache::record_ns += PCNowNs() - t0;
 }
 
 } // namespace duckdb

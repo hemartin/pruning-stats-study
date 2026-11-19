@@ -1,4 +1,3 @@
-#include "duckdb/storage/table/predicate_cache.hpp"
 #include "duckdb/storage/table/selective_stats.hpp"
 
 #include "duckdb/common/error_data.hpp"
@@ -30,10 +29,6 @@
 #include <unistd.h>
 
 namespace duckdb {
-
-atomic<uint64_t> SelectiveStats::consult_ns {0};
-atomic<uint64_t> SelectiveStats::consultations {0};
-atomic<uint64_t> SelectiveStats::pruned {0};
 
 namespace selective_impl {
 
@@ -957,19 +952,8 @@ static bool NgramCanPrune(const TableFilter &filter, const SelectiveStat &stat) 
 }
 
 //===--------------------------------------------------------------------===//
-// Timing log (PRUNING_STATS_TIMING)
+// JSON escaping (build-on-load stderr record)
 //===--------------------------------------------------------------------===//
-static const char *TimingPath() {
-	static const char *path = []() -> const char * {
-		auto env = std::getenv("PRUNING_STATS_TIMING");
-		if (!env || !*env) {
-			return nullptr;
-		}
-		return env;
-	}();
-	return path;
-}
-
 static string Escape(const string &input) {
 	string result = "\"";
 	for (auto c : input) {
@@ -993,156 +977,6 @@ static string Escape(const string &input) {
 	}
 	return result + "\"";
 }
-
-struct TimingWriter {
-	mutex lock;
-	FILE *file = nullptr;
-	bool failed = false;
-	string session;
-	atomic<idx_t> next_seq {0};
-
-	TimingWriter() {
-		auto now = std::chrono::duration_cast<std::chrono::milliseconds>(
-		               std::chrono::system_clock::now().time_since_epoch())
-		               .count();
-		session = std::to_string(getpid()) + "-" + std::to_string(now);
-	}
-	static TimingWriter &Get() {
-		static TimingWriter writer;
-		return writer;
-	}
-	void Write(const string &lines) {
-		lock_guard<mutex> guard(lock);
-		if (failed) {
-			return;
-		}
-		if (!file) {
-			file = fopen(TimingPath(), "a");
-			if (!file) {
-				failed = true;
-				fprintf(stderr, "PRUNING_STATS_TIMING: cannot open '%s' for appending\n", TimingPath());
-				return;
-			}
-			// first line of a session: the configuration
-			auto &config = Config::Get();
-			string spec = "{\"type\":\"config\",\"session\":" + Escape(session) + ",\"columns\":";
-			auto env = std::getenv("PRUNING_STATS_COLUMNS");
-			spec += Escape(env ? env : "") + ",\"entries\":" + to_string(config.entries.size()) + ",\"errors\":[";
-			for (idx_t i = 0; i < config.errors.size(); i++) {
-				spec += (i ? "," : "") + Escape(config.errors[i]);
-			}
-			spec += "]}\n";
-			fwrite(spec.data(), 1, spec.size(), file);
-		}
-		fwrite(lines.data(), 1, lines.size(), file);
-		fflush(file);
-	}
-};
-
-class TimingQueryState : public ClientContextState {
-public:
-	mutex lock;
-	bool active = false;
-	idx_t seq = 0;
-	string sql;
-	std::chrono::steady_clock::time_point start;
-	uint64_t consult_ns_start = 0;
-	uint64_t consultations_start = 0;
-	uint64_t pruned_start = 0;
-	uint64_t pc_start[PredicateCache::SNAPSHOT_SIZE] = {};
-
-	void QueryBegin(ClientContext &context) override {
-		lock_guard<mutex> guard(lock);
-		active = true;
-		seq = TimingWriter::Get().next_seq++;
-		sql = context.GetCurrentQuery();
-		consult_ns_start = SelectiveStats::consult_ns.load();
-		consultations_start = SelectiveStats::consultations.load();
-		pruned_start = SelectiveStats::pruned.load();
-		PredicateCache::Snapshot(pc_start);
-		start = std::chrono::steady_clock::now();
-	}
-
-	using ClientContextState::QueryEnd;
-	void QueryEnd(ClientContext &context, optional_ptr<ErrorData> error) override {
-		auto end = std::chrono::steady_clock::now();
-		string tag;
-		auto &vars = ClientConfig::GetConfig(context).user_variables;
-		auto entry = vars.find("pruning_tag");
-		if (entry != vars.end() && !entry->second.IsNull()) {
-			tag = entry->second.ToString();
-		}
-		auto &writer = TimingWriter::Get();
-		string out;
-		{
-			lock_guard<mutex> guard(lock);
-			if (!active) {
-				return;
-			}
-			active = false;
-			double elapsed_ms = std::chrono::duration<double, std::milli>(end - start).count();
-			auto prefix = "\"session\":" + Escape(writer.session) + ",\"seq\":" + to_string(seq) +
-			              ",\"tag\":" + Escape(tag);
-			out += "{\"type\":\"query_timing\"," + prefix + ",\"elapsed_ms\":" + to_string(elapsed_ms) +
-			       ",\"error\":" + (error && error->HasError() ? Escape(error->RawMessage()) : string("null")) +
-			       ",\"consultations\":" + to_string(SelectiveStats::consultations.load() - consultations_start) +
-			       ",\"consult_ns\":" + to_string(SelectiveStats::consult_ns.load() - consult_ns_start) +
-			       ",\"pruned_additional\":" + to_string(SelectiveStats::pruned.load() - pruned_start) +
-			       PredicateCache::TimingFields(pc_start) + ",\"sql\":" + Escape(sql.size() > 300 ? sql.substr(0, 300) + "..." : sql) + "}\n";
-			// ingest accumulators of all selected columns (statement level)
-			auto &config = Config::Get();
-			lock_guard<mutex> config_guard(config.lock);
-			for (auto &resolved : config.resolved) {
-				auto &spec = *resolved.second;
-				auto values = spec.values.exchange(0);
-				auto buffer_ns = spec.buffer_ns.exchange(0);
-				auto build_ns = spec.build_ns.exchange(0);
-				auto built = spec.row_groups_built.exchange(0);
-				auto failed = spec.row_groups_failed.exchange(0);
-				auto bytes = spec.bytes.exchange(0);
-				auto useless = spec.row_groups_useless.exchange(0);
-				auto empty = spec.row_groups_empty.exchange(0);
-				vector<uint64_t> rg_distinct, rg_bytes;
-				vector<double> rg_eps;
-				{
-					lock_guard<mutex> detail_guard(spec.detail_lock);
-					std::swap(rg_distinct, spec.rg_distinct);
-					std::swap(rg_bytes, spec.rg_bytes);
-					std::swap(rg_eps, spec.rg_eps);
-				}
-				if (values == 0 && built == 0 && failed == 0 && useless == 0 && empty == 0) {
-					continue;
-				}
-				string ngram_fields;
-				if (spec.kind == SelectiveStatKind::NGRAM) {
-					ngram_fields = ",\"n\":" + to_string(spec.ngram_n) + ",\"row_groups_useless\":" + to_string(useless) +
-					               ",\"row_groups_empty\":" + to_string(empty) + ",\"rg_distinct\":[";
-					for (idx_t r = 0; r < rg_distinct.size(); r++) {
-						ngram_fields += (r ? "," : "") + to_string(rg_distinct[r]);
-					}
-					ngram_fields += "],\"rg_bytes\":[";
-					for (idx_t r = 0; r < rg_bytes.size(); r++) {
-						ngram_fields += (r ? "," : "") + to_string(rg_bytes[r]);
-					}
-					ngram_fields += "],\"rg_eps\":[";
-					for (idx_t r = 0; r < rg_eps.size(); r++) {
-						char buf[32];
-						snprintf(buf, sizeof(buf), "%.6g", rg_eps[r]);
-						ngram_fields += (r ? "," : "") + string(buf);
-					}
-					ngram_fields += "]";
-				}
-				out += "{\"type\":\"ingest\"," + prefix + ",\"table\":" + Escape(spec.table) +
-				       ",\"column\":" + Escape(spec.column) + ",\"kind\":" + Escape(spec.KindName()) +
-				       ",\"words\":" + to_string(spec.words) + ",\"values\":" + to_string(values) +
-				       ",\"row_groups_built\":" + to_string(built) + ",\"row_groups_failed\":" + to_string(failed) +
-				       ",\"bytes\":" + to_string(bytes) + ",\"buffer_ns\":" + to_string(buffer_ns) +
-				       ",\"build_ns\":" + to_string(build_ns) + ngram_fields + "}\n";
-			}
-		}
-		writer.Write(out);
-	}
-};
 
 } // namespace selective_impl
 
@@ -1577,14 +1411,6 @@ void SelectiveStats::LogLoadBuild(const string &table, idx_t row_groups, idx_t t
 	              ",\"columns\":" + columns +
 	              ",\"error\":" + (error.empty() ? string("null") : selective_impl::Escape(error)) + "}\n";
 	fprintf(stderr, "PRUNING_STATS_BUILD_ON_LOAD %s", line.c_str());
-	if (TimingEnabled()) {
-		selective_impl::TimingWriter::Get().Write(line);
-	}
-}
-
-bool SelectiveStats::TimingEnabled() {
-	static const bool enabled = selective_impl::TimingPath() != nullptr;
-	return enabled;
 }
 
 bool SelectiveStats::SupportsType(SelectiveStatKind kind, PhysicalType type) {
@@ -1691,13 +1517,6 @@ vector<SelectiveColumnSpec *> SelectiveStats::Resolve(const string &table, const
 		result.clear();
 	}
 	return result;
-}
-
-void SelectiveStats::RegisterClientContext(ClientContext &context) {
-	if (!TimingEnabled()) {
-		return;
-	}
-	context.registered_state->GetOrCreate<selective_impl::TimingQueryState>("selective_stats_timing");
 }
 
 bool SelectiveStats::FilterCanPrune(const TableFilter &filter, const SelectiveStat &stat) {

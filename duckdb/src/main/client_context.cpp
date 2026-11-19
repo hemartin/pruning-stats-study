@@ -1,4 +1,3 @@
-#include "duckdb/storage/table/selective_stats.hpp"
 #include "duckdb/main/client_context.hpp"
 
 #include "duckdb/catalog/catalog_entry/scalar_function_catalog_entry.hpp"
@@ -155,7 +154,6 @@ ClientContext::ClientContext(shared_ptr<DatabaseInstance> database)
 	LoggingContext context(LogContextScope::CONNECTION);
 	logger = db->GetLogManager().CreateLogger(context, true);
 	client_data = make_uniq<ClientData>(*this);
-	SelectiveStats::RegisterClientContext(*this);
 }
 
 ClientContext::~ClientContext() {

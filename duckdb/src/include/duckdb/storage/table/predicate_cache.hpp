@@ -43,24 +43,6 @@ struct PredicateCache {
 	static bool Enabled() {
 		return Mode() != PredicateCacheMode::OFF;
 	}
-	//! process-wide counters (reported per statement in the PRUNING_STATS_TIMING log)
-	static atomic<uint64_t> scans_cacheable;
-	static atomic<uint64_t> scans_uncacheable;
-	static atomic<uint64_t> pruned;
-	static atomic<uint64_t> recorded_empty;
-	static atomic<uint64_t> recorded_rows;
-	static atomic<uint64_t> conflicts;
-	static atomic<uint64_t> lookup_ns;
-	static atomic<uint64_t> record_ns;
-	static atomic<uint64_t> recheck_ns;
-	static atomic<uint64_t> invalidations;
-	//! current cache size over all tables
-	static atomic<int64_t> entries;
-	static atomic<int64_t> bytes;
-	//! JSON fields for the timing log: ",\"pc_...\":..."
-	static string TimingFields(const uint64_t *start);
-	static void Snapshot(uint64_t *out);
-	static constexpr idx_t SNAPSHOT_SIZE = 10;
 };
 
 struct PredicateCacheEntry {

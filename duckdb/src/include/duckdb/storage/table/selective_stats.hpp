@@ -20,9 +20,8 @@
 // persisted, so data must be loaded and queried in the same process. At query time they are consulted only after the
 // min/max zonemaps of ALL filtered columns failed to prune the row group (RowGroup::CheckZonemap).
 //
-// PRUNING_STATS_TIMING=<file> appends JSON lines with per-statement timings (ingest: time spent buffering values and
-// building statistics per column, statistic bytes; queries: time spent consulting the statistics, number of
-// consultations, row groups pruned by them, engine-side elapsed time).
+// ec2-timing branch: no per-statement timing log (PRUNING_STATS_TIMING) and no query-side counters; only the
+// build-on-load pass writes one line per table to stderr (PRUNING_STATS_BUILD_ON_LOAD ..., incl. its wall time).
 //===----------------------------------------------------------------------===//
 
 #pragma once
@@ -135,8 +134,6 @@ public:
 struct SelectiveStats {
 	//! PRUNING_STATS_COLUMNS set and at least one valid entry (evaluated once)
 	static bool Enabled();
-	//! PRUNING_STATS_TIMING set (evaluated once)
-	static bool TimingEnabled();
 	//! Whether statistics of this kind can be built for this physical type
 	static bool SupportsType(SelectiveStatKind kind, PhysicalType type);
 	//! Resolve the specs of a table (index = column index; nullptr = no statistic)
@@ -144,20 +141,14 @@ struct SelectiveStats {
 	//! PRUNING_STATS_BUILD_ON_LOAD: 0 (unset / "0" / "off") = statistics only at ingest; N >= 1 = also build them for
 	//! tables loaded from disk (database open / ATTACH), with N threads (evaluated once)
 	static idx_t BuildOnLoadThreads();
-	//! Timing log + stderr record of one build-on-load pass
+	//! stderr record of one build-on-load pass
 	static void LogLoadBuild(const string &table, idx_t row_groups, idx_t threads, uint64_t wall_ns, uint64_t read_ns,
 	                         const string &error);
-	//! Registers the per-connection timing state (called from the ClientContext constructor)
-	static void RegisterClientContext(ClientContext &context);
 
 	//! true if `filter` (a column's complete pushed-down filter, or a part of it) can match no row of the row group
 	//! described by `stat`
 	static bool FilterCanPrune(const TableFilter &filter, const SelectiveStat &stat);
 
-	//! query-side accumulators (all queries, all threads)
-	static atomic<uint64_t> consult_ns;
-	static atomic<uint64_t> consultations;
-	static atomic<uint64_t> pruned;
 };
 
 } // namespace duckdb

@@ -575,15 +575,7 @@ bool RowGroup::CheckZonemap(ScanFilterInfo &filters, uint8_t &cause, PredicateCa
 		if (!stat) {
 			continue;
 		}
-		auto consult_start = std::chrono::steady_clock::now();
-		bool prune = SelectiveStats::FilterCanPrune(entry.filter, *stat);
-		auto consult_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now() -
-		                                                                       consult_start)
-		                      .count();
-		SelectiveStats::consult_ns.fetch_add((uint64_t)consult_ns, std::memory_order_relaxed);
-		SelectiveStats::consultations.fetch_add(1, std::memory_order_relaxed);
-		if (prune) {
-			SelectiveStats::pruned.fetch_add(1, std::memory_order_relaxed);
+		if (SelectiveStats::FilterCanPrune(entry.filter, *stat)) {
 			cause = 3;
 			return false;
 		}
