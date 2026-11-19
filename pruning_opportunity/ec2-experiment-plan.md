@@ -132,7 +132,8 @@ bytes per run show how much was cached.
 | Slack for problems | ~1.5 h |
 | **Total** | **~6 h** |
 
-Cost: ~6 h × $1.17 ≈ **$7** instance + < $2 EBS (gp3 with provisioned IOPS and throughput, for one day) + S3 ~$1.30/month.
+Cost: ~6 h × $1.17 ≈ **$7** instance + ~$1.50 EBS (200 GB gp3 with 16,000 IOPS and 1,000 MB/s: $139/month, i.e.
+$4.60 per day while the volume exists, also when the instance is stopped; terminate it after the run) + S3 ~$1.30/month.
 A full repeat roughly doubles the instance part.
 
 ## 7. Decisions
