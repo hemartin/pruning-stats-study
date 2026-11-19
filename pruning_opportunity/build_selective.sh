@@ -5,6 +5,7 @@
 #   pruning_opportunity/build_selective.sh                 # configure (once) + build, ninja, -j3
 #   JOBS=6 pruning_opportunity/build_selective.sh          # more parallel jobs
 #   BUILD_TPC=1 pruning_opportunity/build_selective.sh     # also build in the tpch + tpcds extensions
+#   BUILD_NAME=timing pruning_opportunity/build_selective.sh   # build into duckdb/build/timing instead
 #
 # Result: duckdb/build/selective/duckdb  (reports v1.4.4)
 #   * PRUNING_STATS_COLUMNS unset  -> min/max only (baseline configuration)
@@ -15,7 +16,7 @@ set -euo pipefail
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SRC="$(cd "$HERE/../duckdb" && pwd)"
-BUILD="$SRC/build/selective"
+BUILD="$SRC/build/${BUILD_NAME:-selective}"
 JOBS="${JOBS:-3}"
 EXTS=""
 if [ "${BUILD_TPC:-0}" = "1" ]; then
