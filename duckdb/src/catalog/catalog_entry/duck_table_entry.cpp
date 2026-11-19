@@ -1,3 +1,4 @@
+#include "duckdb/storage/table/pruning_stats.hpp"
 #include "duckdb/catalog/catalog_entry/duck_table_entry.hpp"
 
 #include "duckdb/common/enum_util.hpp"
@@ -1282,6 +1283,9 @@ DataTable &DuckTableEntry::GetStorage() {
 
 TableFunction DuckTableEntry::GetScanFunction(ClientContext &context, unique_ptr<FunctionData> &bind_data) {
 	bind_data = make_uniq<TableScanBindData>(*this);
+	if (PruningStats::Enabled()) {
+		PruningStats::OnBindTable(context, name);
+	}
 	return TableScanFunction::GetFunction();
 }
 

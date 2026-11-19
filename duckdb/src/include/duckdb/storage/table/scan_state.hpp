@@ -42,6 +42,7 @@ struct AdaptiveFilterState;
 struct TableScanOptions;
 struct ScanSamplingInfo;
 struct TableFilterState;
+class PruningScanLocal;
 class PredicateCacheScan;
 
 struct SegmentScanState {
@@ -201,6 +202,8 @@ public:
 	SelectionVector valid_sel;
 
 	RandomEngine random;
+	//! Pruning-study counters (only set for the main table state of a query scan when DUCKDB_PRUNING_STATS is set)
+	PruningScanLocal *pruning_local = nullptr;
 	//! Predicate cache of the scan (only set for the main table state of a query scan when PRUNING_PREDICATE_CACHE
 	//! is set)
 	PredicateCacheScan *predcache = nullptr;
@@ -257,6 +260,8 @@ public:
 	ScanFilterInfo filters;
 	//! Sampling info
 	ScanSamplingInfo sampling_info;
+	//! Owner of table_state.pruning_local (pruning-study counters)
+	shared_ptr<PruningScanLocal> pruning_local;
 	//! Owner of table_state.predcache (predicate cache)
 	shared_ptr<PredicateCacheScan> predcache;
 

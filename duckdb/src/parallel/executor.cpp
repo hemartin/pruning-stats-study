@@ -1,3 +1,4 @@
+#include "duckdb/storage/table/pruning_stats.hpp"
 #include "duckdb/execution/executor.hpp"
 
 #include "duckdb/execution/execution_context.hpp"
@@ -387,6 +388,9 @@ void Executor::InitializeInternal(PhysicalOperator &plan) {
 
 		this->profiler = ClientData::Get(context).profiler;
 		profiler->Initialize(plan);
+		if (PruningStats::Enabled()) {
+			PruningStats::OnPlan(context, plan);
+		}
 		this->producer = scheduler.CreateProducer();
 
 		// build and ready the pipelines
