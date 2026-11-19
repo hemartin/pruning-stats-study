@@ -37,6 +37,7 @@ struct PersistentCollectionData;
 class CheckpointTask;
 class TableIOManager;
 class DataTable;
+class PredicateCacheTable;
 
 class RowGroupCollection {
 public:
@@ -152,6 +153,10 @@ public:
 	//! Build-on-load (pruning study, PRUNING_STATS_BUILD_ON_LOAD): build the selective statistics of a table loaded
 	//! from disk by streaming its row groups (only the selected columns are read)
 	void BuildSelectiveStatsOnLoad();
+	//! Predicate cache of this table (pruning study; only when PRUNING_PREDICATE_CACHE is set)
+	shared_ptr<PredicateCacheTable> predicate_cache;
+	//! Any write: invalidates the predicate cache
+	void PredicateCacheOnWrite();
 
 private:
 	bool IsEmpty(SegmentLock &) const;

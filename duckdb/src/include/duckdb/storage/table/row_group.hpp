@@ -31,6 +31,7 @@ class PartialBlockManager;
 struct DataTableInfo;
 class ExpressionExecutor;
 class RowGroupCollection;
+class PredicateCacheScan;
 struct SelectiveColumnSpec;
 class RowGroupWriter;
 class UpdateSegment;
@@ -73,6 +74,7 @@ struct RowGroupWriteData {
 class RowGroup : public SegmentBase<RowGroup> {
 public:
 	friend class ColumnData;
+	friend class PredicateCacheScan;
 
 public:
 	RowGroup(RowGroupCollection &collection, idx_t start, idx_t count);
@@ -124,8 +126,9 @@ public:
 	bool CheckZonemap(ScanFilterInfo &filters);
 	//! Same; pruned_by_additional is set if min/max could not prune but a selective statistic could
 	bool CheckZonemap(ScanFilterInfo &filters, bool &pruned_by_additional);
-	//! cause: 1 = min/max zonemap, 3 = selective statistic
-	bool CheckZonemap(ScanFilterInfo &filters, uint8_t &cause);
+	//! cause: 1 = min/max zonemap, 3 = selective statistic, 4 = predicate cache (consulted after min/max, before the
+	//! selective statistics)
+	bool CheckZonemap(ScanFilterInfo &filters, uint8_t &cause, PredicateCacheScan *predcache);
 	//! Checks the given set of table filters against the per-segment statistics. Returns false if any segments were
 	//! skipped.
 	bool CheckZonemapSegments(CollectionScanState &state);

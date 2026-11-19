@@ -1,3 +1,4 @@
+#include "duckdb/storage/table/predicate_cache.hpp"
 #include "duckdb/storage/table/row_group.hpp"
 #include "duckdb/storage/table/selective_stats.hpp"
 #include "duckdb/storage/table/data_table_info.hpp"
@@ -261,7 +262,11 @@ void CollectionScanState::Initialize(const vector<LogicalType> &types) {
 bool RowGroup::InitializeScanWithOffset(CollectionScanState &state, idx_t vector_offset) {
 	auto &column_ids = state.GetColumnIds();
 	auto &filters = state.GetFilterInfo();
-	if (!CheckZonemap(filters)) {
+	uint8_t prune_cause;
+	if (!CheckZonemap(filters, prune_cause, state.predcache)) {
+		if (state.predcache) {
+			state.predcache->OnPruned(*this, prune_cause);
+		}
 		return false;
 	}
 
@@ -273,6 +278,9 @@ bool RowGroup::InitializeScanWithOffset(CollectionScanState &state, idx_t vector
 	if (state.max_row_group_row == 0) {
 		// exceeded row groups to scan
 		return false;
+	}
+	if (state.predcache) {
+		state.predcache->OnEnter(*this, state.max_row_group_row);
 	}
 	D_ASSERT(state.column_scans);
 	for (idx_t i = 0; i < column_ids.size(); i++) {
@@ -287,7 +295,11 @@ bool RowGroup::InitializeScanWithOffset(CollectionScanState &state, idx_t vector
 bool RowGroup::InitializeScan(CollectionScanState &state) {
 	auto &column_ids = state.GetColumnIds();
 	auto &filters = state.GetFilterInfo();
-	if (!CheckZonemap(filters)) {
+	uint8_t prune_cause;
+	if (!CheckZonemap(filters, prune_cause, state.predcache)) {
+		if (state.predcache) {
+			state.predcache->OnPruned(*this, prune_cause);
+		}
 		return false;
 	}
 	state.row_group = this;
@@ -296,6 +308,9 @@ bool RowGroup::InitializeScan(CollectionScanState &state) {
 	    this->start > state.max_row ? 0 : MinValue<idx_t>(this->count, state.max_row - this->start);
 	if (state.max_row_group_row == 0) {
 		return false;
+	}
+	if (state.predcache) {
+		state.predcache->OnEnter(*this, state.max_row_group_row);
 	}
 	D_ASSERT(state.column_scans);
 	for (idx_t i = 0; i < column_ids.size(); i++) {
@@ -505,12 +520,12 @@ bool RowGroup::CheckZonemap(ScanFilterInfo &filters) {
 
 bool RowGroup::CheckZonemap(ScanFilterInfo &filters, bool &pruned_by_additional) {
 	uint8_t cause = 0;
-	auto result = CheckZonemap(filters, cause);
+	auto result = CheckZonemap(filters, cause, nullptr);
 	pruned_by_additional = !result && cause == 3;
 	return result;
 }
 
-bool RowGroup::CheckZonemap(ScanFilterInfo &filters, uint8_t &cause) {
+bool RowGroup::CheckZonemap(ScanFilterInfo &filters, uint8_t &cause, PredicateCacheScan *predcache) {
 	cause = 1;
 	auto &filter_list = filters.GetFilterList();
 	// new row group - label all filters as up for grabs again
@@ -537,6 +552,11 @@ bool RowGroup::CheckZonemap(ScanFilterInfo &filters, uint8_t &cause) {
 			// label the filter as always true so we don't need to check it anymore
 			filters.SetFilterAlwaysTrue(i);
 		}
+	}
+	if (predcache && predcache->KnownEmpty(index)) {
+		// predicate cache: a previous scan with the same static filter conjunction found no qualifying row
+		cause = 4;
+		return false;
 	}
 	if (!SelectiveStats::Enabled()) {
 		return true;
@@ -626,6 +646,7 @@ void RowGroup::TemplatedScan(TransactionData transaction, CollectionScanState &s
 	                           TYPE != TableScanType::TABLE_SCAN_COMMITTED_ROWS_OMIT_PERMANENTLY_DELETED;
 	const auto &column_ids = state.GetColumnIds();
 	auto &filter_info = state.GetFilterInfo();
+	auto predcache = state.predcache;
 	while (true) {
 		if (state.vector_index * STANDARD_VECTOR_SIZE >= state.max_row_group_row) {
 			// exceeded the amount of rows to scan
@@ -637,12 +658,19 @@ void RowGroup::TemplatedScan(TransactionData transaction, CollectionScanState &s
 		// check the sampling info if we have to sample this chunk
 		if (state.GetSamplingInfo().do_system_sample &&
 		    state.random.NextRandom() > state.GetSamplingInfo().sample_rate) {
+			if (predcache) {
+				predcache->OnVector(*this, 0, false);
+			}
 			NextVector(state);
 			continue;
 		}
 
 		//! first check the zonemap if we have to scan this partition
+		const idx_t vector_index_before = state.vector_index;
 		if (!CheckZonemapSegments(state)) {
+			if (predcache) {
+				predcache->OnSegmentSkip(*this, state.vector_index - vector_index_before);
+			}
 			continue;
 		}
 
@@ -652,6 +680,9 @@ void RowGroup::TemplatedScan(TransactionData transaction, CollectionScanState &s
 			count = state.row_group->GetSelVector(transaction, state.vector_index, state.valid_sel, max_count);
 			if (count == 0) {
 				// nothing to scan for this vector, skip the entire vector
+				if (predcache) {
+					predcache->OnVector(*this, 0, false);
+				}
 				NextVector(state);
 				continue;
 			}
@@ -660,12 +691,16 @@ void RowGroup::TemplatedScan(TransactionData transaction, CollectionScanState &s
 			                                               state.vector_index, state.valid_sel, max_count);
 			if (count == 0) {
 				// nothing to scan for this vector, skip the entire vector
+				if (predcache) {
+					predcache->OnVector(*this, 0, false);
+				}
 				NextVector(state);
 				continue;
 			}
 		} else {
 			count = max_count;
 		}
+		const bool all_rows_visible = count == max_count;
 		auto &block_manager = GetBlockManager();
 #ifndef DUCKDB_ALTERNATIVE_VERIFY
 		// // in regular operation we only prefetch from remote file systems
@@ -744,6 +779,9 @@ void RowGroup::TemplatedScan(TransactionData transaction, CollectionScanState &s
 			if (approved_tuple_count == 0) {
 				// all rows were filtered out by the table filters
 				D_ASSERT(has_filters);
+				if (predcache) {
+					predcache->OnVector(*this, 0, all_rows_visible);
+				}
 				result.Reset();
 				// skip this vector in all the scans that were not scanned yet
 				for (idx_t i = 0; i < column_ids.size(); i++) {
@@ -779,6 +817,9 @@ void RowGroup::TemplatedScan(TransactionData transaction, CollectionScanState &s
 			count = approved_tuple_count;
 		}
 		result.SetCardinality(count);
+		if (predcache) {
+			predcache->OnVector(*this, count, all_rows_visible);
+		}
 		state.vector_index++;
 		break;
 	}

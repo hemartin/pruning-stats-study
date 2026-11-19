@@ -42,6 +42,7 @@ struct AdaptiveFilterState;
 struct TableScanOptions;
 struct ScanSamplingInfo;
 struct TableFilterState;
+class PredicateCacheScan;
 
 struct SegmentScanState {
 	virtual ~SegmentScanState() {
@@ -200,6 +201,9 @@ public:
 	SelectionVector valid_sel;
 
 	RandomEngine random;
+	//! Predicate cache of the scan (only set for the main table state of a query scan when PRUNING_PREDICATE_CACHE
+	//! is set)
+	PredicateCacheScan *predcache = nullptr;
 
 public:
 	void Initialize(const vector<LogicalType> &types);
@@ -253,6 +257,8 @@ public:
 	ScanFilterInfo filters;
 	//! Sampling info
 	ScanSamplingInfo sampling_info;
+	//! Owner of table_state.predcache (predicate cache)
+	shared_ptr<PredicateCacheScan> predcache;
 
 public:
 	void Initialize(vector<StorageIndex> column_ids, optional_ptr<ClientContext> context = nullptr,

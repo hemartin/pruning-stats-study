@@ -1,3 +1,4 @@
+#include "duckdb/storage/table/predicate_cache.hpp"
 #include "duckdb/storage/table/row_group_collection.hpp"
 
 #include "duckdb/common/serializer/binary_deserializer.hpp"
@@ -73,6 +74,15 @@ RowGroupCollection::RowGroupCollection(shared_ptr<DataTableInfo> info_p, BlockMa
     : block_manager(block_manager), row_group_size(row_group_size_p), total_rows(total_rows_p), info(std::move(info_p)),
       types(std::move(types_p)), row_start(row_start_p), allocation_size(0), requires_new_row_group(false) {
 	row_groups = make_shared_ptr<RowGroupSegmentTree>(*this);
+	if (PredicateCache::Enabled()) {
+		predicate_cache = make_shared_ptr<PredicateCacheTable>();
+	}
+}
+
+void RowGroupCollection::PredicateCacheOnWrite() {
+	if (predicate_cache) {
+		predicate_cache->OnWrite();
+	}
 }
 
 idx_t RowGroupCollection::GetTotalRows() const {
@@ -418,6 +428,7 @@ bool RowGroupCollection::IsEmpty(SegmentLock &l) const {
 }
 
 void RowGroupCollection::InitializeAppend(TransactionData transaction, TableAppendState &state) {
+	PredicateCacheOnWrite();
 	state.row_start = UnsafeNumericCast<row_t>(total_rows.load());
 	state.current_row = state.row_start;
 	state.total_append_count = 0;
@@ -444,6 +455,7 @@ void RowGroupCollection::InitializeAppend(TableAppendState &state) {
 }
 
 bool RowGroupCollection::Append(DataChunk &chunk, TableAppendState &state) {
+	PredicateCacheOnWrite();
 	const idx_t row_group_size = GetRowGroupSize();
 	D_ASSERT(chunk.ColumnCount() == types.size());
 	chunk.Verify();
@@ -500,6 +512,7 @@ bool RowGroupCollection::Append(DataChunk &chunk, TableAppendState &state) {
 }
 
 void RowGroupCollection::FinalizeAppend(TransactionData transaction, TableAppendState &state) {
+	PredicateCacheOnWrite();
 	const idx_t row_group_size = GetRowGroupSize();
 
 	auto remaining = state.total_append_count;
@@ -533,6 +546,7 @@ void RowGroupCollection::FinalizeAppend(TransactionData transaction, TableAppend
 }
 
 void RowGroupCollection::CommitAppend(transaction_t commit_id, idx_t row_start, idx_t count) {
+	PredicateCacheOnWrite();
 	auto row_group = row_groups->GetSegment(row_start);
 	D_ASSERT(row_group);
 	idx_t current_row = row_start;
@@ -553,6 +567,7 @@ void RowGroupCollection::CommitAppend(transaction_t commit_id, idx_t row_start, 
 }
 
 void RowGroupCollection::RevertAppendInternal(idx_t start_row) {
+	PredicateCacheOnWrite();
 	total_rows = start_row;
 
 	auto l = row_groups->Lock();
@@ -617,6 +632,7 @@ bool RowGroupCollection::IsPersistent() const {
 
 void RowGroupCollection::MergeStorage(RowGroupCollection &data, optional_ptr<DataTable> table,
                                       optional_ptr<StorageCommitState> commit_state) {
+	PredicateCacheOnWrite();
 	D_ASSERT(data.types == types);
 	auto start_index = row_start + total_rows.load();
 	auto index = start_index;
@@ -663,6 +679,7 @@ void RowGroupCollection::MergeStorage(RowGroupCollection &data, optional_ptr<Dat
 // Delete
 //===--------------------------------------------------------------------===//
 idx_t RowGroupCollection::Delete(TransactionData transaction, DataTable &table, row_t *ids, idx_t count) {
+	PredicateCacheOnWrite();
 	idx_t delete_count = 0;
 	// delete is in the row groups
 	// we need to figure out for each id to which row group it belongs
@@ -718,6 +735,7 @@ optional_ptr<RowGroup> RowGroupCollection::NextUpdateRowGroup(row_t *ids, idx_t 
 
 void RowGroupCollection::Update(TransactionData transaction, DataTable &data_table, row_t *ids,
                                 const vector<PhysicalIndex> &column_ids, DataChunk &updates) {
+	PredicateCacheOnWrite();
 	D_ASSERT(updates.size() >= 1);
 	idx_t pos = 0;
 	do {
@@ -846,6 +864,7 @@ void RowGroupCollection::RemoveFromIndexes(TableIndexList &indexes, Vector &row_
 
 void RowGroupCollection::UpdateColumn(TransactionData transaction, DataTable &data_table, Vector &row_ids,
                                       const vector<column_t> &column_path, DataChunk &updates) {
+	PredicateCacheOnWrite();
 	D_ASSERT(updates.size() >= 1);
 	auto ids = FlatVector::GetData<row_t>(row_ids);
 	idx_t pos = 0;
@@ -1161,6 +1180,7 @@ unique_ptr<CheckpointTask> RowGroupCollection::GetCheckpointTask(CollectionCheck
 }
 
 void RowGroupCollection::Checkpoint(TableDataWriter &writer, TableStatistics &global_stats) {
+	PredicateCacheOnWrite();
 	auto l = row_groups->Lock();
 	auto segments = row_groups->MoveSegments(l);
 
@@ -1401,6 +1421,7 @@ void RowGroupCollection::Checkpoint(TableDataWriter &writer, TableStatistics &gl
 // CommitDrop
 //===--------------------------------------------------------------------===//
 void RowGroupCollection::CommitDropColumn(const idx_t column_index) {
+	PredicateCacheOnWrite();
 	for (auto &row_group : row_groups->Segments()) {
 		row_group.CommitDropColumn(column_index);
 	}
@@ -1440,6 +1461,7 @@ vector<ColumnSegmentInfo> RowGroupCollection::GetColumnSegmentInfo() {
 //===--------------------------------------------------------------------===//
 shared_ptr<RowGroupCollection> RowGroupCollection::AddColumn(ClientContext &context, ColumnDefinition &new_column,
                                                              ExpressionExecutor &default_executor) {
+	PredicateCacheOnWrite();
 	idx_t new_column_idx = types.size();
 	auto new_types = types;
 	new_types.push_back(new_column.GetType());
@@ -1467,6 +1489,7 @@ shared_ptr<RowGroupCollection> RowGroupCollection::AddColumn(ClientContext &cont
 }
 
 shared_ptr<RowGroupCollection> RowGroupCollection::RemoveColumn(idx_t col_idx) {
+	PredicateCacheOnWrite();
 	D_ASSERT(col_idx < types.size());
 	auto new_types = types;
 	new_types.erase_at(col_idx);
@@ -1489,6 +1512,7 @@ shared_ptr<RowGroupCollection> RowGroupCollection::AlterType(ClientContext &cont
                                                              const LogicalType &target_type,
                                                              vector<StorageIndex> bound_columns,
                                                              Expression &cast_expr) {
+	PredicateCacheOnWrite();
 	D_ASSERT(changed_idx < types.size());
 	auto new_types = types;
 	new_types[changed_idx] = target_type;

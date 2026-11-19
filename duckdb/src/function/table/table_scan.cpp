@@ -30,6 +30,8 @@
 #include "duckdb/planner/filter/conjunction_filter.hpp"
 #include "duckdb/common/types/value_map.hpp"
 #include "duckdb/main/settings.hpp"
+#include "duckdb/storage/table/predicate_cache.hpp"
+#include "duckdb/storage/table/row_group_collection.hpp"
 #include <list>
 
 namespace duckdb {
@@ -264,6 +266,8 @@ public:
 
 public:
 	ParallelTableScanState state;
+	//! Predicate cache of this scan (only when PRUNING_PREDICATE_CACHE is set and the scan is cacheable)
+	shared_ptr<PredicateCacheScan> predcache;
 
 private:
 	const TableScanBindData &bind_data;
@@ -283,6 +287,10 @@ public:
 		}
 
 		l_state->scan_state.Initialize(std::move(storage_ids), context.client, input.filters, input.sample_options);
+		if (predcache) {
+			l_state->scan_state.predcache = predcache;
+			l_state->scan_state.table_state.predcache = predcache.get();
+		}
 
 		storage.NextParallelScan(context.client, state, l_state->scan_state);
 		if (input.CanRemoveFilterColumns()) {
@@ -363,6 +371,16 @@ unique_ptr<GlobalTableFunctionState> DuckTableScanInitGlobal(ClientContext &cont
                                                              DataTable &storage, const TableScanBindData &bind_data) {
 	auto g_state = make_uniq<DuckTableScanState>(context, input.bind_data.get());
 	storage.InitializeParallelScan(context, g_state->state);
+	if (PredicateCache::Enabled() && !bind_data.is_create_index && g_state->state.scan_state.collection) {
+		vector<StorageIndex> storage_ids;
+		for (auto &col : input.column_indexes) {
+			storage_ids.push_back(GetStorageIndex(bind_data.table, col));
+		}
+		string info_json;
+		g_state->predcache =
+		    PredicateCacheScan::Create(context, *g_state->state.scan_state.collection, storage_ids, input.filters,
+		                               input.op, input.sample_options != nullptr, info_json);
+	}
 	if (!input.CanRemoveFilterColumns()) {
 		return std::move(g_state);
 	}
