@@ -65,6 +65,69 @@ static inline uint64_t MixHash(uint64_t key) {
 }
 
 //===--------------------------------------------------------------------===//
+// Bloom filter (kind BLOOM)
+//===--------------------------------------------------------------------===//
+// Port of the DBTest 2026 paper's Bloom filter (statistics/additional/bloom_additional_stats.hpp, scale level 1 =
+// 100x): K = 1 hash function, one block (BLOCK_COUNT = 1) of `words` 64-bit words, hash = the first 64 bits of
+// MurmurHash3_x64_128 (seed 1) over the 8 bytes of std::hash(value), bit = (h1 + h2) mod (64 * words) in 32-bit
+// arithmetic, with h1/h2 the low/high halves of the hash. For integer columns the hash input is exactly the paper's
+// (std::hash of an integer is the integer, sign-extended to 64 bits): the point key with the sign bit flip undone.
+static inline uint64_t BloomInput(uint64_t point_key, PhysicalType ptype) {
+	switch (ptype) {
+	case PhysicalType::INT8:
+	case PhysicalType::INT16:
+	case PhysicalType::INT32:
+	case PhysicalType::INT64:
+		return point_key ^ (1ULL << 63); // undo SignedKey
+	default:
+		return point_key;
+	}
+}
+
+static inline uint64_t BloomRotl64(uint64_t x, int8_t r) {
+	return (x << r) | (x >> (64 - r));
+}
+
+static inline uint64_t BloomFmix64(uint64_t k) {
+	k ^= k >> 33;
+	k *= 0xff51afd7ed558ccdULL;
+	k ^= k >> 33;
+	k *= 0xc4ceb9fe1a85ec53ULL;
+	k ^= k >> 33;
+	return k;
+}
+
+//! MurmurHash3_x64_128 of an 8-byte little-endian input with seed 1, first 64 bits (as in the paper's BloomUtil)
+static inline uint64_t BloomHash(uint64_t input) {
+	const uint64_t c1 = 0x87c37b91114253d5ULL;
+	const uint64_t c2 = 0x4cf5ad432745937fULL;
+	uint64_t h1 = 1;
+	uint64_t h2 = 1;
+	// len = 8: no 16-byte block, the tail is k1 = the 8 input bytes
+	uint64_t k1 = input;
+	k1 *= c1;
+	k1 = BloomRotl64(k1, 31);
+	k1 *= c2;
+	h1 ^= k1;
+	// finalization
+	h1 ^= 8;
+	h2 ^= 8;
+	h1 += h2;
+	h2 += h1;
+	h1 = BloomFmix64(h1);
+	h2 = BloomFmix64(h2);
+	h1 += h2;
+	return h1;
+}
+
+static inline uint32_t BloomBit(uint64_t point_key, PhysicalType ptype, idx_t words) {
+	auto h = BloomHash(BloomInput(point_key, ptype));
+	uint32_t h1 = (uint32_t)(h & 0xFFFFFFFFULL);
+	uint32_t h2 = (uint32_t)(h >> 32);
+	return (uint32_t)(h1 + 1u * h2) % (uint32_t)(64 * words);
+}
+
+//===--------------------------------------------------------------------===//
 // Keys
 //===--------------------------------------------------------------------===//
 // Ordered key: monotone non-decreasing map of the column's values (in DuckDB's comparison order) to uint64_t;
@@ -325,6 +388,8 @@ struct Config {
 				entry.kind = SelectiveStatKind::OCCUPANCY;
 			} else if (parts[1] == "nullspace") {
 				entry.kind = SelectiveStatKind::NULLSPACE;
+			} else if (parts[1] == "bloom") {
+				entry.kind = SelectiveStatKind::BLOOM;
 			} else if (parts[1] == "ngram" ||
 			           (parts[1].size() == 6 && parts[1].compare(0, 5, "ngram") == 0 && parts[1][5] >= '1' &&
 			            parts[1][5] <= '8')) {
@@ -333,7 +398,7 @@ struct Config {
 					entry.ngram_n = (idx_t)(parts[1][5] - '0');
 				}
 			} else {
-				errors.push_back("unknown kind '" + parts[1] + "' in '" + item + "' (occupancy|nullspace|ngram)");
+				errors.push_back("unknown kind '" + parts[1] + "' in '" + item + "' (occupancy|nullspace|ngram|bloom)");
 				continue;
 			}
 			if (parts.size() == 4) {
@@ -1091,12 +1156,18 @@ string SelectiveColumnSpec::KindName() const {
 		return "occupancy";
 	case SelectiveStatKind::NULLSPACE:
 		return "nullspace";
+	case SelectiveStatKind::BLOOM:
+		return "bloom";
 	default:
 		return "ngram";
 	}
 }
 
 bool SelectiveStat::MayContainKey(uint64_t key) const {
+	if (kind == SelectiveStatKind::BLOOM) {
+		auto bit = selective_impl::BloomBit(key, ptype, n_words);
+		return (words[bit / 64] >> (bit % 64)) & 1;
+	}
 	selective_impl::BitReader in(words.get());
 	auto stream = in.Read(selective_impl::KIND_BITS);
 	if (kind == SelectiveStatKind::OCCUPANCY) {
@@ -1247,7 +1318,7 @@ void SelectiveColumnState::Append(Vector &input, idx_t count) {
 	auto before = keys.size();
 	UnifiedVectorFormat format;
 	input.ToUnifiedFormat(count, format);
-	const bool point = spec.kind == SelectiveStatKind::NULLSPACE;
+	const bool point = spec.kind == SelectiveStatKind::NULLSPACE || spec.kind == SelectiveStatKind::BLOOM;
 	switch (ptype) {
 	case PhysicalType::BOOL:
 		selective_impl::AppendKeys<bool>(format, count, point, keys);
@@ -1390,6 +1461,30 @@ void SelectiveColumnState::Finish() {
 		return;
 	}
 	auto start = selective_impl::NowNs();
+	if (spec.kind == SelectiveStatKind::BLOOM) {
+		auto result = make_uniq<SelectiveStat>();
+		result->kind = spec.kind;
+		result->ptype = ptype;
+		result->n_words = spec.words;
+		result->words = make_unsafe_uniq_array<uint64_t>(result->n_words + 1);
+		memset(result->words.get(), 0, (result->n_words + 1) * sizeof(uint64_t));
+		for (auto key : keys) {
+			auto bit = selective_impl::BloomBit(key, ptype, result->n_words);
+			result->words[bit / 64] |= 1ULL << (bit % 64);
+		}
+		keys = vector<uint64_t>();
+		auto bytes = result->SizeInBytes();
+		stat_owner = std::move(result);
+		stat.store(stat_owner.get(), std::memory_order_release);
+		spec.row_groups_built.fetch_add(1, std::memory_order_relaxed);
+		spec.total_row_groups_built.fetch_add(1, std::memory_order_relaxed);
+		spec.bytes.fetch_add(bytes, std::memory_order_relaxed);
+		spec.total_bytes.fetch_add(bytes, std::memory_order_relaxed);
+		auto elapsed = selective_impl::NowNs() - start;
+		spec.build_ns.fetch_add(elapsed, std::memory_order_relaxed);
+		spec.total_build_ns.fetch_add(elapsed, std::memory_order_relaxed);
+		return;
+	}
 	selective_impl::BitWriter out;
 	bool fits = selective_impl::Encode(spec.kind, keys, spec.words, out);
 	keys = vector<uint64_t>();

@@ -9,9 +9,10 @@
 //
 //   PRUNING_STATS_COLUMNS="table.column:kind[:words],table.column:kind[:words],..."
 //
-// kind = occupancy | nullspace | ngram, words = size budget in 64-bit words (default 200); "table.*" selects every
+// kind = occupancy | nullspace | ngram | bloom, words = size budget in 64-bit words (default 200); "table.*" selects every
 // column of the table whose type is supported. ngram (VARCHAR only): "table.column:ngram[:words[:n]]" (or kind
 // "ngramN"), the set of distinct byte n-grams (default n = 3) of the row group's values, for LIKE/contains pruning.
+// bloom: the DBTest 2026 paper's Bloom filter (one block of `words` words, one hash function), equality and IN only.
 // Names are case-insensitive. Unset/empty: no additional statistics at all (the binary then behaves like
 // min/max-only DuckDB: no ingest buffering, a null check per filtered column and row group).
 //
@@ -40,7 +41,7 @@ class Value;
 class Vector;
 struct DataTableInfo;
 
-enum class SelectiveStatKind : uint8_t { OCCUPANCY = 1, NULLSPACE = 2, NGRAM = 3 };
+enum class SelectiveStatKind : uint8_t { OCCUPANCY = 1, NULLSPACE = 2, NGRAM = 3, BLOOM = 4 };
 
 //! One entry of PRUNING_STATS_COLUMNS (resolved to a concrete column). Also accumulates ingest timings.
 struct SelectiveColumnSpec {
