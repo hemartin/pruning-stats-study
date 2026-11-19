@@ -31,6 +31,7 @@ class PartialBlockManager;
 struct DataTableInfo;
 class ExpressionExecutor;
 class RowGroupCollection;
+struct SelectiveColumnSpec;
 class RowGroupWriter;
 class UpdateSegment;
 class TableStatistics;
@@ -121,6 +122,10 @@ public:
 	//! Checks the given set of table filters against the row-group statistics. Returns false if the entire row group
 	//! can be skipped.
 	bool CheckZonemap(ScanFilterInfo &filters);
+	//! Same; pruned_by_additional is set if min/max could not prune but a selective statistic could
+	bool CheckZonemap(ScanFilterInfo &filters, bool &pruned_by_additional);
+	//! cause: 1 = min/max zonemap, 3 = selective statistic
+	bool CheckZonemap(ScanFilterInfo &filters, uint8_t &cause);
 	//! Checks the given set of table filters against the per-segment statistics. Returns false if any segments were
 	//! skipped.
 	bool CheckZonemapSegments(CollectionScanState &state);
@@ -198,6 +203,9 @@ public:
 	//! Row-group zonemap check of one filter on a table column; for the rowid column (if RowIdSkipEnabled) the filter
 	//! is checked against this row group's row-id range [start, start + count - 1]
 	FilterPropagateResult CheckColumnZonemap(storage_t column_index, TableFilter &filter);
+	//! Build-on-load (PRUNING_STATS_BUILD_ON_LOAD): build the selective statistics of the selected columns of this
+	//! (persistent) row group by scanning their committed data. Returns the time spent reading the data (ns).
+	uint64_t BuildSelectiveStatsFromStorage(const vector<SelectiveColumnSpec *> &specs);
 
 	vector<MetaBlockPointer> CheckpointDeletes(MetadataManager &manager);
 

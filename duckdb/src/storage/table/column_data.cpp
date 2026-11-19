@@ -1,4 +1,5 @@
 #include "duckdb/storage/table/column_data.hpp"
+#include "duckdb/storage/table/selective_stats.hpp"
 #include "duckdb/common/exception/transaction_exception.hpp"
 #include "duckdb/common/vector_operations/vector_operations.hpp"
 #include "duckdb/function/compression_function.hpp"

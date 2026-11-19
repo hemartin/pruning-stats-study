@@ -18,6 +18,11 @@
 #include "duckdb/storage/table/scan_state.hpp"
 #include "duckdb/storage/table_storage_info.hpp"
 #include "duckdb/main/settings.hpp"
+#include "duckdb/storage/table/selective_stats.hpp"
+#include "duckdb/storage/table/data_table_info.hpp"
+
+#include <chrono>
+#include <thread>
 
 namespace duckdb {
 
@@ -122,6 +127,63 @@ void RowGroupCollection::Initialize(PersistentCollectionData &data) {
 
 void RowGroupCollection::SetAppendRequiresNewRowGroup() {
 	requires_new_row_group = true;
+}
+
+void RowGroupCollection::BuildSelectiveStatsOnLoad() {
+	auto &specs = info->selective_specs;
+	bool any = false;
+	for (auto spec : specs) {
+		any = any || spec;
+	}
+	if (!any) {
+		return;
+	}
+	auto wall_start = std::chrono::steady_clock::now();
+	vector<RowGroup *> list;
+	for (auto rg = row_groups->GetRootSegment(); rg; rg = row_groups->GetNextSegment(rg)) {
+		list.push_back(rg);
+	}
+	idx_t n_threads = MinValue<idx_t>(SelectiveStats::BuildOnLoadThreads(), MaxValue<idx_t>(list.size(), 1));
+	atomic<idx_t> next {0};
+	atomic<uint64_t> read_ns {0};
+	mutex error_lock;
+	string error;
+	auto worker = [&]() {
+		while (true) {
+			auto i = next.fetch_add(1);
+			if (i >= list.size()) {
+				return;
+			}
+			try {
+				read_ns.fetch_add(list[i]->BuildSelectiveStatsFromStorage(specs));
+			} catch (std::exception &ex) {
+				lock_guard<mutex> guard(error_lock);
+				if (error.empty()) {
+					error = ex.what();
+				}
+				next = list.size();
+				return;
+			}
+		}
+	};
+	if (n_threads <= 1) {
+		worker();
+	} else {
+		vector<std::thread> threads;
+		for (idx_t t = 0; t < n_threads; t++) {
+			threads.emplace_back(worker);
+		}
+		for (auto &t : threads) {
+			t.join();
+		}
+	}
+	auto wall_ns = (uint64_t)std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now() -
+	                                                                              wall_start)
+	                   .count();
+	SelectiveStats::LogLoadBuild(info->GetTableName(), list.size(), n_threads, wall_ns, read_ns.load(), error);
+	if (!error.empty()) {
+		throw IOException("PRUNING_STATS_BUILD_ON_LOAD failed for table %s: %s", info->GetTableName(), error);
+	}
 }
 
 void RowGroupCollection::InitializeEmpty() {

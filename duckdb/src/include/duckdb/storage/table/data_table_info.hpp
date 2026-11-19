@@ -16,6 +16,7 @@
 namespace duckdb {
 class DatabaseInstance;
 class TableIOManager;
+struct SelectiveColumnSpec;
 
 struct DataTableInfo {
 	friend class DataTable;
@@ -51,6 +52,9 @@ public:
 	string GetSchemaName();
 	string GetTableName();
 	void SetTableName(string name);
+
+	//! Selective pruning statistics (pruning study): spec per column index (nullptr = none); set by DataTable
+	vector<SelectiveColumnSpec *> selective_specs;
 
 private:
 	//! The database instance of the table

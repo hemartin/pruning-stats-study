@@ -1,4 +1,5 @@
 #include "duckdb/storage/data_table.hpp"
+#include "duckdb/storage/table/selective_stats.hpp"
 
 #include "duckdb/catalog/catalog_entry/table_catalog_entry.hpp"
 #include "duckdb/common/chrono.hpp"
@@ -51,12 +52,18 @@ DataTable::DataTable(AttachedDatabase &db, shared_ptr<TableIOManager> table_io_m
                      unique_ptr<PersistentTableData> data)
     : db(db), info(make_shared_ptr<DataTableInfo>(db, std::move(table_io_manager_p), schema, table)),
       column_definitions(std::move(column_definitions_p)), version(DataTableVersion::MAIN_TABLE) {
+	// selective pruning statistics (pruning study): which columns get one (PRUNING_STATS_COLUMNS)
+	info->selective_specs = SelectiveStats::Resolve(table, column_definitions);
 	// initialize the table with the existing data from disk, if any
 	auto types = GetTypes();
 	auto &io_manager = TableIOManager::Get(*this);
 	this->row_groups = make_shared_ptr<RowGroupCollection>(info, io_manager, types, 0);
 	if (data && data->row_group_count > 0) {
 		this->row_groups->Initialize(*data);
+		if (SelectiveStats::Enabled() && SelectiveStats::BuildOnLoadThreads() > 0) {
+			// pruning study: statistics are not persisted; rebuild them from the stored data
+			this->row_groups->BuildSelectiveStatsOnLoad();
+		}
 		if (!HasIndexes()) {
 			// if we don't have indexes, always append a new row group upon appending
 			// we can clean up this row group again when vacuuming
@@ -123,6 +130,8 @@ DataTable::DataTable(ClientContext &context, DataTable &parent, idx_t removed_co
 	// erase the column definitions from this DataTable
 	D_ASSERT(removed_column < column_definitions.size());
 	column_definitions.erase_at(removed_column);
+	// column indexes shift: no selective statistics for row groups created from now on
+	info->selective_specs.clear();
 
 	storage_t storage_idx = 0;
 	for (idx_t i = 0; i < column_definitions.size(); i++) {
@@ -191,6 +200,8 @@ DataTable::DataTable(ClientContext &context, DataTable &parent, idx_t changed_id
 
 	// change the type in this DataTable
 	column_definitions[changed_idx].SetType(target_type);
+	// no selective statistics for row groups created from now on
+	info->selective_specs.clear();
 
 	// set up the statistics for the table
 	// the column that had its type changed will have the new statistics computed during conversion

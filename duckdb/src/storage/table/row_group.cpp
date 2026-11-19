@@ -1,4 +1,8 @@
 #include "duckdb/storage/table/row_group.hpp"
+#include "duckdb/storage/table/selective_stats.hpp"
+#include "duckdb/storage/table/data_table_info.hpp"
+
+#include <chrono>
 
 #include "duckdb/common/exception.hpp"
 #include "duckdb/common/serializer/binary_serializer.hpp"
@@ -177,8 +181,13 @@ DataTableInfo &RowGroup::GetTableInfo() {
 void RowGroup::InitializeEmpty(const vector<LogicalType> &types) {
 	// set up the segment trees for the column segments
 	D_ASSERT(columns.empty());
+	auto &specs = GetTableInfo().selective_specs;
 	for (idx_t i = 0; i < types.size(); i++) {
 		auto column_data = ColumnData::CreateColumn(GetBlockManager(), GetTableInfo(), i, start, types[i]);
+		if (i < specs.size() && specs[i] && SelectiveStats::SupportsType(specs[i]->kind, types[i].InternalType())) {
+			// selective pruning statistic: buffer the values of this column while the row group is filled
+			column_data->selective = make_uniq<SelectiveColumnState>(*specs[i], types[i].InternalType());
+		}
 		columns.push_back(std::move(column_data));
 	}
 }
@@ -451,17 +460,74 @@ FilterPropagateResult RowGroup::CheckColumnZonemap(storage_t column_index, Table
 	return GetColumn(column_index).CheckZonemap(filter);
 }
 
+uint64_t RowGroup::BuildSelectiveStatsFromStorage(const vector<SelectiveColumnSpec *> &specs) {
+	uint64_t read_ns = 0;
+	idx_t rg_count = count.load();
+	if (rg_count == 0) {
+		return 0;
+	}
+	auto &types = GetCollection().GetTypes();
+	for (idx_t c = 0; c < specs.size() && c < GetColumnCount(); c++) {
+		if (!specs[c] || !SelectiveStats::SupportsType(specs[c]->kind, types[c].InternalType())) {
+			continue;
+		}
+		auto &column = GetColumn(c);
+		if (column.selective) {
+			continue;
+		}
+		// the statistic covers every stored row of the row group (incl. deleted rows: a superset is safe), also the
+		// last, partial row group
+		auto state = make_uniq<SelectiveColumnState>(*specs[c], types[c].InternalType());
+		ColumnScanState scan_state;
+		scan_state.Initialize(types[c], nullptr);
+		column.InitializeScan(scan_state);
+		DataChunk chunk;
+		chunk.Initialize(Allocator::DefaultAllocator(), vector<LogicalType> {types[c]});
+		for (idx_t v = 0; v * STANDARD_VECTOR_SIZE < rg_count; v++) {
+			chunk.Reset();
+			auto t0 = std::chrono::steady_clock::now();
+			auto n = column.ScanCommitted(v, scan_state, chunk.data[0], true);
+			read_ns += (uint64_t)std::chrono::duration_cast<std::chrono::nanoseconds>(
+			               std::chrono::steady_clock::now() - t0)
+			               .count();
+			state->Append(chunk.data[0], n);
+		}
+		state->Finish();
+		column.selective = std::move(state);
+	}
+	return read_ns;
+}
+
 bool RowGroup::CheckZonemap(ScanFilterInfo &filters) {
+	bool pruned_by_additional;
+	return CheckZonemap(filters, pruned_by_additional);
+}
+
+bool RowGroup::CheckZonemap(ScanFilterInfo &filters, bool &pruned_by_additional) {
+	uint8_t cause = 0;
+	auto result = CheckZonemap(filters, cause);
+	pruned_by_additional = !result && cause == 3;
+	return result;
+}
+
+bool RowGroup::CheckZonemap(ScanFilterInfo &filters, uint8_t &cause) {
+	cause = 1;
 	auto &filter_list = filters.GetFilterList();
 	// new row group - label all filters as up for grabs again
 	filters.CheckAllFilters();
+	// filters (among the first 64) that min/max proved to be always true: a selective statistic cannot prune them
+	uint64_t minmax_always_true = 0;
 	for (idx_t i = 0; i < filter_list.size(); i++) {
 		auto &entry = filter_list[i];
 		auto &filter = entry.filter;
 		auto base_column_index = entry.table_column_index;
+
 		auto prune_result = CheckColumnZonemap(base_column_index, filter);
 		if (prune_result == FilterPropagateResult::FILTER_ALWAYS_FALSE) {
 			return false;
+		}
+		if (prune_result == FilterPropagateResult::FILTER_ALWAYS_TRUE && i < 64) {
+			minmax_always_true |= 1ULL << i;
 		}
 		if (filter.filter_type == TableFilterType::OPTIONAL_FILTER) {
 			// these are only for row group checking, set as always true so we don't check it
@@ -470,6 +536,36 @@ bool RowGroup::CheckZonemap(ScanFilterInfo &filters) {
 			// filter is always true - no need to check it
 			// label the filter as always true so we don't need to check it anymore
 			filters.SetFilterAlwaysTrue(i);
+		}
+	}
+	if (!SelectiveStats::Enabled()) {
+		return true;
+	}
+	// min/max could not prune the row group: consult the selective statistics of the filtered columns (if any)
+	for (idx_t i = 0; i < filter_list.size(); i++) {
+		if (i < 64 && (minmax_always_true >> i) & 1) {
+			continue;
+		}
+		auto &entry = filter_list[i];
+		auto &column = GetColumn(entry.table_column_index);
+		if (!column.selective) {
+			continue;
+		}
+		auto stat = column.selective->stat.load(std::memory_order_acquire);
+		if (!stat) {
+			continue;
+		}
+		auto consult_start = std::chrono::steady_clock::now();
+		bool prune = SelectiveStats::FilterCanPrune(entry.filter, *stat);
+		auto consult_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now() -
+		                                                                       consult_start)
+		                      .count();
+		SelectiveStats::consult_ns.fetch_add((uint64_t)consult_ns, std::memory_order_relaxed);
+		SelectiveStats::consultations.fetch_add(1, std::memory_order_relaxed);
+		if (prune) {
+			SelectiveStats::pruned.fetch_add(1, std::memory_order_relaxed);
+			cause = 3;
+			return false;
 		}
 	}
 	return true;
@@ -846,6 +942,10 @@ void RowGroup::RevertAppend(idx_t row_group_start) {
 	vinfo.RevertAppend(row_group_start - this->start);
 	for (auto &column : GetColumns()) {
 		column->RevertAppend(UnsafeNumericCast<row_t>(row_group_start));
+		if (column->selective) {
+			// the statistic (or the buffer) would not match the remaining + future rows: never use one here
+			column->selective->Invalidate(true);
+		}
 	}
 	SetCount(MinValue<idx_t>(row_group_start - this->start, this->count));
 	Verify();
@@ -870,8 +970,20 @@ void RowGroup::Append(RowGroupAppendState &state, DataChunk &chunk, idx_t append
 		auto prev_allocation_size = col_data.GetAllocationSize();
 		col_data.Append(state.states[i], chunk.data[i], append_count);
 		allocation_size += col_data.GetAllocationSize() - prev_allocation_size;
+		if (col_data.selective) {
+			col_data.selective->Append(chunk.data[i], append_count);
+		}
 	}
 	state.offset_in_row_group += append_count;
+	if (state.offset_in_row_group >= GetRowGroupSize()) {
+		// the row group is full: build the selective statistics (the last, partial row group gets none)
+		for (idx_t i = 0; i < GetColumnCount(); i++) {
+			auto &col_data = GetColumn(i);
+			if (col_data.selective) {
+				col_data.selective->Finish();
+			}
+		}
+	}
 }
 
 void RowGroup::CleanupAppend(transaction_t lowest_transaction, idx_t start, idx_t count) {
@@ -889,6 +1001,9 @@ void RowGroup::Update(TransactionData transaction, DataTable &data_table, DataCh
 	for (idx_t i = 0; i < column_ids.size(); i++) {
 		auto column = column_ids[i];
 		auto &col_data = GetColumn(column.index);
+		if (col_data.selective) {
+			col_data.selective->Invalidate(true);
+		}
 		D_ASSERT(col_data.type.id() == update_chunk.data[i].GetType().id());
 		if (offset > 0) {
 			Vector sliced_vector(update_chunk.data[i], offset, offset + count);
@@ -909,6 +1024,9 @@ void RowGroup::UpdateColumn(TransactionData transaction, DataTable &data_table, 
 	auto primary_column_idx = column_path[0];
 	D_ASSERT(primary_column_idx < columns.size());
 	auto &col_data = GetColumn(primary_column_idx);
+	if (col_data.selective) {
+		col_data.selective->Invalidate(true);
+	}
 	if (offset > 0) {
 		Vector sliced_vector(updates.data[0], offset, offset + count);
 		sliced_vector.Flatten(count);

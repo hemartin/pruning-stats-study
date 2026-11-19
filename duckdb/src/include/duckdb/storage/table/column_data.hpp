@@ -22,6 +22,7 @@
 
 namespace duckdb {
 class ColumnData;
+class SelectiveColumnState;
 class ColumnSegment;
 class DatabaseInstance;
 class RowGroup;
@@ -69,6 +70,9 @@ public:
 	idx_t column_index;
 	//! The type of the column
 	LogicalType type;
+	//! Selective pruning statistic of this (top-level) column in its row group (pruning study, selective_stats.hpp);
+	//! nullptr unless the column was selected via PRUNING_STATS_COLUMNS
+	unique_ptr<SelectiveColumnState> selective;
 
 public:
 	virtual FilterPropagateResult CheckZonemap(ColumnScanState &state, TableFilter &filter);

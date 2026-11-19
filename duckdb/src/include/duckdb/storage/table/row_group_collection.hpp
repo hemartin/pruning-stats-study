@@ -149,6 +149,9 @@ public:
 		return row_group_size;
 	}
 	void SetAppendRequiresNewRowGroup();
+	//! Build-on-load (pruning study, PRUNING_STATS_BUILD_ON_LOAD): build the selective statistics of a table loaded
+	//! from disk by streaming its row groups (only the selected columns are read)
+	void BuildSelectiveStatsOnLoad();
 
 private:
 	bool IsEmpty(SegmentLock &) const;
