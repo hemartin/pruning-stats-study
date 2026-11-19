@@ -11,7 +11,7 @@ Memory modes:
   M1  all memory: DuckDB memory_limit --m1-memory (default 50GB), no OS limit, one untimed warm-up query that
       reads every column of the table before the timed queries.
   M2  restricted: DuckDB memory_limit --m2-memory (default 2GB), the process runs in a systemd scope with
-      MemoryMax=--m2-cgroup (default 3G, includes the page cache) and no swap; before the session the page cache
+      MemoryMax=--m2-cgroup (default 6G, includes the page cache) and no swap; before the session the page cache
       is dropped (needs passwordless sudo; otherwise a warning is recorded) and the database file's pages are
       evicted with posix_fadvise(DONTNEED) (pages cached before the session are not charged to the cgroup).
 
@@ -539,7 +539,8 @@ def main():
     ap.add_argument("--sample", type=int, default=10, help="micro: every k-th query of 1,000 (default 10)")
     ap.add_argument("--m1-memory", default="50GB")
     ap.add_argument("--m2-memory", default="2GB")
-    ap.add_argument("--m2-cgroup", default="3G")
+    ap.add_argument("--m2-cgroup", default="6G",
+                    help="M2 cgroup MemoryMax: DuckDB's process memory exceeds its memory_limit (up to ~4.3 GB at 2GB, 16 threads, full-size data)")
     ap.add_argument("--cgroup-runner", choices=["user", "sudo"], default="sudo",
                     help="M2: systemd-run --user (local) or sudo systemd-run --uid (EC2)")
     ap.add_argument("--require-drop-caches", action="store_true", help="M2: abort if the page cache cannot be dropped")

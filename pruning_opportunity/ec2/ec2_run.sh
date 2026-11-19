@@ -3,7 +3,7 @@
 #
 #   tmux new -s timing '~/repo/pruning_opportunity/ec2/ec2_run.sh'
 #
-# Runs M1 (all memory), then M2 (2 GB DuckDB / 3 GB cgroup, page cache dropped per session), aggregates, copies the
+# Runs M1 (all memory), then M2 (2 GB DuckDB / 6 GB cgroup, page cache dropped per session), aggregates, copies the
 # results to S3 after every session and at the end, and shuts the instance down (SHUTDOWN=0 to keep it running).
 # Resumable: finished sessions are skipped when the script is started again.
 #
