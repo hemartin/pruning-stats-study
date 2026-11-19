@@ -1,0 +1,5 @@
+group,setup,pass,config,queries,total,rowid,minmax,stat,pc,wasted,with,rest
+clickbench,clickbench,1,baseline_step4cb,43,537108,0,152845,0,0,58769,325494,0
+clickbench,clickbench,2,baseline_step4cb,43,537108,0,152842,0,0,58782,325484,0
+clickbench,clickbench,1,cbnew_step4,43,537108,24398,152778,19197,1462,13725,325548,0
+clickbench,clickbench,2,cbnew_step4,43,537108,24397,152957,0,34384,0,325370,0

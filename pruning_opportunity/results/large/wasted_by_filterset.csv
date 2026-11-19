@@ -1,0 +1,2093 @@
+benchmark,table,filter_set,scans,scanned_no_rows
+micro,sensor_records,user_id=74,6,366804
+micro,sensor_records,user_id=38,6,366702
+micro,sensor_records,user_id=47,6,365636
+micro,sensor_records,user_id=69,5,306135
+micro,sensor_records,user_id=17,5,305840
+micro,sensor_records,user_id=78,5,305130
+micro,sensor_records,user_id=87,5,305120
+micro,sensor_records,user_id=35,5,304510
+micro,sensor_records,user_id=44,4,292387
+micro,sensor_records,user_id=65,4,244640
+micro,sensor_records,user_id=9,4,244608
+micro,sensor_records,user_id=67,4,244276
+micro,sensor_records,user_id=11,4,244236
+micro,sensor_records,user_id=59,4,244069
+micro,sensor_records,user_id=42,4,243948
+micro,sensor_records,user_id=62,4,243888
+micro,sensor_records,user_id=61,4,243565
+micro,sensor_records,user_id=19,4,243460
+micro,sensor_records,user_id=4,4,229306
+micro,sensor_records,user_id=95,4,229100
+micro,sensor_records,timestamp_ms=1769803735120,2,222196
+micro,sensor_records,timestamp_ms=1769800650983,2,222077
+micro,sensor_records,timestamp_ms=1769797235191,2,221945
+micro,sensor_records,timestamp_ms>=1769803735120 AND timestamp_ms<=1769803736120,2,221850
+micro,sensor_records,timestamp_ms=1769790396478,3,221684
+micro,sensor_records,timestamp_ms>=1769800650983 AND timestamp_ms<=1769800651983,2,221672
+micro,sensor_records,timestamp_ms=1769787021100,3,221553
+micro,sensor_records,timestamp_ms>=1769797235191 AND timestamp_ms<=1769797236191,2,221550
+micro,sensor_records,timestamp_ms>=1769790396478 AND timestamp_ms<=1769790397478,2,221306
+micro,sensor_records,timestamp_ms=1769777366402,2,221177
+micro,sensor_records,timestamp_ms>=1769787021100 AND timestamp_ms<=1769787022100,2,221162
+micro,sensor_records,timestamp_ms=1769774653024,3,221077
+micro,sensor_records,timestamp_ms=1769768738369,2,220845
+micro,sensor_records,timestamp_ms>=1769777366402 AND timestamp_ms<=1769777367402,2,220786
+micro,sensor_records,timestamp_ms=1769764258013,2,220670
+micro,sensor_records,timestamp_ms>=1769774653024 AND timestamp_ms<=1769774654024,2,220664
+micro,sensor_records,timestamp_ms>=1769768738369 AND timestamp_ms<=1769768739369,2,220452
+micro,sensor_records,timestamp_ms=1769756731181,2,220382
+micro,sensor_records,timestamp_ms>=1769764258013 AND timestamp_ms<=1769764259013,2,220260
+micro,sensor_records,timestamp_ms>=1769756731181 AND timestamp_ms<=1769756732181,2,219964
+micro,sensor_records,timestamp_ms=1769705813809,3,218419
+micro,sensor_records,timestamp_ms=1769695994287,3,218041
+micro,sensor_records,timestamp_ms>=1769705813809 AND timestamp_ms<=1769705814809,2,217999
+micro,sensor_records,timestamp_ms>=1769695994287 AND timestamp_ms<=1769695995287,2,217675
+micro,sensor_records,timestamp_ms=1769654296059,3,216432
+micro,sensor_records,timestamp_ms>=1769654296059 AND timestamp_ms<=1769654297059,2,216043
+micro,sensor_records,timestamp_ms=1769641187249,3,215926
+micro,sensor_records,timestamp_ms>=1769641187249 AND timestamp_ms<=1769641188249,2,215521
+micro,sensor_records,timestamp_ms=1769623834130,3,215257
+micro,sensor_records,timestamp_ms>=1769623834130 AND timestamp_ms<=1769623835130,2,214839
+micro,sensor_records,timestamp_ms=1769601877916,2,214406
+micro,sensor_records,timestamp_ms=1769592714809,3,214056
+micro,sensor_records,timestamp_ms=1769592515567,2,214046
+micro,sensor_records,timestamp_ms>=1769601877916 AND timestamp_ms<=1769601878916,2,214021
+micro,sensor_records,timestamp_ms>=1769592515567 AND timestamp_ms<=1769592516567,2,213668
+micro,sensor_records,timestamp_ms=1769582638842,3,213667
+micro,sensor_records,timestamp_ms>=1769592714809 AND timestamp_ms<=1769592715809,2,213657
+micro,sensor_records,timestamp_ms=1769573334146,3,213309
+micro,sensor_records,timestamp_ms=1769572724354,3,213285
+micro,sensor_records,timestamp_ms>=1769582638842 AND timestamp_ms<=1769582639842,2,213271
+micro,sensor_records,timestamp_ms>=1769573334146 AND timestamp_ms<=1769573335146,2,212907
+micro,sensor_records,timestamp_ms>=1769572724354 AND timestamp_ms<=1769572725354,2,212894
+micro,sensor_records,timestamp_ms=1769548974552,2,212364
+micro,sensor_records,timestamp_ms=1769546815122,3,212285
+micro,sensor_records,timestamp_ms=1769545723552,2,212240
+micro,sensor_records,timestamp_ms>=1769548974552 AND timestamp_ms<=1769548975552,2,211995
+micro,sensor_records,timestamp_ms>=1769545723552 AND timestamp_ms<=1769545724552,2,211881
+micro,sensor_records,timestamp_ms>=1769546815122 AND timestamp_ms<=1769546816122,2,211880
+micro,sensor_records,timestamp_ms=1769533598224,3,211776
+micro,sensor_records,timestamp_ms=1769528687845,3,211587
+micro,sensor_records,timestamp_ms>=1769533598224 AND timestamp_ms<=1769533599224,2,211401
+micro,sensor_records,timestamp_ms=1769520880664,3,211285
+micro,sensor_records,timestamp_ms>=1769528687845 AND timestamp_ms<=1769528688845,2,211202
+micro,sensor_records,timestamp_ms=1769511404986,3,210920
+micro,sensor_records,timestamp_ms>=1769520880664 AND timestamp_ms<=1769520881664,2,210884
+micro,sensor_records,timestamp_ms=1769507600151,3,210773
+micro,sensor_records,timestamp_ms=1769506149835,2,210714
+micro,sensor_records,timestamp_ms=1769502319835,2,210566
+micro,sensor_records,timestamp_ms>=1769511404986 AND timestamp_ms<=1769511405986,2,210468
+micro,sensor_records,timestamp_ms>=1769507600151 AND timestamp_ms<=1769507601151,2,210391
+micro,sensor_records,timestamp_ms>=1769506149835 AND timestamp_ms<=1769506150835,2,210349
+micro,sensor_records,timestamp_ms=1769496341792,3,210339
+micro,sensor_records,timestamp_ms>=1769502319835 AND timestamp_ms<=1769502320835,2,210178
+micro,sensor_records,timestamp_ms>=1769496341792 AND timestamp_ms<=1769496342792,2,209939
+micro,sensor_records,timestamp_ms=1769468812907,2,209274
+micro,sensor_records,timestamp_ms>=1769468812907 AND timestamp_ms<=1769468813907,2,208892
+micro,sensor_records,timestamp_ms=1769428232426,3,207711
+micro,sensor_records,timestamp_ms>=1769428232426 AND timestamp_ms<=1769428233426,2,207319
+micro,sensor_records,timestamp_ms=1769389997419,3,206235
+micro,sensor_records,timestamp_ms>=1769389997419 AND timestamp_ms<=1769389998419,2,205906
+micro,sensor_records,timestamp_ms=1769369636575,3,205449
+micro,sensor_records,timestamp_ms=1769367352004,3,205362
+micro,sensor_records,timestamp_ms>=1769369636575 AND timestamp_ms<=1769369637575,2,205066
+micro,sensor_records,timestamp_ms>=1769367352004 AND timestamp_ms<=1769367353004,2,204975
+micro,sensor_records,timestamp_ms=1769335738871,3,204142
+micro,sensor_records,timestamp_ms>=1769335738871 AND timestamp_ms<=1769335739871,2,203759
+micro,sensor_records,timestamp_ms=1769305054142,3,202958
+micro,sensor_records,timestamp_ms=1769304554492,3,202939
+micro,sensor_records,timestamp_ms=1769303990171,2,202914
+micro,sensor_records,timestamp_ms>=1769305054142 AND timestamp_ms<=1769305055142,2,202595
+micro,sensor_records,timestamp_ms=1769294781600,3,202562
+micro,sensor_records,timestamp_ms>=1769303990171 AND timestamp_ms<=1769303991171,2,202552
+micro,sensor_records,timestamp_ms>=1769304554492 AND timestamp_ms<=1769304555492,2,202534
+micro,sensor_records,timestamp_ms=1769288426892,3,202316
+micro,sensor_records,timestamp_ms>=1769294781600 AND timestamp_ms<=1769294782600,2,202175
+micro,sensor_records,timestamp_ms>=1769288426892 AND timestamp_ms<=1769288427892,2,201930
+micro,sensor_records,timestamp_ms=1769269749906,3,201596
+micro,sensor_records,timestamp_ms>=1769269749906 AND timestamp_ms<=1769269750906,2,201199
+micro,sensor_records,timestamp_ms>=1769803735120 AND timestamp_ms<=1769803795120,2,201067
+micro,sensor_records,timestamp_ms=1769253318293,3,200962
+micro,sensor_records,timestamp_ms=1769251079028,3,200876
+micro,sensor_records,timestamp_ms>=1769797235191 AND timestamp_ms<=1769797295191,2,200843
+micro,sensor_records,timestamp_ms>=1769800650983 AND timestamp_ms<=1769800710983,2,200805
+micro,sensor_records,timestamp_ms>=1769787021100 AND timestamp_ms<=1769787081100,2,200632
+micro,sensor_records,timestamp_ms>=1769253318293 AND timestamp_ms<=1769253319293,2,200572
+micro,sensor_records,timestamp_ms>=1769251079028 AND timestamp_ms<=1769251080028,2,200497
+micro,sensor_records,timestamp_ms>=1769790396478 AND timestamp_ms<=1769790456478,2,200436
+micro,sensor_records,timestamp_ms=1769235397847,3,200270
+micro,sensor_records,timestamp_ms>=1769777366402 AND timestamp_ms<=1769777426402,2,200146
+micro,sensor_records,timestamp_ms>=1769768738369 AND timestamp_ms<=1769768798369,2,199958
+micro,sensor_records,timestamp_ms>=1769235397847 AND timestamp_ms<=1769235398847,2,199901
+micro,sensor_records,timestamp_ms>=1769774653024 AND timestamp_ms<=1769774713024,2,199823
+micro,sensor_records,timestamp_ms>=1769764258013 AND timestamp_ms<=1769764318013,2,199802
+micro,sensor_records,timestamp_ms=1769216436725,3,199539
+micro,sensor_records,timestamp_ms>=1769756731181 AND timestamp_ms<=1769756791181,2,199303
+micro,sensor_records,timestamp_ms>=1769216436725 AND timestamp_ms<=1769216437725,2,199164
+micro,sensor_records,timestamp_ms=1769202428121,3,198998
+micro,sensor_records,timestamp_ms=1769198043992,2,198827
+micro,sensor_records,timestamp_ms=1769196162995,2,198754
+micro,sensor_records,timestamp_ms>=1769202428121 AND timestamp_ms<=1769202429121,2,198616
+micro,sensor_records,timestamp_ms>=1769198043992 AND timestamp_ms<=1769198044992,2,198467
+micro,sensor_records,timestamp_ms>=1769196162995 AND timestamp_ms<=1769196163995,2,198384
+micro,sensor_records,timestamp_ms=1769163393847,3,197492
+micro,sensor_records,timestamp_ms=1769160397773,3,197376
+micro,sensor_records,timestamp_ms>=1769705813809 AND timestamp_ms<=1769705873809,2,197260
+micro,sensor_records,timestamp_ms>=1769163393847 AND timestamp_ms<=1769163394847,2,197106
+micro,sensor_records,timestamp_ms>=1769160397773 AND timestamp_ms<=1769160398773,2,197001
+micro,sensor_records,timestamp_ms>=1769695994287 AND timestamp_ms<=1769696054287,2,196869
+micro,sensor_records,timestamp_ms=1769125874346,3,196044
+micro,sensor_records,timestamp_ms=1769120938985,3,195854
+micro,sensor_records,timestamp_ms>=1769125874346 AND timestamp_ms<=1769125875346,2,195654
+micro,sensor_records,timestamp_ms=1769111786509,3,195500
+micro,sensor_records,timestamp_ms>=1769120938985 AND timestamp_ms<=1769120939985,2,195461
+micro,sensor_records,timestamp_ms=1769107801512,3,195346
+micro,sensor_records,timestamp_ms>=1769654296059 AND timestamp_ms<=1769654356059,2,195320
+micro,sensor_records,user_id=48,3,195190
+micro,sensor_records,timestamp_ms>=1769111786509 AND timestamp_ms<=1769111787509,2,195088
+micro,sensor_records,timestamp_ms=1769100894853,3,195080
+micro,sensor_records,timestamp_ms=1769099502193,2,195023
+micro,sensor_records,timestamp_ms>=1769641187249 AND timestamp_ms<=1769641247249,2,194943
+micro,sensor_records,timestamp_ms>=1769107801512 AND timestamp_ms<=1769107802512,2,194926
+micro,sensor_records,timestamp_ms>=1769100894853 AND timestamp_ms<=1769100895853,2,194661
+micro,sensor_records,timestamp_ms>=1769099502193 AND timestamp_ms<=1769099503193,2,194640
+micro,sensor_records,timestamp_ms>=1769623834130 AND timestamp_ms<=1769623894130,2,194199
+micro,sensor_records,timestamp_ms=1769074639391,3,194066
+micro,sensor_records,timestamp_ms>=1769074639391 AND timestamp_ms<=1769074640391,2,193683
+micro,sensor_records,timestamp_ms>=1769601877916 AND timestamp_ms<=1769601937916,2,193476
+micro,sensor_records,timestamp_ms=1769046628610,3,192986
+micro,sensor_records,timestamp_ms>=1769592714809 AND timestamp_ms<=1769592774809,2,192945
+micro,sensor_records,timestamp_ms>=1769592515567 AND timestamp_ms<=1769592575567,2,192924
+micro,sensor_records,timestamp_ms=1769038621854,2,192674
+micro,sensor_records,timestamp_ms>=1769046628610 AND timestamp_ms<=1769046629610,2,192609
+micro,sensor_records,timestamp_ms>=1769582638842 AND timestamp_ms<=1769582698842,2,192551
+micro,sensor_records,timestamp_ms>=1769038621854 AND timestamp_ms<=1769038622854,2,192253
+micro,sensor_records,timestamp_ms>=1769573334146 AND timestamp_ms<=1769573394146,2,192188
+micro,sensor_records,timestamp_ms>=1769572724354 AND timestamp_ms<=1769572784354,2,192150
+micro,sensor_records,timestamp_ms>=1769546815122 AND timestamp_ms<=1769546875122,2,191375
+micro,sensor_records,timestamp_ms>=1769548974552 AND timestamp_ms<=1769549034552,2,191350
+micro,sensor_records,timestamp_ms>=1769545723552 AND timestamp_ms<=1769545783552,2,191242
+micro,sensor_records,timestamp_ms>=1769533598224 AND timestamp_ms<=1769533658224,2,190681
+micro,sensor_records,timestamp_ms>=1769528687845 AND timestamp_ms<=1769528747845,2,190580
+micro,sensor_records,timestamp_ms=1768979826806,3,190408
+micro,sensor_records,timestamp_ms=1768979491171,2,190392
+micro,sensor_records,timestamp_ms=1768971143394,2,190071
+micro,sensor_records,timestamp_ms>=1769520880664 AND timestamp_ms<=1769520940664,2,190035
+micro,sensor_records,timestamp_ms>=1768979491171 AND timestamp_ms<=1768979492171,2,190027
+micro,sensor_records,timestamp_ms>=1768979826806 AND timestamp_ms<=1768979827806,2,189993
+micro,sensor_records,timestamp_ms>=1769511404986 AND timestamp_ms<=1769511464986,2,189718
+micro,sensor_records,timestamp_ms>=1769507600151 AND timestamp_ms<=1769507660151,2,189684
+micro,sensor_records,timestamp_ms>=1769502319835 AND timestamp_ms<=1769502379835,2,189677
+micro,sensor_records,timestamp_ms>=1768971143394 AND timestamp_ms<=1768971144394,2,189649
+micro,sensor_records,timestamp_ms=1768958155627,2,189570
+micro,sensor_records,timestamp_ms>=1769506149835 AND timestamp_ms<=1769506209835,2,189494
+micro,sensor_records,timestamp_ms>=1768958155627 AND timestamp_ms<=1768958156627,2,189187
+micro,sensor_records,timestamp_ms>=1769496341792 AND timestamp_ms<=1769496401792,2,189157
+micro,sensor_records,timestamp_ms>=1769468812907 AND timestamp_ms<=1769468872907,2,188232
+micro,sensor_records,timestamp_ms=1768906259274,3,187570
+micro,sensor_records,timestamp_ms=1768900987154,3,187367
+micro,sensor_records,timestamp_ms>=1768906259274 AND timestamp_ms<=1768906260274,2,187151
+micro,sensor_records,timestamp_ms>=1768900987154 AND timestamp_ms<=1768900988154,2,186968
+micro,sensor_records,timestamp_ms>=1769428232426 AND timestamp_ms<=1769428292426,2,186769
+micro,sensor_records,timestamp_ms=1768876307997,3,186415
+micro,sensor_records,timestamp_ms=1768875203837,3,186372
+micro,sensor_records,timestamp_ms=1768868310795,3,186107
+micro,sensor_records,timestamp_ms>=1768876307997 AND timestamp_ms<=1768876308997,2,186056
+micro,sensor_records,timestamp_ms>=1768875203837 AND timestamp_ms<=1768875204837,2,185993
+micro,sensor_records,timestamp_ms=1768865330359,3,185991
+micro,sensor_records,timestamp_ms=1768858891305,3,185742
+micro,sensor_records,timestamp_ms>=1768868310795 AND timestamp_ms<=1768868311795,2,185733
+micro,sensor_records,timestamp_ms>=1768865330359 AND timestamp_ms<=1768865331359,2,185614
+micro,sensor_records,user_id=2687,2,185567
+micro,sensor_records,timestamp_ms>=1769389997419 AND timestamp_ms<=1769390057419,2,185397
+micro,sensor_records,timestamp_ms>=1768858891305 AND timestamp_ms<=1768858892305,2,185363
+micro,sensor_records,timestamp_ms>=1769369636575 AND timestamp_ms<=1769369696575,2,184444
+micro,sensor_records,timestamp_ms>=1769367352004 AND timestamp_ms<=1769367412004,2,184306
+micro,sensor_records,timestamp_ms=1768821107583,3,184285
+micro,sensor_records,timestamp_ms=1768818300700,3,184176
+micro,sensor_records,timestamp_ms>=1768821107583 AND timestamp_ms<=1768821108583,2,183940
+micro,sensor_records,timestamp_ms=1768809631420,3,183842
+micro,sensor_records,user_id=54,3,183810
+micro,sensor_records,timestamp_ms>=1768818300700 AND timestamp_ms<=1768818301700,2,183788
+micro,sensor_records,timestamp_ms=1768803243099,3,183595
+micro,sensor_records,timestamp_ms>=1768809631420 AND timestamp_ms<=1768809632420,2,183454
+micro,sensor_records,user_id=14,3,183432
+micro,sensor_records,user_id=76,3,183429
+micro,sensor_records,user_id=28,3,183258
+micro,sensor_records,timestamp_ms>=1768803243099 AND timestamp_ms<=1768803244099,2,183200
+micro,sensor_records,timestamp_ms>=1769335738871 AND timestamp_ms<=1769335798871,2,183193
+micro,sensor_records,user_id=82,3,183119
+micro,sensor_records,user_id=81,3,183108
+micro,sensor_records,user_id=21,3,183030
+micro,sensor_records,user_id=24,3,183015
+micro,sensor_records,user_id=18,3,182976
+micro,sensor_records,user_id=27,3,182949
+micro,sensor_records,user_id=83,3,182850
+micro,sensor_records,user_id=55,3,182763
+micro,sensor_records,user_id=89,3,182624
+micro,sensor_records,user_id=49,3,182571
+micro,sensor_records,timestamp_ms=1768775653083,3,182531
+micro,sensor_records,user_id=85,3,182421
+micro,sensor_records,user_id=92,3,182313
+micro,sensor_records,timestamp_ms=1768766786524,3,182189
+micro,sensor_records,timestamp_ms>=1768775653083 AND timestamp_ms<=1768775654083,2,182137
+micro,sensor_records,timestamp_ms>=1769303990171 AND timestamp_ms<=1769304050171,2,181965
+micro,sensor_records,timestamp_ms>=1769305054142 AND timestamp_ms<=1769305114142,2,181866
+micro,sensor_records,timestamp_ms=1768757810456,2,181840
+micro,sensor_records,timestamp_ms>=1768766786524 AND timestamp_ms<=1768766787524,2,181822
+micro,sensor_records,timestamp_ms>=1769304554492 AND timestamp_ms<=1769304614492,2,181665
+micro,sensor_records,timestamp_ms=1768748444312,2,181479
+micro,sensor_records,timestamp_ms>=1768757810456 AND timestamp_ms<=1768757811456,2,181449
+micro,sensor_records,timestamp_ms=1768747326165,3,181439
+micro,sensor_records,timestamp_ms>=1769294781600 AND timestamp_ms<=1769294841600,2,181368
+micro,sensor_records,timestamp_ms=1768739844183,2,181145
+micro,sensor_records,timestamp_ms>=1768748444312 AND timestamp_ms<=1768748445312,2,181103
+micro,sensor_records,timestamp_ms>=1768747326165 AND timestamp_ms<=1768747327165,2,181083
+micro,sensor_records,timestamp_ms=1768737389400,3,181055
+micro,sensor_records,timestamp_ms>=1769288426892 AND timestamp_ms<=1769288486892,2,181026
+micro,sensor_records,timestamp_ms>=1768739844183 AND timestamp_ms<=1768739845183,2,180769
+micro,sensor_records,timestamp_ms>=1768737389400 AND timestamp_ms<=1768737390400,2,180664
+micro,sensor_records,timestamp_ms=1768726773837,3,180646
+micro,sensor_records,timestamp_ms>=1769269749906 AND timestamp_ms<=1769269809906,2,180465
+micro,sensor_records,timestamp_ms>=1768726773837 AND timestamp_ms<=1768726774837,2,180273
+micro,sensor_records,timestamp_ms=1768715433394,2,180205
+micro,sensor_records,timestamp_ms>=1768715433394 AND timestamp_ms<=1768715434394,2,179839
+micro,sensor_records,timestamp_ms>=1769253318293 AND timestamp_ms<=1769253378293,2,179822
+micro,sensor_records,timestamp_ms=1768703995841,3,179767
+micro,sensor_records,timestamp_ms=1768702338857,2,179701
+micro,sensor_records,timestamp_ms>=1769251079028 AND timestamp_ms<=1769251139028,2,179575
+micro,sensor_records,timestamp_ms>=1768703995841 AND timestamp_ms<=1768703996841,2,179379
+micro,sensor_records,timestamp_ms>=1768702338857 AND timestamp_ms<=1768702339857,2,179305
+micro,sensor_records,timestamp_ms>=1769235397847 AND timestamp_ms<=1769235457847,2,178992
+micro,sensor_records,timestamp_ms=1768675862427,2,178679
+micro,sensor_records,timestamp_ms>=1768675862427 AND timestamp_ms<=1768675863427,2,178300
+micro,sensor_records,timestamp_ms>=1769216436725 AND timestamp_ms<=1769216496725,2,178279
+micro,sensor_records,timestamp_ms>=1769202428121 AND timestamp_ms<=1769202488121,2,177850
+micro,sensor_records,timestamp_ms=1768652406904,3,177777
+micro,sensor_records,timestamp_ms>=1769198043992 AND timestamp_ms<=1769198103992,2,177722
+micro,sensor_records,timestamp_ms>=1769196162995 AND timestamp_ms<=1769196222995,2,177459
+micro,sensor_records,timestamp_ms>=1768652406904 AND timestamp_ms<=1768652407904,2,177414
+micro,sensor_records,timestamp_ms=1768630797031,3,176943
+micro,sensor_records,timestamp_ms=1768629725233,3,176902
+micro,sensor_records,timestamp_ms=1768627272156,2,176805
+micro,sensor_records,timestamp_ms>=1768629725233 AND timestamp_ms<=1768629726233,2,176546
+micro,sensor_records,timestamp_ms>=1768630797031 AND timestamp_ms<=1768630798031,2,176522
+micro,sensor_records,timestamp_ms=1768619852060,2,176518
+micro,sensor_records,timestamp_ms>=1769163393847 AND timestamp_ms<=1769163453847,2,176448
+micro,sensor_records,timestamp_ms>=1768627272156 AND timestamp_ms<=1768627273156,2,176417
+micro,sensor_records,timestamp_ms>=1769160397773 AND timestamp_ms<=1769160457773,2,176201
+micro,sensor_records,timestamp_ms>=1768619852060 AND timestamp_ms<=1768619853060,2,176152
+micro,sensor_records,timestamp_ms=1768594913663,2,175555
+micro,sensor_records,timestamp_ms=1768589516581,3,175351
+micro,sensor_records,timestamp_ms>=1768594913663 AND timestamp_ms<=1768594914663,2,175187
+micro,sensor_records,timestamp_ms>=1769125874346 AND timestamp_ms<=1769125934346,2,175005
+micro,sensor_records,timestamp_ms>=1768589516581 AND timestamp_ms<=1768589517581,2,174935
+micro,sensor_records,timestamp_ms=1768576739183,3,174858
+micro,sensor_records,timestamp_ms>=1769120938985 AND timestamp_ms<=1769120998985,2,174696
+micro,sensor_records,timestamp_ms=1768572016315,3,174675
+micro,sensor_records,timestamp_ms>=1768576739183 AND timestamp_ms<=1768576740183,2,174473
+micro,sensor_records,timestamp_ms>=1769111786509 AND timestamp_ms<=1769111846509,2,174352
+micro,sensor_records,timestamp_ms>=1768572016315 AND timestamp_ms<=1768572017315,2,174349
+micro,sensor_records,timestamp_ms>=1769107801512 AND timestamp_ms<=1769107861512,2,174251
+micro,sensor_records,timestamp_ms>=1769100894853 AND timestamp_ms<=1769100954853,2,174082
+micro,sensor_records,timestamp_ms>=1769099502193 AND timestamp_ms<=1769099562193,2,173908
+micro,sensor_records,timestamp_ms>=1769074639391 AND timestamp_ms<=1769074699391,2,172921
+micro,sensor_records,timestamp_ms=1768526128167,3,172904
+micro,sensor_records,timestamp_ms=1768519330618,3,172642
+micro,sensor_records,timestamp_ms>=1768526128167 AND timestamp_ms<=1768526129167,2,172523
+micro,sensor_records,timestamp_ms=1768509984325,3,172282
+micro,sensor_records,timestamp_ms>=1768519330618 AND timestamp_ms<=1768519331618,2,172223
+micro,sensor_records,timestamp_ms=1768506093049,3,172132
+micro,sensor_records,timestamp_ms=1768503520440,3,172033
+micro,sensor_records,timestamp_ms>=1768509984325 AND timestamp_ms<=1768509985325,2,171896
+micro,sensor_records,timestamp_ms=1768499453496,2,171872
+micro,sensor_records,timestamp_ms>=1769046628610 AND timestamp_ms<=1769046688610,2,171842
+micro,sensor_records,timestamp_ms>=1768506093049 AND timestamp_ms<=1768506094049,2,171775
+micro,sensor_records,timestamp_ms>=1768503520440 AND timestamp_ms<=1768503521440,2,171659
+micro,sensor_records,timestamp_ms>=1769038621854 AND timestamp_ms<=1769038681854,2,171579
+micro,sensor_records,timestamp_ms>=1768499453496 AND timestamp_ms<=1768499454496,2,171487
+micro,sensor_records,timestamp_ms=1768445492606,2,169790
+micro,sensor_records,timestamp_ms=1768442706445,3,169687
+micro,sensor_records,timestamp_ms=1768440563252,3,169603
+micro,sensor_records,timestamp_ms>=1768445492606 AND timestamp_ms<=1768445493606,2,169432
+micro,sensor_records,timestamp_ms>=1768979491171 AND timestamp_ms<=1768979551171,2,169400
+micro,sensor_records,timestamp_ms>=1768442706445 AND timestamp_ms<=1768442707445,2,169327
+micro,sensor_records,timestamp_ms>=1768979826806 AND timestamp_ms<=1768979886806,2,169208
+micro,sensor_records,timestamp_ms>=1768440563252 AND timestamp_ms<=1768440564252,2,169164
+micro,sensor_records,timestamp_ms>=1768971143394 AND timestamp_ms<=1768971203394,2,168691
+micro,sensor_records,timestamp_ms>=1768958155627 AND timestamp_ms<=1768958215627,2,168479
+micro,sensor_records,timestamp_ms=1768401694244,2,168101
+micro,sensor_records,timestamp_ms=1768392967222,3,167768
+micro,sensor_records,timestamp_ms>=1768401694244 AND timestamp_ms<=1768401695244,2,167753
+micro,sensor_records,timestamp_ms>=1768392967222 AND timestamp_ms<=1768392968222,2,167370
+micro,sensor_records,timestamp_ms=1768380137075,3,167272
+micro,sensor_records,timestamp_ms=1768378727868,2,167215
+micro,sensor_records,timestamp_ms=1768376982782,2,167148
+micro,sensor_records,timestamp_ms>=1768380137075 AND timestamp_ms<=1768380138075,2,166886
+micro,sensor_records,timestamp_ms>=1768378727868 AND timestamp_ms<=1768378728868,2,166828
+micro,sensor_records,timestamp_ms>=1768376982782 AND timestamp_ms<=1768376983782,2,166779
+micro,sensor_records,timestamp_ms>=1768906259274 AND timestamp_ms<=1768906319274,2,166400
+micro,sensor_records,timestamp_ms=1768353761608,3,166255
+micro,sensor_records,timestamp_ms>=1768900987154 AND timestamp_ms<=1768901047154,2,166223
+micro,sensor_records,timestamp_ms>=1768353761608 AND timestamp_ms<=1768353762608,2,165904
+micro,sensor_records,timestamp_ms>=1768875203837 AND timestamp_ms<=1768875263837,2,165297
+micro,sensor_records,timestamp_ms>=1768876307997 AND timestamp_ms<=1768876367997,2,165205
+micro,sensor_records,timestamp_ms=1768324073740,3,165109
+micro,sensor_records,timestamp_ms>=1768868310795 AND timestamp_ms<=1768868370795,2,165064
+micro,sensor_records,timestamp_ms=1768317023672,3,164837
+micro,sensor_records,timestamp_ms>=1768865330359 AND timestamp_ms<=1768865390359,2,164794
+micro,sensor_records,timestamp_ms>=1768324073740 AND timestamp_ms<=1768324074740,2,164698
+micro,sensor_records,timestamp_ms>=1768858891305 AND timestamp_ms<=1768858951305,2,164603
+micro,sensor_records,timestamp_ms=1768309524454,3,164547
+micro,sensor_records,timestamp_ms>=1768317023672 AND timestamp_ms<=1768317024672,2,164460
+micro,sensor_records,timestamp_ms=1768305277531,3,164384
+micro,sensor_records,timestamp_ms>=1768309524454 AND timestamp_ms<=1768309525454,2,164174
+micro,sensor_records,timestamp_ms=1768296682374,3,164052
+micro,sensor_records,timestamp_ms>=1768305277531 AND timestamp_ms<=1768305278531,2,163992
+micro,sensor_records,timestamp_ms>=1768296682374 AND timestamp_ms<=1768296683374,2,163692
+micro,sensor_records,timestamp_ms=1768282438715,3,163502
+micro,sensor_records,timestamp_ms>=1768821107583 AND timestamp_ms<=1768821167583,2,163452
+micro,sensor_records,timestamp_ms>=1768818300700 AND timestamp_ms<=1768818360700,2,163271
+micro,sensor_records,timestamp_ms>=1768282438715 AND timestamp_ms<=1768282439715,2,163120
+micro,sensor_records,timestamp_ms>=1768803243099 AND timestamp_ms<=1768803303099,2,162746
+micro,sensor_records,timestamp_ms>=1768809631420 AND timestamp_ms<=1768809691420,2,162715
+micro,sensor_records,timestamp_ms=1768249377584,3,162226
+micro,sensor_records,timestamp_ms=1768246200332,3,162104
+micro,sensor_records,timestamp_ms>=1768249377584 AND timestamp_ms<=1768249378584,2,161842
+micro,sensor_records,timestamp_ms>=1768246200332 AND timestamp_ms<=1768246201332,2,161723
+micro,sensor_records,timestamp_ms>=1768775653083 AND timestamp_ms<=1768775713083,2,161505
+micro,sensor_records,timestamp_ms=1768226080833,2,161324
+micro,sensor_records,timestamp_ms=1768223682759,2,161230
+micro,sensor_records,timestamp_ms>=1768766786524 AND timestamp_ms<=1768766846524,2,161217
+micro,sensor_records,timestamp_ms>=1768226080833 AND timestamp_ms<=1768226081833,2,160950
+micro,sensor_records,timestamp_ms>=1768223682759 AND timestamp_ms<=1768223683759,2,160859
+micro,sensor_records,timestamp_ms>=1768757810456 AND timestamp_ms<=1768757870456,2,160740
+micro,sensor_records,timestamp_ms=1768206969275,2,160587
+micro,sensor_records,timestamp_ms=1768202890346,3,160432
+micro,sensor_records,timestamp_ms>=1768747326165 AND timestamp_ms<=1768747386165,2,160388
+micro,sensor_records,timestamp_ms>=1768748444312 AND timestamp_ms<=1768748504312,2,160368
+micro,sensor_records,timestamp_ms=1768200989793,3,160359
+micro,sensor_records,timestamp_ms>=1768206969275 AND timestamp_ms<=1768206970275,2,160198
+micro,sensor_records,timestamp_ms>=1768739844183 AND timestamp_ms<=1768739904183,2,160139
+micro,sensor_records,timestamp_ms>=1768202890346 AND timestamp_ms<=1768202891346,2,160084
+micro,sensor_records,timestamp_ms>=1768200989793 AND timestamp_ms<=1768200990793,2,159967
+micro,sensor_records,timestamp_ms>=1768737389400 AND timestamp_ms<=1768737449400,2,159895
+micro,sensor_records,timestamp_ms>=1768726773837 AND timestamp_ms<=1768726833837,2,159737
+micro,sensor_records,timestamp_ms=1768184864689,2,159733
+micro,sensor_records,timestamp_ms=1768182890435,3,159661
+micro,sensor_records,timestamp_ms>=1768184864689 AND timestamp_ms<=1768184865689,2,159340
+micro,sensor_records,timestamp_ms>=1768182890435 AND timestamp_ms<=1768182891435,2,159287
+micro,sensor_records,timestamp_ms>=1768715433394 AND timestamp_ms<=1768715493394,2,159118
+micro,sensor_records,timestamp_ms=1768162540156,2,158873
+micro,sensor_records,timestamp_ms>=1768702338857 AND timestamp_ms<=1768702398857,2,158687
+micro,sensor_records,timestamp_ms>=1768162540156 AND timestamp_ms<=1768162541156,2,158517
+micro,sensor_records,timestamp_ms>=1768703995841 AND timestamp_ms<=1768704055841,2,158459
+micro,sensor_records,timestamp_ms=1768137650650,2,157912
+micro,sensor_records,timestamp_ms=1768136084432,3,157855
+micro,sensor_records,timestamp_ms>=1768675862427 AND timestamp_ms<=1768675922427,2,157749
+micro,sensor_records,timestamp_ms>=1768137650650 AND timestamp_ms<=1768137651650,2,157524
+micro,sensor_records,timestamp_ms>=1768136084432 AND timestamp_ms<=1768136085432,2,157492
+micro,sensor_records,timestamp_ms>=1768652406904 AND timestamp_ms<=1768652466904,2,156654
+micro,sensor_records,timestamp_ms=1768092600889,3,156176
+micro,sensor_records,timestamp_ms>=1768630797031 AND timestamp_ms<=1768630857031,2,156052
+micro,sensor_records,timestamp_ms>=1768629725233 AND timestamp_ms<=1768629785233,2,155866
+micro,sensor_records,timestamp_ms>=1768092600889 AND timestamp_ms<=1768092601889,2,155797
+micro,sensor_records,timestamp_ms=1768080769741,3,155720
+micro,sensor_records,timestamp_ms>=1768627272156 AND timestamp_ms<=1768627332156,2,155621
+micro,sensor_records,timestamp_ms>=1768619852060 AND timestamp_ms<=1768619912060,2,155447
+micro,sensor_records,timestamp_ms>=1768080769741 AND timestamp_ms<=1768080770741,2,155335
+micro,sensor_records,timestamp_ms=1768068700773,3,155255
+micro,sensor_records,timestamp_ms>=1768068700773 AND timestamp_ms<=1768068701773,2,154860
+micro,sensor_records,timestamp_ms>=1768589516581 AND timestamp_ms<=1768589576581,2,154481
+micro,sensor_records,timestamp_ms>=1768594913663 AND timestamp_ms<=1768594973663,2,154369
+micro,sensor_records,timestamp_ms=1768039383997,3,154124
+micro,sensor_records,timestamp_ms=1768030717342,2,153787
+micro,sensor_records,timestamp_ms>=1768039383997 AND timestamp_ms<=1768039384997,2,153723
+micro,sensor_records,timestamp_ms>=1768576739183 AND timestamp_ms<=1768576799183,2,153722
+micro,sensor_records,timestamp_ms>=1768572016315 AND timestamp_ms<=1768572076315,2,153667
+micro,sensor_records,timestamp_ms>=1768030717342 AND timestamp_ms<=1768030718342,2,153378
+micro,sensor_records,timestamp_ms=1768003161505,3,152726
+micro,sensor_records,timestamp_ms=1768001001629,2,152639
+micro,sensor_records,timestamp_ms=1767999012246,2,152563
+micro,sensor_records,timestamp_ms>=1768003161505 AND timestamp_ms<=1768003162505,2,152296
+micro,sensor_records,timestamp_ms>=1768001001629 AND timestamp_ms<=1768001002629,2,152247
+micro,sensor_records,timestamp_ms>=1767999012246 AND timestamp_ms<=1767999013246,2,152152
+micro,sensor_records,timestamp_ms=1767987336433,3,152115
+micro,sensor_records,timestamp_ms>=1768526128167 AND timestamp_ms<=1768526188167,2,151914
+micro,sensor_records,timestamp_ms>=1767987336433 AND timestamp_ms<=1767987337433,2,151712
+micro,sensor_records,timestamp_ms=1767974373037,3,151616
+micro,sensor_records,timestamp_ms>=1768519330618 AND timestamp_ms<=1768519390618,2,151394
+micro,sensor_records,timestamp_ms=1767966799782,3,151323
+micro,sensor_records,timestamp_ms=1767966468206,2,151307
+micro,sensor_records,timestamp_ms>=1768509984325 AND timestamp_ms<=1768510044325,2,151285
+micro,sensor_records,timestamp_ms>=1767974373037 AND timestamp_ms<=1767974374037,2,151240
+micro,sensor_records,timestamp_ms=1767964216873,3,151224
+micro,sensor_records,timestamp_ms>=1768506093049 AND timestamp_ms<=1768506153049,2,151133
+micro,sensor_records,timestamp_ms>=1767966799782 AND timestamp_ms<=1767966800782,2,150919
+micro,sensor_records,timestamp_ms>=1767966468206 AND timestamp_ms<=1767966469206,2,150900
+micro,sensor_records,timestamp_ms>=1768503520440 AND timestamp_ms<=1768503580440,2,150883
+micro,sensor_records,timestamp_ms>=1767964216873 AND timestamp_ms<=1767964217873,2,150827
+micro,sensor_records,timestamp_ms>=1768499453496 AND timestamp_ms<=1768499513496,2,150814
+micro,sensor_records,timestamp_ms=1767951613786,3,150737
+micro,sensor_records,timestamp_ms=1767947732443,2,150584
+micro,sensor_records,timestamp_ms=1767943599467,3,150429
+micro,sensor_records,timestamp_ms>=1767951613786 AND timestamp_ms<=1767951614786,2,150330
+micro,sensor_records,timestamp_ms>=1767947732443 AND timestamp_ms<=1767947733443,2,150169
+micro,sensor_records,timestamp_ms>=1767943599467 AND timestamp_ms<=1767943600467,2,150041
+micro,sensor_records,timestamp_ms=1767930972849,3,149941
+micro,sensor_records,timestamp_ms>=1767930972849 AND timestamp_ms<=1767930973849,2,149523
+micro,sensor_records,timestamp_ms=1767919055898,2,149478
+micro,sensor_records,timestamp_ms=1767912813378,3,149241
+micro,sensor_records,timestamp_ms>=1767919055898 AND timestamp_ms<=1767919056898,2,149084
+micro,sensor_records,timestamp_ms>=1767912813378 AND timestamp_ms<=1767912814378,2,148854
+micro,sensor_records,timestamp_ms>=1768445492606 AND timestamp_ms<=1768445552606,2,148789
+micro,sensor_records,timestamp_ms>=1768440563252 AND timestamp_ms<=1768440623252,2,148781
+micro,sensor_records,timestamp_ms=1767899282833,2,148714
+micro,sensor_records,timestamp_ms>=1768442706445 AND timestamp_ms<=1768442766445,2,148470
+micro,sensor_records,timestamp_ms=1767892696955,3,148464
+micro,sensor_records,timestamp_ms>=1767899282833 AND timestamp_ms<=1767899283833,2,148337
+micro,sensor_records,timestamp_ms>=1767892696955 AND timestamp_ms<=1767892697955,2,148076
+micro,sensor_records,timestamp_ms=1767878195274,3,147905
+micro,sensor_records,timestamp_ms=1767869443840,2,147562
+micro,sensor_records,timestamp_ms>=1767878195274 AND timestamp_ms<=1767878196274,2,147541
+micro,sensor_records,timestamp_ms=1767865595006,3,147419
+micro,sensor_records,timestamp_ms=1767864157874,3,147363
+micro,sensor_records,timestamp_ms>=1768401694244 AND timestamp_ms<=1768401754244,2,147203
+micro,sensor_records,timestamp_ms>=1767869443840 AND timestamp_ms<=1767869444840,2,147175
+micro,sensor_records,timestamp_ms>=1767865595006 AND timestamp_ms<=1767865596006,2,147061
+micro,sensor_records,timestamp_ms>=1767864157874 AND timestamp_ms<=1767864158874,2,146980
+micro,sensor_records,timestamp_ms=1767850482323,3,146835
+micro,sensor_records,timestamp_ms>=1768392967222 AND timestamp_ms<=1768393027222,2,146793
+micro,sensor_records,timestamp_ms>=1767850482323 AND timestamp_ms<=1767850483323,2,146451
+micro,sensor_records,timestamp_ms>=1768376982782 AND timestamp_ms<=1768377042782,2,146111
+micro,sensor_records,timestamp_ms>=1768380137075 AND timestamp_ms<=1768380197075,2,146037
+micro,sensor_records,timestamp_ms>=1768378727868 AND timestamp_ms<=1768378787868,2,146032
+micro,sensor_records,user_id=1846,2,145816
+micro,sensor_records,user_id=4007,2,145650
+micro,sensor_records,timestamp_ms>=1768353761608 AND timestamp_ms<=1768353821608,2,145461
+micro,sensor_records,timestamp_ms=1767811399540,3,145326
+micro,sensor_records,timestamp_ms>=1767811399540 AND timestamp_ms<=1767811400540,2,144939
+micro,sensor_records,timestamp_ms=1767788669035,2,144446
+micro,sensor_records,timestamp_ms>=1767788669035 AND timestamp_ms<=1767788670035,2,144046
+micro,sensor_records,timestamp_ms>=1768324073740 AND timestamp_ms<=1768324133740,2,144018
+micro,sensor_records,timestamp_ms>=1768317023672 AND timestamp_ms<=1768317083672,2,143847
+micro,sensor_records,timestamp_ms>=1768305277531 AND timestamp_ms<=1768305337531,2,143273
+micro,sensor_records,timestamp_ms>=1768309524454 AND timestamp_ms<=1768309584454,2,143223
+micro,sensor_records,timestamp_ms>=1768296682374 AND timestamp_ms<=1768296742374,2,143113
+micro,sensor_records,timestamp_ms=1767753362505,3,143087
+micro,sensor_records,timestamp_ms>=1767753362505 AND timestamp_ms<=1767753363505,2,142667
+micro,sensor_records,timestamp_ms>=1768282438715 AND timestamp_ms<=1768282498715,2,142585
+micro,sensor_records,timestamp_ms=1767714361085,2,141577
+micro,sensor_records,timestamp_ms>=1768249377584 AND timestamp_ms<=1768249437584,2,141240
+micro,sensor_records,timestamp_ms>=1767714361085 AND timestamp_ms<=1767714362085,2,141233
+micro,sensor_records,timestamp_ms>=1768246200332 AND timestamp_ms<=1768246260332,2,140982
+micro,sensor_records,timestamp_ms=1767687902611,3,140560
+micro,sensor_records,timestamp_ms=1767683024181,3,140372
+micro,sensor_records,timestamp_ms>=1768226080833 AND timestamp_ms<=1768226140833,2,140321
+micro,sensor_records,timestamp_ms>=1768223682759 AND timestamp_ms<=1768223742759,2,140302
+micro,sensor_records,timestamp_ms=1767680145930,3,140261
+micro,sensor_records,timestamp_ms>=1767687902611 AND timestamp_ms<=1767687903611,2,140167
+micro,sensor_records,timestamp_ms=1767674934730,3,140060
+micro,sensor_records,timestamp_ms>=1767683024181 AND timestamp_ms<=1767683025181,2,139980
+micro,sensor_records,timestamp_ms>=1767680145930 AND timestamp_ms<=1767680146930,2,139865
+micro,sensor_records,timestamp_ms>=1767674934730 AND timestamp_ms<=1767674935730,2,139670
+micro,sensor_records,timestamp_ms=1767662963227,3,139598
+micro,sensor_records,timestamp_ms>=1768206969275 AND timestamp_ms<=1768207029275,2,139524
+micro,sensor_records,timestamp_ms>=1768202890346 AND timestamp_ms<=1768202950346,2,139334
+micro,sensor_records,timestamp_ms>=1768200989793 AND timestamp_ms<=1768201049793,2,139296
+micro,sensor_records,timestamp_ms>=1767662963227 AND timestamp_ms<=1767662964227,2,139196
+micro,sensor_records,timestamp_ms>=1768182890435 AND timestamp_ms<=1768182950435,2,138713
+micro,sensor_records,timestamp_ms>=1768184864689 AND timestamp_ms<=1768184924689,2,138689
+micro,sensor_records,user_id=97,3,138333
+micro,sensor_records,timestamp_ms=1767628551492,3,138270
+micro,sensor_records,timestamp_ms>=1768162540156 AND timestamp_ms<=1768162600156,2,137901
+micro,sensor_records,timestamp_ms>=1767628551492 AND timestamp_ms<=1767628552492,2,137877
+micro,sensor_records,timestamp_ms=1767615364285,3,137762
+micro,sensor_records,timestamp_ms=1767612758176,3,137661
+micro,sensor_records,timestamp_ms>=1767615364285 AND timestamp_ms<=1767615365285,2,137364
+micro,sensor_records,timestamp_ms>=1767612758176 AND timestamp_ms<=1767612759176,2,137268
+micro,sensor_records,timestamp_ms>=1768137650650 AND timestamp_ms<=1768137710650,2,137043
+micro,sensor_records,timestamp_ms=1767592589780,3,136883
+micro,sensor_records,timestamp_ms>=1768136084432 AND timestamp_ms<=1768136144432,2,136854
+micro,sensor_records,timestamp_ms>=1767592589780 AND timestamp_ms<=1767592590780,2,136492
+micro,sensor_records,timestamp_ms=1767565674666,3,135845
+micro,sensor_records,timestamp_ms>=1767565674666 AND timestamp_ms<=1767565675666,2,135440
+micro,sensor_records,timestamp_ms>=1768092600889 AND timestamp_ms<=1768092660889,2,135063
+micro,sensor_records,timestamp_ms=1767538102289,3,134781
+micro,sensor_records,timestamp_ms=1767535601743,3,134685
+micro,sensor_records,timestamp_ms=1767531968268,2,134542
+micro,sensor_records,timestamp_ms>=1768080769741 AND timestamp_ms<=1768080829741,2,134448
+micro,sensor_records,timestamp_ms>=1767538102289 AND timestamp_ms<=1767538103289,2,134397
+micro,sensor_records,timestamp_ms>=1767535601743 AND timestamp_ms<=1767535602743,2,134311
+micro,sensor_records,timestamp_ms>=1768068700773 AND timestamp_ms<=1768068760773,2,134279
+micro,sensor_records,timestamp_ms>=1767531968268 AND timestamp_ms<=1767531969268,2,134182
+micro,sensor_records,user_id=260,2,133979
+micro,sensor_records,timestamp_ms=1767516369184,2,133940
+micro,sensor_records,user_id=863,2,133741
+micro,sensor_records,user_id=457,2,133607
+micro,sensor_records,timestamp_ms>=1767516369184 AND timestamp_ms<=1767516370184,2,133541
+micro,sensor_records,timestamp_ms=1767505138671,2,133507
+micro,sensor_records,timestamp_ms>=1768039383997 AND timestamp_ms<=1768039443997,2,133347
+micro,sensor_records,timestamp_ms>=1767505138671 AND timestamp_ms<=1767505139671,2,133132
+micro,sensor_records,timestamp_ms=1767491491563,3,132983
+micro,sensor_records,timestamp_ms=1767486956864,3,132808
+micro,sensor_records,timestamp_ms>=1768030717342 AND timestamp_ms<=1768030777342,2,132713
+micro,sensor_records,timestamp_ms>=1767491491563 AND timestamp_ms<=1767491492563,2,132582
+micro,sensor_records,timestamp_ms=1767477420761,2,132437
+micro,sensor_records,timestamp_ms>=1767486956864 AND timestamp_ms<=1767486957864,2,132433
+micro,sensor_records,timestamp_ms>=1767477420761 AND timestamp_ms<=1767477421761,2,132059
+micro,sensor_records,timestamp_ms>=1768001001629 AND timestamp_ms<=1768001061629,2,131637
+micro,sensor_records,timestamp_ms=1767454025885,2,131533
+micro,sensor_records,timestamp_ms>=1767999012246 AND timestamp_ms<=1767999072246,2,131508
+micro,sensor_records,timestamp_ms=1767451566649,3,131443
+micro,sensor_records,timestamp_ms>=1768003161505 AND timestamp_ms<=1768003221505,2,131431
+micro,sensor_records,timestamp_ms>=1767454025885 AND timestamp_ms<=1767454026885,2,131127
+micro,sensor_records,timestamp_ms=1767443306434,3,131124
+micro,sensor_records,timestamp_ms>=1767451566649 AND timestamp_ms<=1767451567649,2,131029
+micro,sensor_records,timestamp_ms=1767438707567,2,130943
+micro,sensor_records,timestamp_ms>=1767987336433 AND timestamp_ms<=1767987396433,2,130875
+micro,sensor_records,timestamp_ms=1767434533562,2,130781
+micro,sensor_records,timestamp_ms>=1767443306434 AND timestamp_ms<=1767443307434,2,130762
+micro,sensor_records,timestamp_ms>=1767966799782 AND timestamp_ms<=1767966859782,2,130612
+micro,sensor_records,timestamp_ms>=1767438707567 AND timestamp_ms<=1767438708567,2,130553
+micro,sensor_records,timestamp_ms>=1767974373037 AND timestamp_ms<=1767974433037,2,130482
+micro,sensor_records,timestamp_ms>=1767434533562 AND timestamp_ms<=1767434534562,2,130395
+micro,sensor_records,timestamp_ms>=1767966468206 AND timestamp_ms<=1767966528206,2,130316
+micro,sensor_records,timestamp_ms=1767420213547,2,130230
+micro,sensor_records,timestamp_ms>=1767964216873 AND timestamp_ms<=1767964276873,2,130048
+micro,sensor_records,timestamp_ms=1767413021823,2,129953
+micro,sensor_records,timestamp_ms>=1767420213547 AND timestamp_ms<=1767420214547,2,129877
+micro,sensor_records,timestamp_ms=1767410186660,3,129846
+micro,sensor_records,timestamp_ms>=1767951613786 AND timestamp_ms<=1767951673786,2,129596
+micro,sensor_records,timestamp_ms>=1767413021823 AND timestamp_ms<=1767413022823,2,129548
+micro,sensor_records,timestamp_ms>=1767947732443 AND timestamp_ms<=1767947792443,2,129484
+micro,sensor_records,timestamp_ms>=1767410186660 AND timestamp_ms<=1767410187660,2,129463
+micro,sensor_records,timestamp_ms=1767392524042,3,129164
+micro,sensor_records,timestamp_ms>=1767943599467 AND timestamp_ms<=1767943659467,2,129147
+micro,sensor_records,timestamp_ms>=1767930972849 AND timestamp_ms<=1767931032849,2,129107
+micro,sensor_records,timestamp_ms>=1767392524042 AND timestamp_ms<=1767392525042,2,128748
+micro,sensor_records,timestamp_ms=1767369206281,3,128266
+micro,sensor_records,timestamp_ms>=1767919055898 AND timestamp_ms<=1767919115898,2,128204
+micro,sensor_records,timestamp_ms>=1767912813378 AND timestamp_ms<=1767912873378,2,128155
+micro,sensor_records,timestamp_ms=1767363865364,3,128059
+micro,sensor_records,timestamp_ms>=1767369206281 AND timestamp_ms<=1767369207281,2,127886
+micro,sensor_records,timestamp_ms=1767356306078,3,127767
+micro,sensor_records,timestamp_ms>=1767363865364 AND timestamp_ms<=1767363866364,2,127665
+micro,sensor_records,timestamp_ms=1767352361915,3,127615
+micro,sensor_records,timestamp_ms>=1767899282833 AND timestamp_ms<=1767899342833,2,127428
+micro,sensor_records,timestamp_ms>=1767356306078 AND timestamp_ms<=1767356307078,2,127363
+micro,sensor_records,timestamp_ms>=1767352361915 AND timestamp_ms<=1767352362915,2,127222
+micro,sensor_records,timestamp_ms>=1767892696955 AND timestamp_ms<=1767892756955,2,127155
+micro,sensor_records,timestamp_ms=1767336227728,3,126992
+micro,sensor_records,timestamp_ms>=1767878195274 AND timestamp_ms<=1767878255274,2,126846
+micro,sensor_records,timestamp_ms=1767330820245,2,126779
+micro,sensor_records,timestamp_ms=1767329923646,2,126746
+micro,sensor_records,timestamp_ms>=1767336227728 AND timestamp_ms<=1767336228728,2,126616
+micro,sensor_records,timestamp_ms>=1767869443840 AND timestamp_ms<=1767869503840,2,126590
+micro,sensor_records,timestamp_ms>=1767330820245 AND timestamp_ms<=1767330821245,2,126394
+micro,sensor_records,timestamp_ms>=1767329923646 AND timestamp_ms<=1767329924646,2,126337
+micro,sensor_records,timestamp_ms>=1767865595006 AND timestamp_ms<=1767865655006,2,126320
+micro,sensor_records,timestamp_ms>=1767864157874 AND timestamp_ms<=1767864217874,2,126297
+micro,sensor_records,timestamp_ms=1767309654188,2,125964
+micro,sensor_records,timestamp_ms>=1767850482323 AND timestamp_ms<=1767850542323,2,125815
+micro,sensor_records,timestamp_ms>=1767309654188 AND timestamp_ms<=1767309655188,2,125584
+micro,sensor_records,timestamp_ms=1767292063826,2,125285
+micro,sensor_records,timestamp_ms=1767291062929,3,125250
+micro,sensor_records,timestamp_ms>=1767292063826 AND timestamp_ms<=1767292064826,2,124902
+micro,sensor_records,timestamp_ms>=1767291062929 AND timestamp_ms<=1767291063929,2,124880
+micro,sensor_records,timestamp_ms>=1767811399540 AND timestamp_ms<=1767811459540,2,124420
+micro,sensor_records,timestamp_ms=1767264661062,3,124230
+micro,sensor_records,timestamp_ms=1767260155079,3,124057
+micro,sensor_records,timestamp_ms>=1767264661062 AND timestamp_ms<=1767264662062,2,123820
+micro,sensor_records,timestamp_ms>=1767260155079 AND timestamp_ms<=1767260156079,2,123679
+micro,sensor_records,timestamp_ms>=1767788669035 AND timestamp_ms<=1767788729035,2,123347
+micro,sensor_records,user_id=66,2,122742
+micro,sensor_records,timestamp_ms=1769316992706,2,122724
+micro,sensor_records,timestamp_ms=1768512527684,2,122724
+micro,sensor_records,timestamp_ms=1769212251129,2,122724
+micro,sensor_records,timestamp_ms=1769474470509,2,122724
+micro,sensor_records,timestamp_ms=1768777488882,2,122724
+micro,sensor_records,timestamp_ms=1769436689921,2,122724
+micro,sensor_records,timestamp_ms=1769705137233,2,122724
+micro,sensor_records,timestamp_ms=1769527315954,2,122724
+micro,sensor_records,timestamp_ms=1769273944126,2,122724
+micro,sensor_records,timestamp_ms=1769212004426,2,122724
+micro,sensor_records,timestamp_ms=1767940581979,2,122724
+micro,sensor_records,timestamp_ms=1767516380323,2,122724
+micro,sensor_records,timestamp_ms=1768291118671,2,122724
+micro,sensor_records,timestamp_ms=1767756538641,2,122724
+micro,sensor_records,timestamp_ms=1768943616690,2,122724
+micro,sensor_records,timestamp_ms=1769739922453,2,122724
+micro,sensor_records,timestamp_ms=1768445968558,1,122722
+micro,sensor_records,timestamp_ms=1767447787513,1,122722
+micro,sensor_records,timestamp_ms=1767792802506,1,122722
+micro,sensor_records,timestamp_ms=1768517639971,1,122722
+micro,sensor_records,timestamp_ms=1768932514161,1,122722
+micro,sensor_records,timestamp_ms=1769304603891,1,122722
+micro,sensor_records,timestamp_ms=1768726428165,1,122722
+micro,sensor_records,timestamp_ms=1769796920023,1,122722
+micro,sensor_records,timestamp_ms=1767503244151,1,122722
+micro,sensor_records,timestamp_ms=1769451899450,1,122722
+micro,sensor_records,timestamp_ms=1767255768025,1,122722
+micro,sensor_records,timestamp_ms=1767656485156,1,122722
+micro,sensor_records,timestamp_ms=1769435444395,1,122722
+micro,sensor_records,timestamp_ms=1769458142666,1,122722
+micro,sensor_records,timestamp_ms=1767816498107,1,122722
+micro,sensor_records,timestamp_ms=1767566148226,1,122722
+micro,sensor_records,timestamp_ms=1768240955891,1,122721
+micro,sensor_records,timestamp_ms=1767740524666,1,122721
+micro,sensor_records,timestamp_ms=1768609832453,1,122721
+micro,sensor_records,timestamp_ms=1767731331707,1,122721
+micro,sensor_records,timestamp_ms=1767431350329,1,122721
+micro,sensor_records,timestamp_ms=1768494136967,1,122720
+micro,sensor_records,user_id=905,2,122526
+micro,sensor_records,user_id=866,2,122486
+micro,sensor_records,user_id=46,2,122380
+micro,sensor_records,user_id=687,2,122364
+micro,sensor_records,user_id=10,2,122358
+micro,sensor_records,user_id=615,2,122330
+micro,sensor_records,user_id=36,2,122308
+micro,sensor_records,user_id=45,2,122296
+micro,sensor_records,user_id=64,2,122220
+micro,sensor_records,user_id=144,2,122206
+micro,sensor_records,user_id=715,2,122118
+micro,sensor_records,user_id=722,2,122108
+micro,sensor_records,user_id=29,2,122065
+micro,sensor_records,user_id=60,2,122062
+micro,sensor_records,user_id=79,2,122054
+micro,sensor_records,user_id=34,2,122048
+micro,sensor_records,user_id=25,2,122010
+micro,sensor_records,user_id=57,2,122006
+micro,sensor_records,user_id=71,2,121983
+micro,sensor_records,user_id=68,2,121944
+micro,sensor_records,timestamp_ms>=1767753362505 AND timestamp_ms<=1767753422505,2,121940
+micro,sensor_records,user_id=51,2,121940
+micro,sensor_records,user_id=56,2,121896
+micro,sensor_records,user_id=721,2,121858
+micro,sensor_records,user_id=914,2,121852
+micro,sensor_records,user_id=15,2,121823
+micro,sensor_records,user_id=20,2,121810
+micro,sensor_records,user_id=77,2,121721
+micro,sensor_records,user_id=16,2,121663
+micro,sensor_records,user_id=39,2,121650
+micro,sensor_records,user_id=32,2,121276
+micro,sensor_records,user_id=885,2,121076
+micro,sensor_records,timestamp_ms>=1767714361085 AND timestamp_ms<=1767714421085,2,120416
+micro,sensor_records,user_id=93,2,120256
+micro,sensor_records,timestamp_ms>=1767687902611 AND timestamp_ms<=1767687962611,2,119522
+micro,sensor_records,timestamp_ms>=1767680145930 AND timestamp_ms<=1767680205930,2,119239
+micro,sensor_records,timestamp_ms>=1767683024181 AND timestamp_ms<=1767683084181,2,119141
+micro,sensor_records,timestamp_ms>=1767674934730 AND timestamp_ms<=1767674994730,2,118867
+micro,sensor_records,user_id=5,2,118754
+micro,sensor_records,timestamp_ms>=1767662963227 AND timestamp_ms<=1767663023227,2,118519
+micro,sensor_records,timestamp_ms>=1767628551492 AND timestamp_ms<=1767628611492,2,117199
+micro,sensor_records,timestamp_ms>=1767615364285 AND timestamp_ms<=1767615424285,2,116511
+micro,sensor_records,timestamp_ms>=1767612758176 AND timestamp_ms<=1767612818176,2,116472
+micro,sensor_records,timestamp_ms>=1767592589780 AND timestamp_ms<=1767592649780,2,115985
+micro,sensor_records,timestamp_ms>=1767565674666 AND timestamp_ms<=1767565734666,2,114702
+micro,sensor_records,timestamp_ms>=1767538102289 AND timestamp_ms<=1767538162289,2,113846
+micro,sensor_records,timestamp_ms>=1767535601743 AND timestamp_ms<=1767535661743,2,113641
+micro,sensor_records,timestamp_ms>=1767531968268 AND timestamp_ms<=1767532028268,2,113391
+micro,sensor_records,user_id=50284,1,113087
+micro,sensor_records,user_id=87015,1,113066
+micro,sensor_records,user_id=94240,1,113058
+micro,sensor_records,user_id=53689,1,113042
+micro,sensor_records,user_id=1882,1,113023
+micro,sensor_records,user_id=14716,1,113021
+micro,sensor_records,user_id=35253,1,113020
+micro,sensor_records,user_id=15923,1,113001
+micro,sensor_records,user_id=4169,1,113000
+micro,sensor_records,user_id=4213,1,112997
+micro,sensor_records,user_id=61936,1,112987
+micro,sensor_records,user_id=35996,1,112987
+micro,sensor_records,user_id=14000,1,112985
+micro,sensor_records,user_id=25367,1,112971
+micro,sensor_records,user_id=72270,1,112967
+micro,sensor_records,user_id=49665,1,112965
+micro,sensor_records,user_id=67046,1,112962
+micro,sensor_records,user_id=79913,1,112959
+micro,sensor_records,user_id=45594,1,112959
+micro,sensor_records,user_id=47050,1,112958
+micro,sensor_records,user_id=46401,1,112955
+micro,sensor_records,user_id=78738,1,112953
+micro,sensor_records,user_id=75879,1,112953
+micro,sensor_records,user_id=6753,1,112952
+micro,sensor_records,user_id=97799,1,112951
+micro,sensor_records,user_id=55532,1,112950
+micro,sensor_records,user_id=70515,1,112950
+micro,sensor_records,user_id=96540,1,112945
+micro,sensor_records,user_id=60668,1,112943
+micro,sensor_records,user_id=72740,1,112939
+micro,sensor_records,user_id=13594,1,112938
+micro,sensor_records,user_id=17781,1,112935
+micro,sensor_records,user_id=53235,1,112933
+micro,sensor_records,user_id=45143,1,112931
+micro,sensor_records,user_id=87578,1,112928
+micro,sensor_records,user_id=48339,1,112928
+micro,sensor_records,user_id=29059,1,112927
+micro,sensor_records,user_id=89143,1,112927
+micro,sensor_records,user_id=81325,1,112921
+micro,sensor_records,user_id=73350,1,112917
+micro,sensor_records,user_id=32054,1,112915
+micro,sensor_records,user_id=53773,1,112915
+micro,sensor_records,user_id=13432,1,112915
+micro,sensor_records,user_id=42180,1,112912
+micro,sensor_records,user_id=4569,1,112911
+micro,sensor_records,user_id=72381,1,112910
+micro,sensor_records,user_id=86361,1,112910
+micro,sensor_records,user_id=16321,1,112908
+micro,sensor_records,user_id=37009,1,112907
+micro,sensor_records,user_id=31849,1,112904
+micro,sensor_records,user_id=94066,1,112904
+micro,sensor_records,user_id=65997,1,112902
+micro,sensor_records,user_id=28438,1,112901
+micro,sensor_records,user_id=71446,1,112900
+micro,sensor_records,user_id=25064,1,112900
+micro,sensor_records,user_id=67421,1,112899
+micro,sensor_records,user_id=69006,1,112896
+micro,sensor_records,user_id=72262,1,112894
+micro,sensor_records,user_id=60318,1,112894
+micro,sensor_records,user_id=40590,1,112892
+micro,sensor_records,user_id=83594,1,112890
+micro,sensor_records,user_id=33554,1,112884
+micro,sensor_records,user_id=43193,1,112883
+micro,sensor_records,user_id=79545,1,112883
+micro,sensor_records,user_id=46649,1,112883
+micro,sensor_records,user_id=15650,1,112883
+micro,sensor_records,user_id=71646,1,112882
+micro,sensor_records,user_id=19793,1,112881
+micro,sensor_records,user_id=25733,1,112881
+micro,sensor_records,user_id=94395,1,112878
+micro,sensor_records,user_id=30194,1,112874
+micro,sensor_records,user_id=46905,1,112873
+micro,sensor_records,user_id=22966,1,112872
+micro,sensor_records,user_id=60638,1,112872
+micro,sensor_records,user_id=46682,1,112872
+micro,sensor_records,user_id=66651,1,112871
+micro,sensor_records,user_id=35546,1,112870
+micro,sensor_records,user_id=40586,1,112870
+micro,sensor_records,user_id=56736,1,112869
+micro,sensor_records,user_id=66043,1,112869
+micro,sensor_records,user_id=80090,1,112869
+micro,sensor_records,user_id=24403,1,112866
+micro,sensor_records,user_id=73699,1,112863
+micro,sensor_records,user_id=50860,1,112861
+micro,sensor_records,user_id=21397,1,112856
+micro,sensor_records,user_id=84326,1,112856
+micro,sensor_records,user_id=98882,1,112855
+micro,sensor_records,user_id=11784,1,112855
+micro,sensor_records,user_id=90502,1,112853
+micro,sensor_records,user_id=98435,1,112852
+micro,sensor_records,user_id=26141,1,112851
+micro,sensor_records,user_id=52480,1,112850
+micro,sensor_records,user_id=4334,1,112849
+micro,sensor_records,user_id=32821,1,112848
+micro,sensor_records,user_id=88895,1,112847
+micro,sensor_records,user_id=69409,1,112846
+micro,sensor_records,user_id=96819,1,112846
+micro,sensor_records,user_id=63748,1,112845
+micro,sensor_records,user_id=11700,1,112845
+micro,sensor_records,user_id=63216,1,112844
+micro,sensor_records,user_id=87768,1,112843
+micro,sensor_records,user_id=61077,1,112843
+micro,sensor_records,user_id=36890,1,112843
+micro,sensor_records,user_id=56053,1,112843
+micro,sensor_records,user_id=60888,1,112841
+micro,sensor_records,user_id=76762,1,112841
+micro,sensor_records,user_id=7491,1,112839
+micro,sensor_records,user_id=52970,1,112834
+micro,sensor_records,user_id=14563,1,112834
+micro,sensor_records,user_id=38358,1,112830
+micro,sensor_records,user_id=249,1,112826
+micro,sensor_records,user_id=66941,1,112826
+micro,sensor_records,user_id=71121,1,112824
+micro,sensor_records,user_id=3081,1,112824
+micro,sensor_records,user_id=57356,1,112822
+micro,sensor_records,user_id=17178,1,112822
+micro,sensor_records,user_id=18505,1,112821
+micro,sensor_records,user_id=12653,1,112821
+micro,sensor_records,user_id=55067,1,112821
+micro,sensor_records,user_id=49618,1,112821
+micro,sensor_records,timestamp_ms>=1767516369184 AND timestamp_ms<=1767516429184,2,112820
+micro,sensor_records,user_id=17250,1,112818
+micro,sensor_records,user_id=27315,1,112814
+micro,sensor_records,user_id=34625,1,112812
+micro,sensor_records,user_id=4045,1,112809
+micro,sensor_records,user_id=34499,1,112809
+micro,sensor_records,user_id=30833,1,112808
+micro,sensor_records,user_id=3109,1,112808
+micro,sensor_records,user_id=64819,1,112807
+micro,sensor_records,user_id=44577,1,112805
+micro,sensor_records,user_id=40286,1,112805
+micro,sensor_records,user_id=56935,1,112804
+micro,sensor_records,user_id=18393,1,112802
+micro,sensor_records,user_id=33263,1,112801
+micro,sensor_records,user_id=57991,1,112801
+micro,sensor_records,user_id=10655,1,112800
+micro,sensor_records,user_id=50569,1,112799
+micro,sensor_records,user_id=68178,1,112799
+micro,sensor_records,user_id=44541,1,112799
+micro,sensor_records,user_id=62958,1,112797
+micro,sensor_records,user_id=33857,1,112796
+micro,sensor_records,user_id=69576,1,112794
+micro,sensor_records,user_id=34919,1,112790
+micro,sensor_records,user_id=59608,1,112788
+micro,sensor_records,user_id=44320,1,112788
+micro,sensor_records,user_id=44961,1,112787
+micro,sensor_records,user_id=85010,1,112787
+micro,sensor_records,user_id=58669,1,112786
+micro,sensor_records,user_id=12578,1,112785
+micro,sensor_records,user_id=22702,1,112785
+micro,sensor_records,user_id=26213,1,112785
+micro,sensor_records,user_id=18062,1,112784
+micro,sensor_records,user_id=59928,1,112784
+micro,sensor_records,user_id=73393,1,112783
+micro,sensor_records,user_id=90236,1,112782
+micro,sensor_records,user_id=35409,1,112780
+micro,sensor_records,user_id=99859,1,112779
+micro,sensor_records,user_id=23955,1,112778
+micro,sensor_records,user_id=67400,1,112774
+micro,sensor_records,user_id=20476,1,112772
+micro,sensor_records,user_id=61617,1,112772
+micro,sensor_records,user_id=62299,1,112766
+micro,sensor_records,user_id=93469,1,112764
+micro,sensor_records,user_id=85657,1,112760
+micro,sensor_records,user_id=50841,1,112759
+micro,sensor_records,user_id=85226,1,112758
+micro,sensor_records,user_id=72760,1,112757
+micro,sensor_records,user_id=77321,1,112757
+micro,sensor_records,user_id=45727,1,112757
+micro,sensor_records,user_id=49396,1,112754
+micro,sensor_records,user_id=43167,1,112750
+micro,sensor_records,user_id=49469,1,112749
+micro,sensor_records,user_id=78369,1,112743
+micro,sensor_records,user_id=18157,1,112743
+micro,sensor_records,user_id=86297,1,112741
+micro,sensor_records,user_id=93240,1,112735
+micro,sensor_records,user_id=52623,1,112728
+micro,sensor_records,user_id=67043,1,112727
+micro,sensor_records,user_id=43907,1,112727
+micro,sensor_records,user_id=96620,1,112724
+micro,sensor_records,user_id=57000,1,112724
+micro,sensor_records,user_id=10681,1,112722
+micro,sensor_records,user_id=6391,1,112722
+micro,sensor_records,user_id=48639,1,112720
+micro,sensor_records,user_id=84338,1,112713
+micro,sensor_records,user_id=85315,1,112710
+micro,sensor_records,user_id=59554,1,112709
+micro,sensor_records,user_id=53966,1,112705
+micro,sensor_records,user_id=18878,1,112690
+micro,sensor_records,user_id=92519,1,112683
+micro,sensor_records,user_id=93248,1,112679
+micro,sensor_records,user_id=44249,1,112678
+micro,sensor_records,user_id=39635,1,112675
+micro,sensor_records,user_id=80114,1,112672
+micro,sensor_records,user_id=66892,1,112665
+micro,sensor_records,user_id=31939,1,112646
+micro,sensor_records,user_id=63468,1,112646
+micro,sensor_records,user_id=30083,1,112583
+micro,sensor_records,user_id=24885,1,112582
+micro,sensor_records,timestamp_ms>=1767505138671 AND timestamp_ms<=1767505198671,2,112563
+micro,sensor_records,timestamp_ms>=1767491491563 AND timestamp_ms<=1767491551563,2,111965
+micro,sensor_records,timestamp_ms>=1767486956864 AND timestamp_ms<=1767487016864,2,111608
+micro,sensor_records,timestamp_ms>=1767477420761 AND timestamp_ms<=1767477480761,2,111321
+micro,sensor_records,timestamp_ms>=1767451566649 AND timestamp_ms<=1767451626649,2,110633
+micro,sensor_records,timestamp_ms>=1767454025885 AND timestamp_ms<=1767454085885,2,110454
+micro,sensor_records,timestamp_ms>=1767443306434 AND timestamp_ms<=1767443366434,2,109961
+micro,sensor_records,timestamp_ms>=1767438707567 AND timestamp_ms<=1767438767567,2,109733
+micro,sensor_records,timestamp_ms>=1767434533562 AND timestamp_ms<=1767434593562,2,109721
+micro,sensor_records,timestamp_ms>=1767420213547 AND timestamp_ms<=1767420273547,2,109122
+micro,sensor_records,timestamp_ms>=1767413021823 AND timestamp_ms<=1767413081823,2,109016
+micro,sensor_records,timestamp_ms>=1767410186660 AND timestamp_ms<=1767410246660,2,108794
+micro,sensor_records,timestamp_ms>=1767392524042 AND timestamp_ms<=1767392584042,2,108073
+micro,sensor_records,timestamp_ms>=1767369206281 AND timestamp_ms<=1767369266281,2,107211
+micro,sensor_records,timestamp_ms>=1767363865364 AND timestamp_ms<=1767363925364,2,106907
+micro,sensor_records,timestamp_ms>=1767356306078 AND timestamp_ms<=1767356366078,2,106646
+micro,sensor_records,timestamp_ms>=1767352361915 AND timestamp_ms<=1767352421915,2,106407
+micro,sensor_records,timestamp_ms>=1767336227728 AND timestamp_ms<=1767336287728,2,105942
+micro,sensor_records,timestamp_ms>=1767330820245 AND timestamp_ms<=1767330880245,2,105837
+micro,sensor_records,timestamp_ms>=1767329923646 AND timestamp_ms<=1767329983646,2,105563
+micro,sensor_records,timestamp_ms>=1767309654188 AND timestamp_ms<=1767309714188,2,104852
+micro,sensor_records,timestamp_ms>=1767292063826 AND timestamp_ms<=1767292123826,2,104286
+micro,sensor_records,timestamp_ms>=1767291062929 AND timestamp_ms<=1767291122929,2,104130
+micro,sensor_records,timestamp_ms>=1767264661062 AND timestamp_ms<=1767264721062,2,103038
+micro,sensor_records,timestamp_ms>=1767260155079 AND timestamp_ms<=1767260215079,2,102951
+micro,sensor_records,timestamp_ms>=1769796920023 AND timestamp_ms<=1769796980023,1,101904
+micro,sensor_records,timestamp_ms>=1769436689921 AND timestamp_ms<=1769436749921,1,101861
+micro,sensor_records,timestamp_ms>=1767792802506 AND timestamp_ms<=1767792862506,1,101834
+micro,sensor_records,timestamp_ms>=1768291118671 AND timestamp_ms<=1768291178671,1,101768
+micro,sensor_records,timestamp_ms>=1767447787513 AND timestamp_ms<=1767447847513,1,101728
+micro,sensor_records,timestamp_ms>=1769212004426 AND timestamp_ms<=1769212064426,1,101724
+micro,sensor_records,timestamp_ms>=1767516380323 AND timestamp_ms<=1767516440323,1,101695
+micro,sensor_records,timestamp_ms>=1768726428165 AND timestamp_ms<=1768726488165,1,101635
+micro,sensor_records,timestamp_ms>=1768494136967 AND timestamp_ms<=1768494196967,1,101629
+micro,sensor_records,timestamp_ms>=1769451899450 AND timestamp_ms<=1769451959450,1,101629
+micro,sensor_records,timestamp_ms>=1767740524666 AND timestamp_ms<=1767740584666,1,101625
+micro,sensor_records,timestamp_ms>=1768609832453 AND timestamp_ms<=1768609892453,1,101623
+micro,sensor_records,timestamp_ms>=1769212251129 AND timestamp_ms<=1769212311129,1,101608
+micro,sensor_records,timestamp_ms>=1768512527684 AND timestamp_ms<=1768512587684,1,101578
+micro,sensor_records,timestamp_ms>=1769705137233 AND timestamp_ms<=1769705197233,1,101575
+micro,sensor_records,timestamp_ms>=1767940581979 AND timestamp_ms<=1767940641979,1,101572
+micro,sensor_records,timestamp_ms>=1769527315954 AND timestamp_ms<=1769527375954,1,101562
+micro,sensor_records,timestamp_ms>=1768777488882 AND timestamp_ms<=1768777548882,1,101556
+micro,sensor_records,timestamp_ms>=1769273944126 AND timestamp_ms<=1769274004126,1,101556
+micro,sensor_records,timestamp_ms>=1769474470509 AND timestamp_ms<=1769474530509,1,101554
+micro,sensor_records,timestamp_ms>=1767756538641 AND timestamp_ms<=1767756598641,1,101545
+micro,sensor_records,timestamp_ms>=1768445968558 AND timestamp_ms<=1768446028558,1,101540
+micro,sensor_records,timestamp_ms>=1768240955891 AND timestamp_ms<=1768241015891,1,101519
+micro,sensor_records,timestamp_ms>=1769316992706 AND timestamp_ms<=1769317052706,1,101498
+micro,sensor_records,timestamp_ms>=1769304603891 AND timestamp_ms<=1769304663891,1,101487
+micro,sensor_records,timestamp_ms>=1767503244151 AND timestamp_ms<=1767503304151,1,101458
+micro,sensor_records,timestamp_ms>=1768932514161 AND timestamp_ms<=1768932574161,1,101437
+micro,sensor_records,timestamp_ms>=1767731331707 AND timestamp_ms<=1767731391707,1,101434
+micro,sensor_records,timestamp_ms>=1768517639971 AND timestamp_ms<=1768517699971,1,101405
+micro,sensor_records,timestamp_ms>=1769803735120 AND timestamp_ms<=1769807335120,2,99477
+micro,sensor_records,timestamp_ms>=1769800650983 AND timestamp_ms<=1769804250983,2,99358
+micro,sensor_records,timestamp_ms>=1769797235191 AND timestamp_ms<=1769800835191,2,99224
+micro,sensor_records,timestamp_ms>=1769790396478 AND timestamp_ms<=1769793996478,2,98961
+micro,sensor_records,timestamp_ms>=1769787021100 AND timestamp_ms<=1769790621100,2,98830
+micro,sensor_records,timestamp_ms>=1769777366402 AND timestamp_ms<=1769780966402,2,98458
+micro,sensor_records,timestamp_ms>=1769774653024 AND timestamp_ms<=1769778253024,2,98353
+micro,sensor_records,timestamp_ms>=1769768738369 AND timestamp_ms<=1769772338369,2,98124
+micro,sensor_records,timestamp_ms>=1769764258013 AND timestamp_ms<=1769767858013,2,97953
+micro,sensor_records,timestamp_ms>=1769756731181 AND timestamp_ms<=1769760331181,2,97662
+micro,sensor_records,timestamp_ms>=1769705813809 AND timestamp_ms<=1769709413809,2,95698
+micro,sensor_records,timestamp_ms>=1769695994287 AND timestamp_ms<=1769699594287,1,95316
+micro,sensor_records,timestamp_ms>=1769654296059 AND timestamp_ms<=1769657896059,2,93708
+micro,sensor_records,timestamp_ms>=1769641187249 AND timestamp_ms<=1769644787249,2,93204
+micro,sensor_records,timestamp_ms>=1769623834130 AND timestamp_ms<=1769627434130,2,92535
+micro,sensor_records,user_id=2,2,92514
+micro,sensor_records,timestamp_ms>=1769601877916 AND timestamp_ms<=1769605477916,1,91684
+micro,sensor_records,timestamp_ms>=1769592714809 AND timestamp_ms<=1769596314809,2,91335
+micro,sensor_records,timestamp_ms>=1769592515567 AND timestamp_ms<=1769596115567,2,91327
+micro,sensor_records,timestamp_ms>=1769582638842 AND timestamp_ms<=1769586238842,1,90942
+micro,sensor_records,timestamp_ms>=1769573334146 AND timestamp_ms<=1769576934146,2,90585
+micro,sensor_records,timestamp_ms>=1769572724354 AND timestamp_ms<=1769576324354,1,90560
+micro,sensor_records,timestamp_ms>=1769548974552 AND timestamp_ms<=1769552574552,2,89647
+micro,sensor_records,timestamp_ms>=1769546815122 AND timestamp_ms<=1769550415122,2,89562
+micro,sensor_records,timestamp_ms>=1769545723552 AND timestamp_ms<=1769549323552,2,89520
+micro,sensor_records,timestamp_ms>=1769533598224 AND timestamp_ms<=1769537198224,2,89055
+micro,sensor_records,timestamp_ms>=1769528687845 AND timestamp_ms<=1769532287845,2,88864
+micro,sensor_records,timestamp_ms>=1769520880664 AND timestamp_ms<=1769524480664,2,88561
+micro,sensor_records,timestamp_ms>=1769511404986 AND timestamp_ms<=1769515004986,2,88199
+micro,sensor_records,timestamp_ms>=1769507600151 AND timestamp_ms<=1769511200151,2,88051
+micro,sensor_records,timestamp_ms>=1769506149835 AND timestamp_ms<=1769509749835,2,87994
+micro,sensor_records,timestamp_ms>=1769502319835 AND timestamp_ms<=1769505919835,2,87846
+micro,sensor_records,timestamp_ms>=1769496341792 AND timestamp_ms<=1769499941792,2,87617
+micro,sensor_records,timestamp_ms>=1769468812907 AND timestamp_ms<=1769472412907,2,86555
+micro,sensor_records,timestamp_ms>=1769428232426 AND timestamp_ms<=1769431832426,2,84990
+micro,sensor_records,timestamp_ms>=1769389997419 AND timestamp_ms<=1769393597419,2,83513
+micro,sensor_records,timestamp_ms>=1769369636575 AND timestamp_ms<=1769373236575,1,82724
+micro,sensor_records,timestamp_ms>=1769367352004 AND timestamp_ms<=1769370952004,2,82640
+micro,sensor_records,timestamp_ms>=1769335738871 AND timestamp_ms<=1769339338871,2,81420
+micro,sensor_records,timestamp_ms>=1769305054142 AND timestamp_ms<=1769308654142,2,80234
+micro,sensor_records,timestamp_ms>=1769304554492 AND timestamp_ms<=1769308154492,2,80216
+micro,sensor_records,timestamp_ms>=1769303990171 AND timestamp_ms<=1769307590171,2,80193
+micro,sensor_records,timestamp_ms>=1769294781600 AND timestamp_ms<=1769298381600,2,79842
+micro,sensor_records,timestamp_ms>=1769288426892 AND timestamp_ms<=1769292026892,2,79593
+micro,sensor_records,timestamp_ms>=1769269749906 AND timestamp_ms<=1769273349906,1,78871
+micro,sensor_records,timestamp_ms>=1769253318293 AND timestamp_ms<=1769256918293,2,78243
+micro,sensor_records,timestamp_ms>=1769251079028 AND timestamp_ms<=1769254679028,2,78152
+micro,sensor_records,timestamp_ms>=1769235397847 AND timestamp_ms<=1769238997847,2,77546
+micro,sensor_records,timestamp_ms>=1769216436725 AND timestamp_ms<=1769220036725,2,76816
+micro,sensor_records,timestamp_ms>=1769202428121 AND timestamp_ms<=1769206028121,2,76274
+micro,sensor_records,timestamp_ms>=1769198043992 AND timestamp_ms<=1769201643992,2,76107
+micro,sensor_records,timestamp_ms>=1769196162995 AND timestamp_ms<=1769199762995,2,76033
+micro,sensor_records,timestamp_ms>=1769163393847 AND timestamp_ms<=1769166993847,2,74769
+micro,sensor_records,timestamp_ms>=1769160397773 AND timestamp_ms<=1769163997773,1,74651
+micro,sensor_records,timestamp_ms>=1769125874346 AND timestamp_ms<=1769129474346,2,73321
+micro,sensor_records,user_id=1413,1,73300
+micro,sensor_records,user_id=8088,1,73299
+micro,sensor_records,user_id=2451,1,73197
+micro,sensor_records,user_id=1270,1,73176
+micro,sensor_records,user_id=2829,1,73166
+micro,sensor_records,user_id=9262,1,73165
+micro,sensor_records,user_id=7997,1,73151
+micro,sensor_records,user_id=7352,1,73137
+micro,sensor_records,timestamp_ms>=1769120938985 AND timestamp_ms<=1769124538985,2,73133
+micro,sensor_records,user_id=509,1,73131
+micro,sensor_records,user_id=9544,1,73129
+micro,sensor_records,user_id=901,1,73124
+micro,sensor_records,user_id=8875,1,73116
+micro,sensor_records,user_id=4747,1,73114
+micro,sensor_records,user_id=8473,1,73109
+micro,sensor_records,user_id=234,1,73097
+micro,sensor_records,user_id=293,1,73095
+micro,sensor_records,user_id=5807,1,73090
+micro,sensor_records,user_id=7092,1,73089
+micro,sensor_records,user_id=3609,1,73088
+micro,sensor_records,user_id=8269,1,73081
+micro,sensor_records,user_id=9765,1,73079
+micro,sensor_records,user_id=2656,1,73078
+micro,sensor_records,user_id=423,1,73070
+micro,sensor_records,user_id=8089,1,73068
+micro,sensor_records,user_id=9397,1,73064
+micro,sensor_records,user_id=9069,1,73063
+micro,sensor_records,user_id=363,1,73057
+micro,sensor_records,user_id=1596,1,73057
+micro,sensor_records,user_id=8383,1,73054
+micro,sensor_records,user_id=4443,1,73052
+micro,sensor_records,user_id=5545,1,73049
+micro,sensor_records,user_id=9736,1,73049
+micro,sensor_records,user_id=9466,1,73039
+micro,sensor_records,user_id=3280,1,73032
+micro,sensor_records,user_id=8367,1,73031
+micro,sensor_records,user_id=1966,1,73029
+micro,sensor_records,user_id=4242,1,73016
+micro,sensor_records,user_id=6677,1,73008
+micro,sensor_records,user_id=5793,1,73005
+micro,sensor_records,user_id=8512,1,73005
+micro,sensor_records,user_id=1176,1,73001
+micro,sensor_records,user_id=9632,1,73000
+micro,sensor_records,user_id=9682,1,72998
+micro,sensor_records,user_id=6019,1,72995
+micro,sensor_records,user_id=2010,1,72993
+micro,sensor_records,user_id=1506,1,72992
+micro,sensor_records,user_id=8956,1,72990
+micro,sensor_records,user_id=2360,1,72990
+micro,sensor_records,user_id=4934,1,72989
+micro,sensor_records,user_id=5005,1,72985
+micro,sensor_records,user_id=9842,1,72981
+micro,sensor_records,user_id=7301,1,72978
+micro,sensor_records,user_id=9368,1,72978
+micro,sensor_records,user_id=7182,1,72974
+micro,sensor_records,user_id=7494,1,72972
+micro,sensor_records,user_id=6603,1,72971
+micro,sensor_records,user_id=2381,1,72970
+micro,sensor_records,user_id=9090,1,72968
+micro,sensor_records,user_id=6986,1,72965
+micro,sensor_records,user_id=6473,1,72960
+micro,sensor_records,user_id=8840,1,72957
+micro,sensor_records,user_id=7538,1,72954
+micro,sensor_records,user_id=3411,1,72949
+micro,sensor_records,user_id=4864,1,72949
+micro,sensor_records,user_id=2075,1,72948
+micro,sensor_records,user_id=5304,1,72948
+micro,sensor_records,user_id=7742,1,72947
+micro,sensor_records,user_id=3453,1,72942
+micro,sensor_records,user_id=9865,1,72941
+micro,sensor_records,user_id=9360,1,72940
+micro,sensor_records,user_id=3819,1,72937
+micro,sensor_records,user_id=8331,1,72929
+micro,sensor_records,user_id=5722,1,72929
+micro,sensor_records,user_id=5210,1,72928
+micro,sensor_records,user_id=7433,1,72927
+micro,sensor_records,user_id=2535,1,72926
+micro,sensor_records,user_id=8894,1,72925
+micro,sensor_records,user_id=1660,1,72912
+micro,sensor_records,user_id=1773,1,72911
+micro,sensor_records,user_id=4104,1,72911
+micro,sensor_records,user_id=6233,1,72910
+micro,sensor_records,user_id=7555,1,72909
+micro,sensor_records,user_id=9409,1,72908
+micro,sensor_records,user_id=584,1,72905
+micro,sensor_records,user_id=3881,1,72905
+micro,sensor_records,user_id=6907,1,72901
+micro,sensor_records,user_id=4913,1,72900
+micro,sensor_records,user_id=1474,1,72898
+micro,sensor_records,user_id=4027,1,72898
+micro,sensor_records,user_id=915,1,72897
+micro,sensor_records,user_id=7694,1,72893
+micro,sensor_records,user_id=5139,1,72893
+micro,sensor_records,user_id=2543,1,72892
+micro,sensor_records,user_id=4288,1,72892
+micro,sensor_records,user_id=5635,1,72890
+micro,sensor_records,user_id=5322,1,72888
+micro,sensor_records,user_id=5755,1,72886
+micro,sensor_records,user_id=8972,1,72884
+micro,sensor_records,user_id=5127,1,72884
+micro,sensor_records,user_id=1827,1,72883
+micro,sensor_records,user_id=2797,1,72882
+micro,sensor_records,user_id=3985,1,72881
+micro,sensor_records,user_id=7956,1,72880
+micro,sensor_records,user_id=6878,1,72879
+micro,sensor_records,user_id=8847,1,72878
+micro,sensor_records,user_id=2476,1,72877
+micro,sensor_records,user_id=2378,1,72876
+micro,sensor_records,user_id=2611,1,72870
+micro,sensor_records,user_id=2607,1,72865
+micro,sensor_records,user_id=824,1,72863
+micro,sensor_records,user_id=5153,1,72861
+micro,sensor_records,user_id=3333,1,72858
+micro,sensor_records,user_id=6425,1,72857
+micro,sensor_records,user_id=3583,1,72854
+micro,sensor_records,user_id=7119,1,72851
+micro,sensor_records,user_id=6409,1,72843
+micro,sensor_records,user_id=4166,1,72841
+micro,sensor_records,user_id=8795,1,72834
+micro,sensor_records,user_id=3483,1,72834
+micro,sensor_records,user_id=4791,1,72832
+micro,sensor_records,user_id=659,1,72832
+micro,sensor_records,user_id=708,1,72832
+micro,sensor_records,user_id=2411,1,72826
+micro,sensor_records,user_id=3390,1,72822
+micro,sensor_records,user_id=3966,1,72821
+micro,sensor_records,user_id=490,1,72816
+micro,sensor_records,user_id=6373,1,72804
+micro,sensor_records,user_id=7272,1,72803
+micro,sensor_records,user_id=7426,1,72801
+micro,sensor_records,user_id=323,1,72794
+micro,sensor_records,user_id=3379,1,72793
+micro,sensor_records,user_id=6651,1,72792
+micro,sensor_records,user_id=8135,1,72787
+micro,sensor_records,user_id=2837,1,72784
+micro,sensor_records,user_id=481,1,72780
+micro,sensor_records,timestamp_ms>=1769111786509 AND timestamp_ms<=1769115386509,2,72776
+micro,sensor_records,user_id=6596,1,72772
+micro,sensor_records,user_id=977,1,72771
+micro,sensor_records,user_id=9213,1,72768
+micro,sensor_records,user_id=3370,1,72761
+micro,sensor_records,user_id=1618,1,72746
+micro,sensor_records,user_id=4217,1,72738
+micro,sensor_records,user_id=8720,1,72738
+micro,sensor_records,user_id=9337,1,72730
+micro,sensor_records,user_id=4734,1,72726
+micro,sensor_records,user_id=8451,1,72725
+micro,sensor_records,user_id=7232,1,72723
+micro,sensor_records,user_id=3102,1,72719
+micro,sensor_records,user_id=441,1,72717
+micro,sensor_records,user_id=3334,1,72716
+micro,sensor_records,user_id=362,1,72715
+micro,sensor_records,user_id=7565,1,72714
+micro,sensor_records,user_id=6683,1,72713
+micro,sensor_records,user_id=7365,1,72711
+micro,sensor_records,user_id=3606,1,72708
+micro,sensor_records,user_id=3877,1,72706
+micro,sensor_records,user_id=482,1,72705
+micro,sensor_records,user_id=2276,1,72703
+micro,sensor_records,user_id=2576,1,72699
+micro,sensor_records,user_id=7784,1,72694
+micro,sensor_records,user_id=4118,1,72694
+micro,sensor_records,user_id=5824,1,72693
+micro,sensor_records,user_id=5433,1,72689
+micro,sensor_records,user_id=860,1,72683
+micro,sensor_records,user_id=2442,1,72680
+micro,sensor_records,user_id=6538,1,72675
+micro,sensor_records,user_id=180,1,72674
+micro,sensor_records,user_id=7782,1,72673
+micro,sensor_records,user_id=403,1,72669
+micro,sensor_records,user_id=6810,1,72659
+micro,sensor_records,user_id=5408,1,72658
+micro,sensor_records,user_id=340,1,72655
+micro,sensor_records,user_id=5112,1,72651
+micro,sensor_records,user_id=6761,1,72650
+micro,sensor_records,user_id=9455,1,72646
+micro,sensor_records,user_id=8649,1,72641
+micro,sensor_records,user_id=7425,1,72641
+micro,sensor_records,user_id=4426,1,72634
+micro,sensor_records,timestamp_ms>=1769107801512 AND timestamp_ms<=1769111401512,1,72621
+micro,sensor_records,user_id=1880,1,72621
+micro,sensor_records,user_id=1300,1,72611
+micro,sensor_records,user_id=3254,1,72610
+micro,sensor_records,user_id=3381,1,72607
+micro,sensor_records,user_id=369,1,72605
+micro,sensor_records,user_id=8023,1,72598
+micro,sensor_records,user_id=3864,1,72592
+micro,sensor_records,user_id=5889,1,72570
+micro,sensor_records,user_id=4552,1,72560
+micro,sensor_records,user_id=2753,1,72556
+micro,sensor_records,user_id=5254,1,72555
+micro,sensor_records,user_id=6622,1,72552
+micro,sensor_records,user_id=1989,1,72477
+micro,sensor_records,timestamp_ms>=1769100894853 AND timestamp_ms<=1769104494853,1,72355
+micro,sensor_records,timestamp_ms>=1769099502193 AND timestamp_ms<=1769103102193,2,72303
+micro,sensor_records,timestamp_ms>=1769074639391 AND timestamp_ms<=1769078239391,2,71347
+micro,sensor_records,timestamp_ms>=1769046628610 AND timestamp_ms<=1769050228610,1,70261
+micro,sensor_records,timestamp_ms>=1769038621854 AND timestamp_ms<=1769042221854,2,69956
+micro,sensor_records,timestamp_ms>=1768979826806 AND timestamp_ms<=1768983426806,2,67684
+micro,sensor_records,timestamp_ms>=1768979491171 AND timestamp_ms<=1768983091171,2,67674
+micro,sensor_records,timestamp_ms>=1768971143394 AND timestamp_ms<=1768974743394,2,67350
+micro,sensor_records,timestamp_ms>=1768958155627 AND timestamp_ms<=1768961755627,2,66850
+micro,sensor_records,timestamp_ms>=1768906259274 AND timestamp_ms<=1768909859274,2,64846
+micro,sensor_records,timestamp_ms>=1768900987154 AND timestamp_ms<=1768904587154,2,64643
+micro,sensor_records,timestamp_ms>=1768876307997 AND timestamp_ms<=1768879907997,2,63691
+micro,sensor_records,timestamp_ms>=1768875203837 AND timestamp_ms<=1768878803837,2,63651
+micro,sensor_records,timestamp_ms>=1768868310795 AND timestamp_ms<=1768871910795,2,63386
+micro,sensor_records,timestamp_ms>=1768865330359 AND timestamp_ms<=1768868930359,2,63268
+micro,sensor_records,timestamp_ms>=1768858891305 AND timestamp_ms<=1768862491305,2,63020
+micro,sensor_records,user_id=98,2,61890
+micro,sensor_records,user_id=1,2,61670
+micro,sensor_records,timestamp_ms>=1768821107583 AND timestamp_ms<=1768824707583,2,61566
+micro,sensor_records,user_id=271,1,61549
+micro,sensor_records,user_id=793,1,61496
+micro,sensor_records,timestamp_ms>=1768818300700 AND timestamp_ms<=1768821900700,2,61452
+micro,sensor_records,user_id=41,1,61413
+micro,sensor_records,user_id=553,1,61393
+micro,sensor_records,user_id=662,1,61357
+micro,sensor_records,user_id=612,1,61353
+micro,sensor_records,user_id=857,1,61336
+micro,sensor_records,user_id=522,1,61335
+micro,sensor_records,user_id=796,1,61329
+micro,sensor_records,user_id=58,1,61299
+micro,sensor_records,user_id=645,1,61284
+micro,sensor_records,user_id=675,1,61278
+micro,sensor_records,user_id=395,1,61275
+micro,sensor_records,user_id=358,1,61275
+micro,sensor_records,user_id=964,1,61271
+micro,sensor_records,user_id=898,1,61268
+micro,sensor_records,user_id=353,1,61254
+micro,sensor_records,user_id=33,1,61247
+micro,sensor_records,user_id=187,1,61245
+micro,sensor_records,user_id=135,1,61241
+micro,sensor_records,user_id=147,1,61237
+micro,sensor_records,user_id=918,1,61228
+micro,sensor_records,user_id=131,1,61221
+micro,sensor_records,user_id=261,1,61218
+micro,sensor_records,user_id=727,1,61216
+micro,sensor_records,user_id=909,1,61216
+micro,sensor_records,user_id=487,1,61207
+micro,sensor_records,user_id=253,1,61205
+micro,sensor_records,user_id=75,1,61199
+micro,sensor_records,user_id=833,1,61196
+micro,sensor_records,user_id=499,1,61195
+micro,sensor_records,user_id=278,1,61193
+micro,sensor_records,user_id=812,1,61192
+micro,sensor_records,user_id=433,1,61189
+micro,sensor_records,user_id=146,1,61186
+micro,sensor_records,user_id=240,1,61185
+micro,sensor_records,user_id=166,1,61174
+micro,sensor_records,user_id=743,1,61171
+micro,sensor_records,user_id=723,1,61171
+micro,sensor_records,user_id=822,1,61161
+micro,sensor_records,user_id=170,1,61155
+micro,sensor_records,user_id=713,1,61155
+micro,sensor_records,user_id=72,1,61154
+micro,sensor_records,user_id=473,1,61154
+micro,sensor_records,user_id=635,1,61151
+micro,sensor_records,user_id=548,1,61143
+micro,sensor_records,user_id=625,1,61141
+micro,sensor_records,user_id=500,1,61141
+micro,sensor_records,user_id=980,1,61138
+micro,sensor_records,user_id=205,1,61137
+micro,sensor_records,user_id=613,1,61130
+micro,sensor_records,user_id=132,1,61129
+micro,sensor_records,user_id=861,1,61121
+micro,sensor_records,user_id=406,1,61120
+micro,sensor_records,timestamp_ms>=1768809631420 AND timestamp_ms<=1768813231420,2,61118
+micro,sensor_records,user_id=801,1,61118
+micro,sensor_records,user_id=331,1,61111
+micro,sensor_records,user_id=720,1,61111
+micro,sensor_records,user_id=224,1,61110
+micro,sensor_records,user_id=336,1,61109
+micro,sensor_records,user_id=125,1,61108
+micro,sensor_records,user_id=163,1,61108
+micro,sensor_records,user_id=90,1,61106
+micro,sensor_records,user_id=623,1,61096
+micro,sensor_records,user_id=683,1,61095
+micro,sensor_records,user_id=640,1,61094
+micro,sensor_records,user_id=401,1,61094
+micro,sensor_records,user_id=37,1,61082
+micro,sensor_records,user_id=418,1,61081
+micro,sensor_records,user_id=954,1,61079
+micro,sensor_records,user_id=732,1,61078
+micro,sensor_records,user_id=754,1,61074
+micro,sensor_records,user_id=134,1,61073
+micro,sensor_records,user_id=365,1,61072
+micro,sensor_records,user_id=466,1,61072
+micro,sensor_records,user_id=927,1,61071
+micro,sensor_records,user_id=70,1,61066
+micro,sensor_records,user_id=498,1,61066
+micro,sensor_records,user_id=846,1,61064
+micro,sensor_records,user_id=733,1,61059
+micro,sensor_records,user_id=287,1,61057
+micro,sensor_records,user_id=973,1,61054
+micro,sensor_records,user_id=809,1,61051
+micro,sensor_records,user_id=160,1,61049
+micro,sensor_records,user_id=771,1,61044
+micro,sensor_records,user_id=201,1,61043
+micro,sensor_records,user_id=174,1,61039
+micro,sensor_records,user_id=337,1,61039
+micro,sensor_records,user_id=902,1,61038
+micro,sensor_records,user_id=373,1,61035
+micro,sensor_records,user_id=549,1,61034
+micro,sensor_records,user_id=580,1,61031
+micro,sensor_records,user_id=697,1,61029
+micro,sensor_records,user_id=172,1,61026
+micro,sensor_records,user_id=185,1,61025
+micro,sensor_records,user_id=874,1,61025
+micro,sensor_records,user_id=952,1,61022
+micro,sensor_records,user_id=215,1,61022
+micro,sensor_records,user_id=151,1,61021
+micro,sensor_records,user_id=73,1,61019
+micro,sensor_records,user_id=495,1,61019
+micro,sensor_records,user_id=335,1,61017
+micro,sensor_records,user_id=604,1,61016
+micro,sensor_records,user_id=43,1,61008
+micro,sensor_records,user_id=399,1,61008
+micro,sensor_records,user_id=461,1,61002
+micro,sensor_records,user_id=30,1,60995
+micro,sensor_records,user_id=506,1,60990
+micro,sensor_records,user_id=795,1,60988
+micro,sensor_records,user_id=706,1,60984
+micro,sensor_records,user_id=111,1,60983
+micro,sensor_records,user_id=478,1,60979
+micro,sensor_records,user_id=400,1,60977
+micro,sensor_records,user_id=476,1,60975
+micro,sensor_records,user_id=325,1,60974
+micro,sensor_records,user_id=218,1,60971
+micro,sensor_records,user_id=488,1,60969
+micro,sensor_records,user_id=167,1,60967
+micro,sensor_records,user_id=552,1,60958
+micro,sensor_records,user_id=669,1,60956
+micro,sensor_records,user_id=886,1,60955
+micro,sensor_records,user_id=587,1,60954
+micro,sensor_records,user_id=248,1,60952
+micro,sensor_records,user_id=322,1,60947
+micro,sensor_records,user_id=258,1,60940
+micro,sensor_records,user_id=53,1,60937
+micro,sensor_records,user_id=906,1,60934
+micro,sensor_records,user_id=639,1,60933
+micro,sensor_records,user_id=164,1,60932
+micro,sensor_records,user_id=154,1,60922
+micro,sensor_records,user_id=179,1,60915
+micro,sensor_records,user_id=444,1,60914
+micro,sensor_records,user_id=856,1,60913
+micro,sensor_records,user_id=108,1,60910
+micro,sensor_records,user_id=40,1,60905
+micro,sensor_records,user_id=52,1,60904
+micro,sensor_records,user_id=26,1,60904
+micro,sensor_records,user_id=911,1,60901
+micro,sensor_records,user_id=326,1,60900
+micro,sensor_records,user_id=209,1,60896
+micro,sensor_records,user_id=872,1,60894
+micro,sensor_records,user_id=940,1,60890
+micro,sensor_records,user_id=917,1,60876
+micro,sensor_records,user_id=605,1,60875
+micro,sensor_records,user_id=663,1,60875
+micro,sensor_records,timestamp_ms>=1768803243099 AND timestamp_ms<=1768806843099,2,60873
+micro,sensor_records,user_id=304,1,60856
+micro,sensor_records,user_id=704,1,60855
+micro,sensor_records,user_id=397,1,60854
+micro,sensor_records,user_id=302,1,60850
+micro,sensor_records,user_id=8,1,60849
+micro,sensor_records,user_id=559,1,60848
+micro,sensor_records,user_id=84,1,60842
+micro,sensor_records,user_id=190,1,60839
+micro,sensor_records,user_id=178,1,60837
+micro,sensor_records,user_id=159,1,60835
+micro,sensor_records,user_id=344,1,60834
+micro,sensor_records,user_id=341,1,60829
+micro,sensor_records,user_id=665,1,60818
+micro,sensor_records,user_id=523,1,60793
+micro,sensor_records,user_id=736,1,60792
+micro,sensor_records,user_id=845,1,60790
+micro,sensor_records,user_id=986,1,60778
+micro,sensor_records,user_id=332,1,60774
+micro,sensor_records,user_id=501,1,60771
+micro,sensor_records,user_id=412,1,60766
+micro,sensor_records,user_id=31,1,60762
+micro,sensor_records,user_id=182,1,60756
+micro,sensor_records,user_id=818,1,60750
+micro,sensor_records,user_id=883,1,60747
+micro,sensor_records,user_id=114,1,60746
+micro,sensor_records,user_id=137,1,60722
+micro,sensor_records,user_id=471,1,60691
+micro,sensor_records,user_id=657,1,60651
+micro,sensor_records,user_id=213,1,60636
+micro,sensor_records,user_id=158,1,60548
+micro,sensor_records,user_id=22,1,60511
+micro,sensor_records,user_id=6,1,60320
+micro,sensor_records,timestamp_ms>=1768775653083 AND timestamp_ms<=1768779253083,2,59807
+micro,sensor_records,timestamp_ms>=1768766786524 AND timestamp_ms<=1768770386524,2,59466
+micro,sensor_records,timestamp_ms>=1768757810456 AND timestamp_ms<=1768761410456,2,59119
+micro,sensor_records,timestamp_ms>=1768748444312 AND timestamp_ms<=1768752044312,2,58760
+micro,sensor_records,timestamp_ms>=1768747326165 AND timestamp_ms<=1768750926165,2,58716
+micro,sensor_records,timestamp_ms>=1768739844183 AND timestamp_ms<=1768743444183,2,58429
+micro,sensor_records,timestamp_ms>=1768737389400 AND timestamp_ms<=1768740989400,2,58333
+micro,sensor_records,timestamp_ms>=1768726773837 AND timestamp_ms<=1768730373837,2,57924
+micro,sensor_records,user_id=9996,1,57691
+micro,sensor_records,timestamp_ms>=1768715433394 AND timestamp_ms<=1768719033394,2,57488
+micro,sensor_records,timestamp_ms>=1768703995841 AND timestamp_ms<=1768707595841,2,57044
+micro,sensor_records,timestamp_ms>=1768702338857 AND timestamp_ms<=1768705938857,2,56981
+micro,sensor_records,timestamp_ms>=1768675862427 AND timestamp_ms<=1768679462427,2,55961
+micro,sensor_records,timestamp_ms>=1768652406904 AND timestamp_ms<=1768656006904,2,55053
+micro,sensor_records,timestamp_ms>=1768630797031 AND timestamp_ms<=1768634397031,2,54220
+micro,sensor_records,user_id=3,1,54192
+micro,sensor_records,timestamp_ms>=1768629725233 AND timestamp_ms<=1768633325233,1,54177
+micro,sensor_records,timestamp_ms>=1768627272156 AND timestamp_ms<=1768630872156,2,54085
+micro,sensor_records,user_id=96,1,53872
+micro,sensor_records,timestamp_ms>=1768619852060 AND timestamp_ms<=1768623452060,2,53798
+micro,sensor_records,timestamp_ms>=1768594913663 AND timestamp_ms<=1768598513663,2,52836
+micro,sensor_records,timestamp_ms>=1768589516581 AND timestamp_ms<=1768593116581,2,52627
+micro,sensor_records,timestamp_ms>=1768576739183 AND timestamp_ms<=1768580339183,2,52134
+micro,sensor_records,timestamp_ms>=1768572016315 AND timestamp_ms<=1768575616315,2,51952
+micro,sensor_records,timestamp_ms>=1768526128167 AND timestamp_ms<=1768529728167,2,50182
+micro,sensor_records,timestamp_ms>=1768519330618 AND timestamp_ms<=1768522930618,2,49918
+micro,sensor_records,timestamp_ms>=1768509984325 AND timestamp_ms<=1768513584325,2,49559
+micro,sensor_records,timestamp_ms>=1768506093049 AND timestamp_ms<=1768509693049,1,49407
+micro,sensor_records,timestamp_ms>=1768503520440 AND timestamp_ms<=1768507120440,2,49309
+micro,sensor_records,timestamp_ms>=1768499453496 AND timestamp_ms<=1768503053496,2,49151
+micro,sensor_records,timestamp_ms>=1768445492606 AND timestamp_ms<=1768449092606,1,47069
+micro,sensor_records,timestamp_ms>=1768442706445 AND timestamp_ms<=1768446306445,2,46967
+micro,sensor_records,timestamp_ms>=1768440563252 AND timestamp_ms<=1768444163252,2,46880
+micro,sensor_records,timestamp_ms>=1768401694244 AND timestamp_ms<=1768405294244,2,45381
+micro,sensor_records,timestamp_ms>=1768392967222 AND timestamp_ms<=1768396567222,2,45045
+micro,sensor_records,timestamp_ms>=1768380137075 AND timestamp_ms<=1768383737075,1,44547
+micro,sensor_records,timestamp_ms>=1768378727868 AND timestamp_ms<=1768382327868,2,44497
+micro,sensor_records,timestamp_ms>=1768376982782 AND timestamp_ms<=1768380582782,2,44429
+micro,sensor_records,timestamp_ms>=1768353761608 AND timestamp_ms<=1768357361608,1,43530
+micro,sensor_records,timestamp_ms>=1768324073740 AND timestamp_ms<=1768327673740,2,42385
+micro,sensor_records,timestamp_ms>=1768317023672 AND timestamp_ms<=1768320623672,1,42112
+micro,sensor_records,timestamp_ms>=1768309524454 AND timestamp_ms<=1768313124454,2,41824
+micro,sensor_records,timestamp_ms>=1768305277531 AND timestamp_ms<=1768308877531,2,41660
+micro,sensor_records,timestamp_ms>=1768296682374 AND timestamp_ms<=1768300282374,2,41330
+micro,sensor_records,timestamp_ms>=1768282438715 AND timestamp_ms<=1768286038715,2,40779
+micro,sensor_records,timestamp_ms>=1768249377584 AND timestamp_ms<=1768252977584,2,39502
+micro,sensor_records,timestamp_ms>=1768246200332 AND timestamp_ms<=1768249800332,2,39381
+micro,sensor_records,timestamp_ms>=1768226080833 AND timestamp_ms<=1768229680833,2,38604
+micro,sensor_records,timestamp_ms>=1768223682759 AND timestamp_ms<=1768227282759,2,38512
+micro,sensor_records,timestamp_ms>=1768206969275 AND timestamp_ms<=1768210569275,2,37868
+micro,sensor_records,timestamp_ms>=1768202890346 AND timestamp_ms<=1768206490346,2,37709
+micro,sensor_records,timestamp_ms>=1768200989793 AND timestamp_ms<=1768204589793,2,37635
+micro,sensor_records,timestamp_ms>=1768184864689 AND timestamp_ms<=1768188464689,2,37014
+micro,sensor_records,timestamp_ms>=1768182890435 AND timestamp_ms<=1768186490435,2,36937
+micro,sensor_records,timestamp_ms>=1768162540156 AND timestamp_ms<=1768166140156,1,36151
+micro,sensor_records,timestamp_ms>=1768137650650 AND timestamp_ms<=1768141250650,2,35192
+micro,sensor_records,timestamp_ms>=1768136084432 AND timestamp_ms<=1768139684432,1,35130
+micro,sensor_records,timestamp_ms>=1768092600889 AND timestamp_ms<=1768096200889,2,33455
+micro,sensor_records,timestamp_ms>=1768080769741 AND timestamp_ms<=1768084369741,2,32997
+micro,sensor_records,timestamp_ms>=1768068700773 AND timestamp_ms<=1768072300773,2,32532
+tpcds,store_sales,ss_store_sk=4 AND (ss_addr_sk IS NULL),2,32084
+micro,sensor_records,timestamp_ms>=1768039383997 AND timestamp_ms<=1768042983997,1,31399
+micro,sensor_records,timestamp_ms>=1768030717342 AND timestamp_ms<=1768034317342,2,31066
+micro,sensor_records,timestamp_ms>=1768003161505 AND timestamp_ms<=1768006761505,2,30003
+micro,sensor_records,timestamp_ms>=1768001001629 AND timestamp_ms<=1768004601629,2,29919
+micro,sensor_records,timestamp_ms>=1767999012246 AND timestamp_ms<=1768002612246,2,29845
+micro,sensor_records,timestamp_ms>=1767987336433 AND timestamp_ms<=1767990936433,2,29394
+micro,sensor_records,timestamp_ms>=1767974373037 AND timestamp_ms<=1767977973037,2,28894
+micro,sensor_records,timestamp_ms>=1767966799782 AND timestamp_ms<=1767970399782,2,28601
+micro,sensor_records,timestamp_ms>=1767966468206 AND timestamp_ms<=1767970068206,2,28587
+micro,sensor_records,timestamp_ms>=1767964216873 AND timestamp_ms<=1767967816873,2,28500
+micro,sensor_records,timestamp_ms>=1767951613786 AND timestamp_ms<=1767955213786,2,28013
+micro,sensor_records,timestamp_ms>=1767947732443 AND timestamp_ms<=1767951332443,2,27864
+micro,sensor_records,timestamp_ms>=1767943599467 AND timestamp_ms<=1767947199467,2,27706
+micro,sensor_records,timestamp_ms>=1767930972849 AND timestamp_ms<=1767934572849,2,27218
+micro,sensor_records,timestamp_ms>=1767919055898 AND timestamp_ms<=1767922655898,2,26758
+micro,sensor_records,timestamp_ms>=1767912813378 AND timestamp_ms<=1767916413378,2,26519
+micro,sensor_records,timestamp_ms>=1767899282833 AND timestamp_ms<=1767902882833,1,25993
+micro,sensor_records,timestamp_ms>=1767892696955 AND timestamp_ms<=1767896296955,2,25741
+micro,sensor_records,timestamp_ms>=1767878195274 AND timestamp_ms<=1767881795274,2,25181
+micro,sensor_records,timestamp_ms>=1767869443840 AND timestamp_ms<=1767873043840,2,24846
+micro,sensor_records,timestamp_ms>=1767865595006 AND timestamp_ms<=1767869195006,2,24695
+micro,sensor_records,timestamp_ms>=1767864157874 AND timestamp_ms<=1767867757874,2,24639
+micro,sensor_records,timestamp_ms>=1767850482323 AND timestamp_ms<=1767854082323,1,24110
+micro,sensor_records,timestamp_ms>=1767811399540 AND timestamp_ms<=1767814999540,2,22603
+micro,sensor_records,timestamp_ms>=1767788669035 AND timestamp_ms<=1767792269035,2,21726
+micro,sensor_records,timestamp_ms>=1767753362505 AND timestamp_ms<=1767756962505,2,20365
+micro,sensor_records,timestamp_ms>=1767714361085 AND timestamp_ms<=1767717961085,1,18855
+micro,sensor_records,timestamp_ms>=1767687902611 AND timestamp_ms<=1767691502611,2,17837
+micro,sensor_records,timestamp_ms>=1767683024181 AND timestamp_ms<=1767686624181,2,17651
+micro,sensor_records,timestamp_ms>=1767680145930 AND timestamp_ms<=1767683745930,1,17536
+micro,sensor_records,timestamp_ms>=1767674934730 AND timestamp_ms<=1767678534730,2,17337
+micro,sensor_records,timestamp_ms>=1767662963227 AND timestamp_ms<=1767666563227,2,16875
+micro,sensor_records,timestamp_ms>=1767628551492 AND timestamp_ms<=1767632151492,2,15547
+micro,sensor_records,timestamp_ms>=1767615364285 AND timestamp_ms<=1767618964285,1,15037
+micro,sensor_records,timestamp_ms>=1767612758176 AND timestamp_ms<=1767616358176,2,14939
+micro,sensor_records,timestamp_ms>=1767592589780 AND timestamp_ms<=1767596189780,2,14160
+micro,sensor_records,timestamp_ms>=1767565674666 AND timestamp_ms<=1767569274666,2,13123
+clickbench,hits,"optional:rowid IN (10541520, 60152823, 60152825, 60152827, 69445322, 70910707, 81981850, 81981851, 97004984, 98655788) [join] AND rowid>=10541520 [join] AND rowid<=98655788 [join]",1,12200
+clickbench,hits,"optional:rowid IN (10125682, 10221901, 11061732, 12626049, 59477121, 69422307, 70843268, 71055038, 91061613, 98635203) [join] AND rowid>=10125682 [join] AND rowid<=98635203 [join]",1,12197
+micro,sensor_records,timestamp_ms>=1767538102289 AND timestamp_ms<=1767541702289,2,12057
+micro,sensor_records,timestamp_ms>=1767535601743 AND timestamp_ms<=1767539201743,2,11962
+micro,sensor_records,timestamp_ms>=1767531968268 AND timestamp_ms<=1767535568268,2,11825
+clickbench,hits,"contains(URL, 'google') AND SearchPhrase!=''",1,11620
+micro,sensor_records,timestamp_ms>=1767516369184 AND timestamp_ms<=1767519969184,2,11219
+micro,sensor_records,timestamp_ms>=1767505138671 AND timestamp_ms<=1767508738671,2,10786
+micro,sensor_records,timestamp_ms>=1767491491563 AND timestamp_ms<=1767495091563,2,10261
+micro,sensor_records,timestamp_ms>=1767486956864 AND timestamp_ms<=1767490556864,2,10086
+micro,sensor_records,timestamp_ms>=1767477420761 AND timestamp_ms<=1767481020761,2,9719
+clickbench,hits,"contains(Title, 'Google') AND (NOT contains(URL, '.google.')) AND SearchPhrase!=''",1,9429
+clickbench,hits,"contains(URL, 'google')",1,9032
+micro,sensor_records,timestamp_ms>=1767454025885 AND timestamp_ms<=1767457625885,2,8813
+micro,sensor_records,timestamp_ms>=1767451566649 AND timestamp_ms<=1767455166649,1,8718
+micro,sensor_records,timestamp_ms>=1767443306434 AND timestamp_ms<=1767446906434,2,8401
+micro,sensor_records,timestamp_ms>=1767438707567 AND timestamp_ms<=1767442307567,2,8225
+micro,sensor_records,timestamp_ms>=1767434533562 AND timestamp_ms<=1767438133562,2,8061
+micro,sensor_records,timestamp_ms>=1767420213547 AND timestamp_ms<=1767423813547,1,7508
+micro,sensor_records,timestamp_ms>=1767413021823 AND timestamp_ms<=1767416621823,1,7231
+micro,sensor_records,timestamp_ms>=1767410186660 AND timestamp_ms<=1767413786660,1,7121
+micro,sensor_records,timestamp_ms>=1767392524042 AND timestamp_ms<=1767396124042,2,6441
+micro,sensor_records,timestamp_ms>=1767369206281 AND timestamp_ms<=1767372806281,2,5542
+micro,sensor_records,timestamp_ms>=1767363865364 AND timestamp_ms<=1767367465364,1,5334
+micro,sensor_records,timestamp_ms>=1767356306078 AND timestamp_ms<=1767359906078,2,5045
+micro,sensor_records,timestamp_ms>=1767352361915 AND timestamp_ms<=1767355961915,1,4890
+micro,sensor_records,timestamp_ms>=1767336227728 AND timestamp_ms<=1767339827728,2,4270
+micro,sensor_records,timestamp_ms>=1767330820245 AND timestamp_ms<=1767334420245,2,4060
+micro,sensor_records,timestamp_ms>=1767329923646 AND timestamp_ms<=1767333523646,2,4025
+micro,sensor_records,timestamp_ms>=1767309654188 AND timestamp_ms<=1767313254188,2,3244
+clickbench,hits,UserID=435090932899640449,1,2748
+micro,sensor_records,timestamp_ms>=1767292063826 AND timestamp_ms<=1767295663826,1,2563
+tpcds,store_sales,ss_store_sk=4,2,2540
+micro,sensor_records,timestamp_ms>=1767291062929 AND timestamp_ms<=1767294662929,2,2526
+micro,sensor_records,timestamp_ms>=1767264661062 AND timestamp_ms<=1767268261062,2,1506
+micro,sensor_records,timestamp_ms>=1767260155079 AND timestamp_ms<=1767263755079,2,1334
+clickbench,hits,"contains(URL, 'google') AND optional:topn:EventTime<'2013-07-01 23:08:40'::TIMESTAMP [topn]",1,1125
+clickbench,hits,SearchPhrase!='',5,360
+tpcds,store_sales,ss_item_sk>=1 [join] AND ss_item_sk<=204000 [join] AND ss_sold_date_sk>=2451541 [join] AND ss_sold_date_sk<=2451547 [join],1,296
+tpcds,web_sales,ws_item_sk>=1 [join] AND ws_item_sk<=204000 [join] AND ws_sold_date_sk>=2451541 [join] AND ws_sold_date_sk<=2451547 [join],1,148
+tpcds,store_sales,ss_item_sk>=118 [join] AND ss_item_sk<=203910 [join] AND ss_sold_date_sk>=2451942 [join] AND ss_sold_date_sk<=2451969 [join] AND ss_addr_sk>=3 [join] AND ss_addr_sk<=1000000 [join],1,90
+tpcds,web_sales,ws_sold_date_sk>=2451576 [join] AND ws_sold_date_sk<=2451604 [join] AND ws_bill_customer_sk>=2 [join] AND ws_bill_customer_sk<=1999992 [join],1,79
+tpcds,web_sales,ws_item_sk>=118 [join] AND ws_item_sk<=203910 [join] AND ws_sold_date_sk>=2451942 [join] AND ws_sold_date_sk<=2451969 [join] AND ws_bill_addr_sk>=3 [join] AND ws_bill_addr_sk<=1000000 [join],1,76
+tpcds,store_sales,ss_sold_date_sk>=2452001 [join] AND ss_sold_date_sk<=2452030 [join] AND ss_item_sk>=1 [join] AND ss_item_sk<=203999 [join] AND ss_customer_sk>=3 [join] AND ss_customer_sk<=1999995 [join] AND ss_ticket_number<=23999996 AND ss_ticket_number>=6 [join] AND ss_ticket_number<=23999975 [join],1,67
+tpcds,web_sales,ws_item_sk>=3 [join] AND ws_item_sk<=203997 [join] AND ws_sold_date_sk>=2451232 [join] AND ws_sold_date_sk<=2451262 [join],1,61
+tpcds,web_sales,ws_item_sk>=1 [join] AND ws_item_sk<=204000 [join] AND ws_sold_date_sk>=2450935 [join] AND ws_sold_date_sk<=2450965 [join] AND ws_bill_addr_sk>=3 [join] AND ws_bill_addr_sk<=1000000 [join],1,51
+tpcds,store_sales,ss_item_sk>=1 [join] AND ss_item_sk<=204000 [join] AND ss_sold_date_sk>=2450935 [join] AND ss_sold_date_sk<=2450965 [join] AND ss_addr_sk>=3 [join] AND ss_addr_sk<=1000000 [join],1,50
+tpcds,store_sales,ss_sold_date_sk>=2451911 [join] AND ss_sold_date_sk<=2451941 [join],1,48
+tpcds,store_sales,ss_store_sk>=1 [join] AND ss_store_sk<=400 [join] AND ss_sold_date_sk>=2451780 [join] AND ss_sold_date_sk<=2451794 [join],1,42
+tpcds,web_sales,ws_web_site_sk>=1 [join] AND ws_web_site_sk<=24 [join] AND ws_sold_date_sk>=2451780 [join] AND ws_sold_date_sk<=2451794 [join],1,33
+clickbench,hits,MobilePhoneModel!='',2,28
+tpcds,store_sales,ss_sold_date_sk>=2451850 [join] AND ss_sold_date_sk<=2451879 [join] AND ss_item_sk>=114 [join] AND ss_item_sk<=203961 [join],2,18
+tpcds,store_sales,ss_sold_date_sk>=2452215 [join] AND ss_sold_date_sk<=2452244 [join],1,12
+tpcds,store_sales,ss_sold_date_sk>=2451423 [join] AND ss_sold_date_sk<=2451452 [join] AND ss_item_sk>=1 [join] AND ss_item_sk<=203998 [join] AND ss_store_sk>=1 [join] AND ss_store_sk<=400 [join] AND ss_customer_sk>=1 [join] AND ss_customer_sk<=1999999 [join] AND ss_ticket_number<=23999996 AND ss_ticket_number>=4 [join] AND ss_ticket_number<=23999968 [join],1,11
+tpcds,store_sales,ss_sold_date_sk>=2451484 [join] AND ss_sold_date_sk<=2451513 [join] AND ss_item_sk>=37 [join] AND ss_item_sk<=203935 [join],1,11
+tpcds,store_sales,ss_net_profit>1.00 AND ss_net_paid>0.00 AND ss_quantity>0 AND ss_sold_date_sk>=2452245 [join] AND ss_sold_date_sk<=2452275 [join],1,9
+tpcds,store_sales,ss_sold_date_sk>=2451180 [join] AND ss_sold_date_sk<=2451269 [join] AND ss_customer_sk>=16 [join] AND ss_customer_sk<=1999997 [join],1,9
+tpcds,store_sales,ss_sold_date_sk>=2451911 [join] AND ss_sold_date_sk<=2452001 [join] AND ss_ticket_number<=23999996,1,8
+tpcds,item,i_manufact_id=977,1,8
+clickbench,hits,SearchPhrase!='' AND optional:topn:EventTime<'2013-07-01 20:00:08'::TIMESTAMP [topn],1,8
+clickbench,hits,SearchPhrase!='' AND optional:topn:EventTime<='2013-07-01 20:00:08'::TIMESTAMP [topn],1,8
+tpcds,store_returns,sr_store_sk>=1 [join] AND sr_store_sk<=400 [join] AND sr_returned_date_sk>=2451780 [join] AND sr_returned_date_sk<=2451794 [join],1,7
+tpcds,store_sales,ss_customer_sk>=74 [join] AND ss_customer_sk<=1999984 [join] AND ss_sold_date_sk>=2452276 [join] AND ss_sold_date_sk<=2452395 [join],1,7
+clickbench,hits,Referer!='',1,7
+tpcds,store_sales,ss_quantity>=41 AND ss_quantity<=60,3,6
+tpcds,store_sales,ss_store_sk>=4 [join] AND ss_store_sk<=396 [join] AND ss_sold_date_sk>=2450906 [join] AND ss_sold_date_sk<=2450996 [join],1,5
+tpch,supplier,(s_comment ~~ '%Customer%Complaints%'),1,3
+tpcds,store_sales,ss_quantity>=21 AND ss_quantity<=40,3,3
+tpcds,store_sales,ss_sold_date_sk>=2451119 [join] AND ss_sold_date_sk<=2451148 [join] AND ss_item_sk>=156 [join] AND ss_item_sk<=203993 [join],1,3
+tpcds,inventory,"optional:inv_item_sk IN (7255, 8572, 38740, 46518, 101587, 118021, 120639, 122920, 178626, 194055) [join] AND inv_item_sk>=7255 [join] AND inv_item_sk<=194055 [join] AND inv_date_sk>=2451576 [join] AND inv_date_sk<=2451636 [join] AND inv_quantity_on_hand>=100 AND inv_quantity_on_hand<=500",1,3
+tpch,part,p_brand='Brand#23' AND p_container='MED BOX',1,2
+tpcds,store_sales,ss_sold_date_sk>=2451911 [join] AND ss_sold_date_sk<=2452275 [join],2,2
+tpcds,store_sales,ss_sold_date_sk>=2451545 [join] AND ss_sold_date_sk<=2451910 [join] AND ss_cdemo_sk>=23 [join] AND ss_cdemo_sk<=1920753 [join] AND ss_promo_sk>=1 [join] AND ss_promo_sk<=1000 [join],1,2
+tpcds,store_sales,ss_sold_date_sk>=2451545 [join] AND ss_sold_date_sk<=2451818 [join] AND ss_addr_sk>=1 [join] AND ss_addr_sk<=1000000 [join],1,2
+tpcds,store_sales,ss_sold_date_sk>=2451545 [join] AND ss_sold_date_sk<=2451910 [join] AND ss_customer_sk>=1 [join] AND ss_customer_sk<=2000000 [join],1,2
+tpcds,store_sales,ss_sold_date_sk>=2451545 [join] AND ss_sold_date_sk<=2451910 [join] AND ss_store_sk>=5 [join] AND ss_store_sk<=399 [join],1,2
+tpcds,store_sales,ss_store_sk>=1 [join] AND ss_store_sk<=400 [join] AND ss_sold_date_sk>=2451545 [join] AND ss_sold_date_sk<=2451910 [join] AND ss_addr_sk>=1 [join] AND ss_addr_sk<=1000000 [join],1,2
+tpcds,store_sales,ss_sold_date_sk>=2451545 [join] AND ss_sold_date_sk<=2451910 [join],1,2
+tpcds,store_sales,ss_item_sk>=6 [join] AND ss_item_sk<=203992 [join] AND ss_sold_date_sk>=2451545 [join] AND ss_sold_date_sk<=2451910 [join] AND ss_store_sk>=1 [join] AND ss_store_sk<=400 [join],1,2
+micro,sensor_records,timestamp_ms=1769137755460,1,1
+micro,sensor_records,timestamp_ms=1767333381623,1,1
+micro,sensor_records,timestamp_ms=1769177081413,1,1
+micro,sensor_records,timestamp_ms=1769705991026,1,1
+micro,sensor_records,timestamp_ms=1769623414716,1,1
+micro,sensor_records,timestamp_ms=1769085652759,1,1
+micro,sensor_records,timestamp_ms=1768254123891,1,1
+micro,sensor_records,timestamp_ms=1769469705100,1,1
+micro,sensor_records,timestamp_ms=1769569234968,1,1
+micro,sensor_records,timestamp_ms=1767501912218,1,1
+micro,sensor_records,timestamp_ms=1768024907270,1,1
+micro,sensor_records,timestamp_ms=1768302517238,1,1
+micro,sensor_records,timestamp_ms=1768300008656,1,1
+micro,sensor_records,timestamp_ms=1768860714296,1,1
+micro,sensor_records,timestamp_ms=1769647705884,1,1
+micro,sensor_records,timestamp_ms=1767973965336,1,1
+micro,sensor_records,timestamp_ms=1767252197868,1,1
+micro,sensor_records,timestamp_ms=1768296345398,1,1
+micro,sensor_records,timestamp_ms=1768972199459,1,1
+micro,sensor_records,timestamp_ms=1768621263284,1,1
+micro,sensor_records,timestamp_ms=1768524064088,1,1
+micro,sensor_records,timestamp_ms=1769020569702,1,1
+micro,sensor_records,timestamp_ms=1769409358031,1,1
+micro,sensor_records,timestamp_ms=1767437961477,1,1
+micro,sensor_records,timestamp_ms=1768513733538,1,1
+micro,sensor_records,timestamp_ms=1768525755325,1,1
+micro,sensor_records,timestamp_ms=1768962284957,1,1
+micro,sensor_records,timestamp_ms=1768739295985,1,1
+micro,sensor_records,timestamp_ms=1768715650379,1,1
+micro,sensor_records,timestamp_ms=1768553436580,1,1
+micro,sensor_records,timestamp_ms=1767575217997,1,1
+micro,sensor_records,timestamp_ms=1769725472578,1,1
+micro,sensor_records,timestamp_ms=1768759814915,1,1
+micro,sensor_records,timestamp_ms=1769711330555,1,1
+micro,sensor_records,timestamp_ms=1768306295660,1,1
+micro,sensor_records,timestamp_ms=1769585093493,1,1
+micro,sensor_records,timestamp_ms=1768480005113,1,1
+micro,sensor_records,timestamp_ms=1769138082619,1,1
+micro,sensor_records,timestamp_ms=1768525789657,1,1
+micro,sensor_records,timestamp_ms=1769149029715,1,1
+micro,sensor_records,timestamp_ms=1768028400619,1,1
+micro,sensor_records,timestamp_ms=1767549968350,1,1
+micro,sensor_records,timestamp_ms=1768680134895,1,1
+micro,sensor_records,timestamp_ms=1769449183377,1,1
+micro,sensor_records,timestamp_ms=1769306093951,1,1
+micro,sensor_records,timestamp_ms=1769177638210,1,1
+micro,sensor_records,timestamp_ms=1768216436079,1,1
+micro,sensor_records,timestamp_ms=1767328837214,1,1
+micro,sensor_records,timestamp_ms=1769138339325,1,1
+micro,sensor_records,timestamp_ms=1768619808430,1,1
+micro,sensor_records,timestamp_ms=1767730886672,1,1
+micro,sensor_records,timestamp_ms=1769720376809,1,1
+micro,sensor_records,timestamp_ms=1769482164926,1,1
+micro,sensor_records,timestamp_ms=1767346051188,1,1
+micro,sensor_records,timestamp_ms=1767272144217,1,1
+micro,sensor_records,timestamp_ms=1768779329689,1,1
+micro,sensor_records,timestamp_ms=1769008615385,1,1
+micro,sensor_records,timestamp_ms=1768506587175,1,1
+micro,sensor_records,timestamp_ms=1769188097644,1,1
+micro,sensor_records,timestamp_ms=1767595209489,1,1
+micro,sensor_records,timestamp_ms=1767386425368,1,1
+micro,sensor_records,timestamp_ms=1767752192706,1,1
+micro,sensor_records,timestamp_ms=1768234174503,1,1
+micro,sensor_records,timestamp_ms=1767803328454,1,1
+micro,sensor_records,timestamp_ms=1767981648440,1,1
+micro,sensor_records,timestamp_ms=1768708149823,1,1
+micro,sensor_records,timestamp_ms=1769116120152,1,1
+micro,sensor_records,timestamp_ms=1769045833869,1,1
+micro,sensor_records,timestamp_ms=1767266569934,1,1
+micro,sensor_records,timestamp_ms=1767785119404,1,1
+micro,sensor_records,timestamp_ms=1767475165698,1,1
+micro,sensor_records,timestamp_ms=1767263175242,1,1
+micro,sensor_records,timestamp_ms=1769507622435,1,1
+micro,sensor_records,timestamp_ms=1768405748181,1,1
+micro,sensor_records,timestamp_ms=1768019264272,1,1
+micro,sensor_records,timestamp_ms=1768271436366,1,1
+micro,sensor_records,timestamp_ms=1769188525774,1,1
+micro,sensor_records,timestamp_ms=1769154162039,1,1
+micro,sensor_records,timestamp_ms=1768303654901,1,1
+micro,sensor_records,timestamp_ms=1767301244812,1,1
+micro,sensor_records,timestamp_ms=1768492917277,1,1
+micro,sensor_records,timestamp_ms=1768230257330,1,1
+micro,sensor_records,timestamp_ms=1768260959521,1,1
+micro,sensor_records,timestamp_ms=1768928147609,1,1
+micro,sensor_records,timestamp_ms=1767233275190,1,1
+micro,sensor_records,timestamp_ms=1769174678142,1,1
+micro,sensor_records,timestamp_ms=1767483139091,1,1
+micro,sensor_records,timestamp_ms=1767618002318,1,1
+micro,sensor_records,timestamp_ms=1768532786567,1,1
+micro,sensor_records,timestamp_ms=1768974197041,1,1
+micro,sensor_records,timestamp_ms=1769121243959,1,1
+micro,sensor_records,timestamp_ms=1769247241724,1,1
+micro,sensor_records,timestamp_ms=1768653456669,1,1
+micro,sensor_records,timestamp_ms=1769171154387,1,1
+micro,sensor_records,timestamp_ms=1767372793527,1,1
+micro,sensor_records,timestamp_ms=1767303477030,1,1
+micro,sensor_records,timestamp_ms=1768507165966,1,1
+micro,sensor_records,timestamp_ms=1768710686548,1,1
+micro,sensor_records,timestamp_ms=1767834912964,1,1
+micro,sensor_records,timestamp_ms=1767560173233,1,1
+micro,sensor_records,timestamp_ms=1767742074783,1,1
+micro,sensor_records,timestamp_ms=1767483686947,1,1
+micro,sensor_records,timestamp_ms=1768979859835,1,1
+micro,sensor_records,timestamp_ms=1768265432846,1,1
+micro,sensor_records,timestamp_ms=1768172586061,1,1
+micro,sensor_records,timestamp_ms=1768958502685,1,1
+micro,sensor_records,timestamp_ms=1768029722677,1,1
+micro,sensor_records,timestamp_ms=1768074201887,1,1
+micro,sensor_records,timestamp_ms=1768355544410,1,1
+micro,sensor_records,timestamp_ms=1769434107558,1,1
+micro,sensor_records,timestamp_ms=1768920396220,1,1
+micro,sensor_records,timestamp_ms=1769376068848,1,1
+micro,sensor_records,timestamp_ms=1767457248098,1,1
+micro,sensor_records,timestamp_ms=1767860061362,1,1
+micro,sensor_records,timestamp_ms=1768448592426,1,1
+micro,sensor_records,timestamp_ms=1768259532705,1,1
+micro,sensor_records,timestamp_ms=1769311940119,1,1
+micro,sensor_records,timestamp_ms=1768709303165,1,1
+micro,sensor_records,timestamp_ms=1769762841723,1,1
+micro,sensor_records,timestamp_ms=1769056102426,1,1
+micro,sensor_records,timestamp_ms=1769336853731,1,1
+micro,sensor_records,timestamp_ms=1767362489697,1,1
+micro,sensor_records,timestamp_ms=1768115104639,1,1
+micro,sensor_records,timestamp_ms=1768620460350,1,1
+micro,sensor_records,timestamp_ms=1768766623597,1,1
+micro,sensor_records,timestamp_ms=1768158516029,1,1
+micro,sensor_records,timestamp_ms=1769128687548,1,1
+micro,sensor_records,timestamp_ms=1768277058675,1,1
+micro,sensor_records,timestamp_ms=1769491169049,1,1
+micro,sensor_records,timestamp_ms=1769103555514,1,1
+micro,sensor_records,timestamp_ms=1768664798103,1,1
+micro,sensor_records,timestamp_ms=1767850347291,1,1
+micro,sensor_records,timestamp_ms=1768441577580,1,1
+micro,sensor_records,timestamp_ms=1768969885948,1,1
+micro,sensor_records,timestamp_ms=1767614396672,1,1
+micro,sensor_records,timestamp_ms=1767661246060,1,1
+micro,sensor_records,timestamp_ms=1768085351000,1,1
+micro,sensor_records,timestamp_ms=1768967102576,1,1
+micro,sensor_records,timestamp_ms=1769386430638,1,1
+micro,sensor_records,timestamp_ms=1769467846992,1,1
+micro,sensor_records,timestamp_ms=1768724012237,1,1
+micro,sensor_records,timestamp_ms=1767494589655,1,1
+micro,sensor_records,timestamp_ms=1768554642240,1,1
+micro,sensor_records,timestamp_ms=1769608838375,1,1
+micro,sensor_records,timestamp_ms=1768831396615,1,1
+micro,sensor_records,timestamp_ms=1769767983803,1,1
+micro,sensor_records,timestamp_ms=1769093278915,1,1
+micro,sensor_records,timestamp_ms=1769124787618,1,1
+micro,sensor_records,timestamp_ms=1767923678627,1,1
+micro,sensor_records,timestamp_ms=1769332725927,1,1
+micro,sensor_records,timestamp_ms=1767869263777,1,1
+micro,sensor_records,timestamp_ms=1768020232200,1,1
+micro,sensor_records,timestamp_ms=1767410065678,1,1
+micro,sensor_records,timestamp_ms=1769556665894,1,1
+micro,sensor_records,timestamp_ms=1767913833870,1,1
+micro,sensor_records,timestamp_ms=1768186572817,1,1
+micro,sensor_records,timestamp_ms=1767811487380,1,1
+micro,sensor_records,timestamp_ms=1767230744321,1,1
+micro,sensor_records,timestamp_ms=1769384619512,1,1
+micro,sensor_records,timestamp_ms=1768290592582,1,1
+micro,sensor_records,timestamp_ms=1769475234436,1,1
+micro,sensor_records,timestamp_ms=1769750276700,1,1
+micro,sensor_records,timestamp_ms=1768392671445,1,1
+micro,sensor_records,timestamp_ms=1768452426399,1,1
+micro,sensor_records,timestamp_ms=1769166985095,1,1
+micro,sensor_records,timestamp_ms=1767395672158,1,1
+micro,sensor_records,timestamp_ms=1769439959548,1,1
+micro,sensor_records,timestamp_ms=1768400122996,1,1
+micro,sensor_records,timestamp_ms=1768859896425,1,1
+micro,sensor_records,timestamp_ms=1768361734771,1,1
+micro,sensor_records,timestamp_ms=1768327426382,1,1
+micro,sensor_records,timestamp_ms=1769554059253,1,1
+micro,sensor_records,timestamp_ms=1769763787248,1,1
+micro,sensor_records,timestamp_ms=1769707817348,1,1
+micro,sensor_records,timestamp_ms=1769682880918,1,1
+micro,sensor_records,timestamp_ms=1769665651077,1,1
+micro,sensor_records,timestamp_ms=1768776232313,1,1
+micro,sensor_records,timestamp_ms=1769415996632,1,1
+micro,sensor_records,timestamp_ms=1768510824835,1,1
+micro,sensor_records,timestamp_ms=1768143825081,1,1
+micro,sensor_records,timestamp_ms=1767682582616,1,1
+micro,sensor_records,timestamp_ms=1769422460590,1,1
+micro,sensor_records,timestamp_ms=1769216653838,1,1
+micro,sensor_records,timestamp_ms=1767986798835,1,1
+micro,sensor_records,timestamp_ms=1768030980970,1,1
+micro,sensor_records,timestamp_ms=1768213657162,1,1
+micro,sensor_records,timestamp_ms=1769571562558,1,1
+micro,sensor_records,timestamp_ms=1769272082647,1,1
+micro,sensor_records,timestamp_ms=1768649585157,1,1
+micro,sensor_records,timestamp_ms=1769554590964,1,1
+micro,sensor_records,timestamp_ms=1768982403910,1,1
+micro,sensor_records,timestamp_ms=1768493121452,1,1
+micro,sensor_records,timestamp_ms=1767611598420,1,1
+micro,sensor_records,timestamp_ms=1767440192067,1,1
+micro,sensor_records,timestamp_ms=1767917886200,1,1
+micro,sensor_records,timestamp_ms=1767981193771,1,1
+micro,sensor_records,timestamp_ms=1767758836800,1,1
+micro,sensor_records,timestamp_ms=1768192385206,1,1
+micro,sensor_records,timestamp_ms=1767892726581,1,1
+micro,sensor_records,timestamp_ms=1767234453404,1,1
+micro,sensor_records,timestamp_ms=1768952916904,1,1
+micro,sensor_records,timestamp_ms=1767287282275,1,1
+micro,sensor_records,timestamp_ms=1769137874997,1,1
+micro,sensor_records,timestamp_ms=1769012538870,1,1
+micro,sensor_records,timestamp_ms=1768600635767,1,1
+micro,sensor_records,timestamp_ms=1768205323100,1,1
+micro,sensor_records,timestamp_ms=1767561521228,1,1
+micro,sensor_records,timestamp_ms=1767311788142,1,1
+micro,sensor_records,timestamp_ms=1767376426226,1,1
+micro,sensor_records,timestamp_ms=1769700928912,1,1
+micro,sensor_records,timestamp_ms=1769295437683,1,1
+micro,sensor_records,timestamp_ms=1768617874714,1,1
+micro,sensor_records,timestamp_ms=1769509827458,1,1
+micro,sensor_records,timestamp_ms=1768012780833,1,1
+micro,sensor_records,timestamp_ms=1767910439001,1,1
+micro,sensor_records,timestamp_ms=1769061736607,1,1
+micro,sensor_records,timestamp_ms=1768659099810,1,1
+micro,sensor_records,timestamp_ms=1768446055901,1,1
+micro,sensor_records,timestamp_ms=1769300953907,1,1
+micro,sensor_records,timestamp_ms=1767932218816,1,1
+micro,sensor_records,timestamp_ms=1768601941536,1,1
+micro,sensor_records,timestamp_ms=1768622468892,1,1
+micro,sensor_records,timestamp_ms=1769786447626,1,1
+micro,sensor_records,timestamp_ms=1767591677573,1,1
+micro,sensor_records,timestamp_ms=1768502916461,1,1
+micro,sensor_records,timestamp_ms=1768051248865,1,1
+micro,sensor_records,timestamp_ms=1767637780776,1,1
+micro,sensor_records,timestamp_ms=1769332516280,1,1
+micro,sensor_records,timestamp_ms=1768397647210,1,1
+micro,sensor_records,timestamp_ms=1768286557498,1,1
+micro,sensor_records,timestamp_ms=1768057646409,1,1
+micro,sensor_records,timestamp_ms=1768221372096,1,1
+micro,sensor_records,timestamp_ms=1768095071295,1,1
+micro,sensor_records,timestamp_ms=1768120357444,1,1
+micro,sensor_records,timestamp_ms=1768434370185,1,1
+micro,sensor_records,timestamp_ms=1769355791963,1,1
+micro,sensor_records,timestamp_ms=1768751322042,1,1
+micro,sensor_records,timestamp_ms=1767604607402,1,1
+micro,sensor_records,timestamp_ms=1768690724681,1,1
+micro,sensor_records,timestamp_ms=1768591974019,1,1
+micro,sensor_records,timestamp_ms=1767273439361,1,1
+micro,sensor_records,timestamp_ms=1769389484458,1,1
+micro,sensor_records,timestamp_ms=1768838088909,1,1
+micro,sensor_records,timestamp_ms=1768813243567,1,1
+micro,sensor_records,timestamp_ms=1768605405252,1,1
+micro,sensor_records,timestamp_ms=1768023050514,1,1
+micro,sensor_records,timestamp_ms=1767282487421,1,1
+micro,sensor_records,timestamp_ms=1768615150339,1,1
+micro,sensor_records,timestamp_ms=1769029524325,1,1
+micro,sensor_records,timestamp_ms=1769149261248,1,1
+micro,sensor_records,timestamp_ms=1769133153079,1,1
+micro,sensor_records,timestamp_ms=1768858002530,1,1
+micro,sensor_records,timestamp_ms=1767902821779,1,1
+micro,sensor_records,timestamp_ms=1768126681214,1,1
+micro,sensor_records,timestamp_ms=1767824878711,1,1
+micro,sensor_records,timestamp_ms=1767250119589,1,1
+micro,sensor_records,timestamp_ms=1769454113668,1,1
+micro,sensor_records,timestamp_ms=1769246660439,1,1
+micro,sensor_records,timestamp_ms=1769169392714,1,1
+micro,sensor_records,timestamp_ms=1769352879797,1,1
+micro,sensor_records,timestamp_ms=1767933173971,1,1
+micro,sensor_records,timestamp_ms=1768459155483,1,1
+micro,sensor_records,timestamp_ms=1768516098651,1,1
+micro,sensor_records,timestamp_ms=1768179866389,1,1
+micro,sensor_records,timestamp_ms=1767506451141,1,1
+micro,sensor_records,timestamp_ms=1767876482372,1,1
+micro,sensor_records,timestamp_ms=1768836116210,1,1
+micro,sensor_records,timestamp_ms=1769718666212,1,1
+micro,sensor_records,timestamp_ms=1769518310983,1,1
+micro,sensor_records,timestamp_ms=1768448039434,1,1
+micro,sensor_records,timestamp_ms=1767497503127,1,1
+micro,sensor_records,timestamp_ms=1767693829794,1,1
+micro,sensor_records,timestamp_ms=1768280166962,1,1
+micro,sensor_records,timestamp_ms=1768702412602,1,1
+micro,sensor_records,timestamp_ms=1767617625147,1,1
+micro,sensor_records,timestamp_ms=1768931775196,1,1
+micro,sensor_records,timestamp_ms=1767523997421,1,1
+micro,sensor_records,timestamp_ms=1768892222235,1,1
+micro,sensor_records,timestamp_ms=1768881938480,1,1
+micro,sensor_records,timestamp_ms=1767863531173,1,1
+micro,sensor_records,timestamp_ms=1767973663020,1,1
+micro,sensor_records,timestamp_ms=1767666374980,1,1
+micro,sensor_records,timestamp_ms=1767275697129,1,1
+micro,sensor_records,timestamp_ms=1768426941961,1,1
+micro,sensor_records,timestamp_ms=1769600543924,1,1
+micro,sensor_records,timestamp_ms=1769169138241,1,1
+micro,sensor_records,timestamp_ms=1767637095089,1,1
+micro,sensor_records,timestamp_ms=1768405108257,1,1
+micro,sensor_records,timestamp_ms=1767918176526,1,1
+micro,sensor_records,timestamp_ms=1767586262429,1,1
+micro,sensor_records,timestamp_ms=1767754107709,1,1
+micro,sensor_records,timestamp_ms=1767431831646,1,1
+micro,sensor_records,timestamp_ms=1768982065425,1,1
+micro,sensor_records,timestamp_ms=1768930655785,1,1
+micro,sensor_records,timestamp_ms=1769638892553,1,1
+micro,sensor_records,timestamp_ms=1767949536021,1,1
+micro,sensor_records,timestamp_ms=1769591556945,1,1
+micro,sensor_records,timestamp_ms=1768047901423,1,1
+micro,sensor_records,timestamp_ms=1767623977575,1,1
+micro,sensor_records,timestamp_ms=1769503375700,1,1
+micro,sensor_records,timestamp_ms=1769561063199,1,1
+micro,sensor_records,timestamp_ms=1767468135040,1,1
+micro,sensor_records,timestamp_ms=1767834485905,1,1
+micro,sensor_records,timestamp_ms=1769117922637,1,1
+micro,sensor_records,timestamp_ms=1767750151535,1,1
+micro,sensor_records,timestamp_ms=1769542292399,1,1
+micro,sensor_records,timestamp_ms=1768112809724,1,1
+micro,sensor_records,timestamp_ms=1767550347429,1,1
+micro,sensor_records,timestamp_ms=1769613730731,1,1
+micro,sensor_records,timestamp_ms=1769270677489,1,1
+micro,sensor_records,timestamp_ms=1768041770986,1,1
+micro,sensor_records,timestamp_ms=1768401908823,1,1
+micro,sensor_records,timestamp_ms=1769499859981,1,1
+micro,sensor_records,timestamp_ms=1767325196087,1,1
+micro,sensor_records,timestamp_ms=1768598895019,1,1
+micro,sensor_records,timestamp_ms=1769669810060,1,1
+micro,sensor_records,timestamp_ms=1769570171824,1,1
+micro,sensor_records,timestamp_ms=1768645510777,1,1
+micro,sensor_records,timestamp_ms=1769006967394,1,1
+micro,sensor_records,timestamp_ms=1767311604282,1,1
+micro,sensor_records,timestamp_ms=1767444996581,1,1
+micro,sensor_records,timestamp_ms=1767612808994,1,1
+micro,sensor_records,timestamp_ms=1768884313212,1,1
+micro,sensor_records,timestamp_ms=1768177817506,1,1
+micro,sensor_records,timestamp_ms=1768547949353,1,1
+micro,sensor_records,timestamp_ms=1767558734804,1,1
+micro,sensor_records,timestamp_ms=1768951173348,1,1
+micro,sensor_records,timestamp_ms=1769629309852,1,1
+micro,sensor_records,timestamp_ms=1767871016201,1,1
+micro,sensor_records,timestamp_ms=1768169568613,1,1
+micro,sensor_records,timestamp_ms=1768743438732,1,1
+micro,sensor_records,timestamp_ms=1767522206405,1,1
+micro,sensor_records,timestamp_ms=1768174966985,1,1
+micro,sensor_records,timestamp_ms=1767689128657,1,1
+micro,sensor_records,timestamp_ms=1767981806942,1,1
+micro,sensor_records,timestamp_ms=1767745571869,1,1
+micro,sensor_records,timestamp_ms=1768897692785,1,1
+micro,sensor_records,timestamp_ms=1769093024685,1,1
+micro,sensor_records,timestamp_ms=1769436762265,1,1
+micro,sensor_records,timestamp_ms=1768975324568,1,1
+micro,sensor_records,timestamp_ms=1768084842153,1,1
+micro,sensor_records,timestamp_ms=1768265045775,1,1
+micro,sensor_records,timestamp_ms=1767558059769,1,1
+micro,sensor_records,timestamp_ms=1768474120670,1,1
+micro,sensor_records,timestamp_ms=1767503426424,1,1
+micro,sensor_records,timestamp_ms=1769200762958,1,1
+micro,sensor_records,timestamp_ms=1769743124139,1,1
+micro,sensor_records,timestamp_ms=1769615724517,1,1
+micro,sensor_records,timestamp_ms=1768918793473,1,1
+micro,sensor_records,timestamp_ms=1769038209082,1,1
+micro,sensor_records,timestamp_ms=1769326862462,1,1
+micro,sensor_records,timestamp_ms=1769227318491,1,1
+micro,sensor_records,timestamp_ms=1768500107819,1,1
+micro,sensor_records,timestamp_ms=1768831342981,1,1
+micro,sensor_records,timestamp_ms=1769152607231,1,1
+micro,sensor_records,timestamp_ms=1768786042092,1,1
+micro,sensor_records,timestamp_ms=1769493683627,1,1
+micro,sensor_records,timestamp_ms=1769782538134,1,1
+micro,sensor_records,timestamp_ms=1767559672200,1,1
+micro,sensor_records,timestamp_ms=1768001546986,1,1
+micro,sensor_records,timestamp_ms=1768565853946,1,1
+micro,sensor_records,timestamp_ms=1768731662739,1,1
+micro,sensor_records,timestamp_ms=1769793073633,1,1
+micro,sensor_records,timestamp_ms=1768118745108,1,1
+micro,sensor_records,timestamp_ms=1769643631121,1,1
+micro,sensor_records,timestamp_ms=1769329675941,1,1
+micro,sensor_records,timestamp_ms=1767382604721,1,1
+micro,sensor_records,timestamp_ms=1767627463708,1,1
+micro,sensor_records,timestamp_ms=1769535280585,1,1
+micro,sensor_records,timestamp_ms=1769360394521,1,1
+micro,sensor_records,timestamp_ms=1767271055569,1,1
+micro,sensor_records,timestamp_ms=1768657605229,1,1
+micro,sensor_records,timestamp_ms=1767578075565,1,1
+micro,sensor_records,timestamp_ms=1768495815972,1,1
+micro,sensor_records,timestamp_ms=1768844337537,1,1
+micro,sensor_records,timestamp_ms=1767999419168,1,1
+micro,sensor_records,timestamp_ms=1768095977201,1,1
+micro,sensor_records,timestamp_ms=1768129450657,1,1
+micro,sensor_records,timestamp_ms=1769501333434,1,1
+micro,sensor_records,timestamp_ms=1768815653478,1,1
+micro,sensor_records,timestamp_ms=1767848113879,1,1
+micro,sensor_records,timestamp_ms=1768894939170,1,1
+micro,sensor_records,timestamp_ms=1767534446488,1,1
+micro,sensor_records,timestamp_ms=1767287251732,1,1
+micro,sensor_records,timestamp_ms=1769651990291,1,1
+micro,sensor_records,timestamp_ms=1768527888671,1,1
+micro,sensor_records,timestamp_ms=1768029564503,1,1
+micro,sensor_records,timestamp_ms=1767950930208,1,1
+micro,sensor_records,timestamp_ms=1768178656575,1,1
+micro,sensor_records,timestamp_ms=1768977961539,1,1
+micro,sensor_records,timestamp_ms=1768307645539,1,1
+micro,sensor_records,timestamp_ms=1767895139030,1,1
+micro,sensor_records,timestamp_ms=1768956827804,1,1
+micro,sensor_records,timestamp_ms=1769794915797,1,1
+micro,sensor_records,timestamp_ms=1769591411078,1,1
+micro,sensor_records,timestamp_ms=1767524348382,1,1
+micro,sensor_records,timestamp_ms=1768289207006,1,1
+micro,sensor_records,timestamp_ms=1768806835570,1,1
+micro,sensor_records,timestamp_ms=1768155440686,1,1
+micro,sensor_records,timestamp_ms=1767886537384,1,1
+micro,sensor_records,timestamp_ms=1769448736944,1,1
+micro,sensor_records,timestamp_ms=1767654426487,1,1
+micro,sensor_records,timestamp_ms=1769744478123,1,1
+micro,sensor_records,timestamp_ms=1767228524539,1,1
+micro,sensor_records,timestamp_ms=1769056924226,1,1
+micro,sensor_records,timestamp_ms=1767447788898,1,1
+micro,sensor_records,timestamp_ms=1767636757055,1,1
+micro,sensor_records,timestamp_ms=1768917818196,1,1
+micro,sensor_records,timestamp_ms=1767237088713,1,1
+micro,sensor_records,timestamp_ms=1768154134309,1,1
+micro,sensor_records,timestamp_ms=1769264598388,1,1
+micro,sensor_records,timestamp_ms=1769065672286,1,1
+micro,sensor_records,timestamp_ms=1767866346994,1,1
+micro,sensor_records,timestamp_ms=1768985025133,1,1
+micro,sensor_records,timestamp_ms=1769613438201,1,1
+micro,sensor_records,timestamp_ms=1768925083709,1,1
+micro,sensor_records,timestamp_ms=1767992951601,1,1
+micro,sensor_records,timestamp_ms=1769248440486,1,1
+micro,sensor_records,timestamp_ms=1768266265623,1,1
+micro,sensor_records,timestamp_ms=1767268999958,1,1
+micro,sensor_records,timestamp_ms=1767794049959,1,1
+micro,sensor_records,timestamp_ms=1769549834556,1,1
+micro,sensor_records,timestamp_ms=1767982762294,1,1
+micro,sensor_records,timestamp_ms=1768016018331,1,1
+micro,sensor_records,timestamp_ms=1767551084742,1,1
+micro,sensor_records,timestamp_ms=1769451477799,1,1
+micro,sensor_records,timestamp_ms=1768033146884,1,1
+micro,sensor_records,timestamp_ms=1767523086293,1,1
+micro,sensor_records,timestamp_ms=1767810830090,1,1
+micro,sensor_records,timestamp_ms=1768234529213,1,1
+micro,sensor_records,timestamp_ms=1769810628139,1,1
+micro,sensor_records,timestamp_ms=1768359410100,1,1
+micro,sensor_records,timestamp_ms=1769736309792,1,1
+micro,sensor_records,timestamp_ms=1768827999139,1,1
+micro,sensor_records,timestamp_ms=1767580806685,1,1
+micro,sensor_records,timestamp_ms=1768980533465,1,1
+micro,sensor_records,timestamp_ms=1768589341859,1,1
+micro,sensor_records,timestamp_ms=1769357509954,1,1
+micro,sensor_records,timestamp_ms=1769670617560,1,1
+micro,sensor_records,timestamp_ms=1768299322836,1,1
+micro,sensor_records,timestamp_ms=1767569399547,1,1
+micro,sensor_records,timestamp_ms=1768997723765,1,1
+micro,sensor_records,timestamp_ms=1769633258379,1,1
+micro,sensor_records,timestamp_ms=1769053698938,1,1
+micro,sensor_records,timestamp_ms=1767577775926,1,1
+micro,sensor_records,timestamp_ms=1767677413242,1,1
+micro,sensor_records,timestamp_ms=1767465517417,1,1
+micro,sensor_records,timestamp_ms=1768329277758,1,1
+micro,sensor_records,timestamp_ms=1767381637420,1,1
+micro,sensor_records,timestamp_ms=1768588341672,1,1
+micro,sensor_records,timestamp_ms=1768081165355,1,1
+micro,sensor_records,timestamp_ms=1768070217146,1,1
+micro,sensor_records,timestamp_ms=1769446399508,1,1
+micro,sensor_records,timestamp_ms=1768327809848,1,1
+micro,sensor_records,timestamp_ms=1769651452159,1,1
+micro,sensor_records,timestamp_ms=1768065576694,1,1
+micro,sensor_records,timestamp_ms=1769246843056,1,1
+micro,sensor_records,timestamp_ms=1769549070606,1,1
+micro,sensor_records,timestamp_ms=1769137537637,1,1
+micro,sensor_records,timestamp_ms=1767463524730,1,1
+micro,sensor_records,timestamp_ms=1767457983091,1,1
+micro,sensor_records,timestamp_ms=1769467026394,1,1
+micro,sensor_records,timestamp_ms=1769128645075,1,1
+micro,sensor_records,timestamp_ms=1767381289018,1,1
+micro,sensor_records,timestamp_ms=1767893508607,1,1
+micro,sensor_records,timestamp_ms=1767439664894,1,1
+micro,sensor_records,timestamp_ms=1768411159702,1,1
+micro,sensor_records,timestamp_ms=1769007667538,1,1
+micro,sensor_records,timestamp_ms=1768184776746,1,1
+micro,sensor_records,timestamp_ms=1767928420632,1,1
+micro,sensor_records,timestamp_ms=1768717675983,1,1
+micro,sensor_records,timestamp_ms=1767274218568,1,1
+micro,sensor_records,timestamp_ms=1767607355234,1,1
+micro,sensor_records,timestamp_ms=1767557834490,1,1
+micro,sensor_records,timestamp_ms=1767390364855,1,1
+micro,sensor_records,timestamp_ms=1768538847390,1,1
+micro,sensor_records,timestamp_ms=1768761098516,1,1
+micro,sensor_records,timestamp_ms=1768831348336,1,1
+micro,sensor_records,timestamp_ms=1769731051028,1,1
+micro,sensor_records,timestamp_ms=1768639395445,1,1
+micro,sensor_records,timestamp_ms=1768217140376,1,1
+micro,sensor_records,timestamp_ms=1769802873087,1,1
+micro,sensor_records,timestamp_ms=1768692844005,1,1
+micro,sensor_records,timestamp_ms=1768423719795,1,1
+micro,sensor_records,timestamp_ms=1769091195501,1,1
+micro,sensor_records,timestamp_ms=1767704156177,1,1
+micro,sensor_records,timestamp_ms=1768932640588,1,1
+micro,sensor_records,timestamp_ms=1769042302942,1,1
+micro,sensor_records,timestamp_ms=1769386224716,1,1
+micro,sensor_records,timestamp_ms=1768248311586,1,1
+micro,sensor_records,timestamp_ms=1769592132762,1,1
+micro,sensor_records,timestamp_ms=1768608386153,1,1
+micro,sensor_records,timestamp_ms=1769375698283,1,1
+micro,sensor_records,timestamp_ms=1769425579187,1,1
+micro,sensor_records,timestamp_ms=1767801977386,1,1
+micro,sensor_records,timestamp_ms=1768995666855,1,1
+micro,sensor_records,timestamp_ms=1769722407065,1,1
+micro,sensor_records,timestamp_ms=1767383219000,1,1
+micro,sensor_records,timestamp_ms=1769037509509,1,1
+micro,sensor_records,timestamp_ms=1767815766395,1,1
+micro,sensor_records,timestamp_ms=1767619297432,1,1
+micro,sensor_records,timestamp_ms=1768057568960,1,1
+micro,sensor_records,timestamp_ms=1768060566401,1,1
+micro,sensor_records,timestamp_ms=1769342834005,1,1
+micro,sensor_records,timestamp_ms=1767457288408,1,1
+micro,sensor_records,timestamp_ms=1767824290907,1,1
+micro,sensor_records,timestamp_ms=1768087048085,1,1
+micro,sensor_records,timestamp_ms=1767610629503,1,1
+micro,sensor_records,timestamp_ms=1768370373808,1,1
+micro,sensor_records,timestamp_ms=1768800060141,1,1
+micro,sensor_records,timestamp_ms=1767891521586,1,1
+micro,sensor_records,timestamp_ms=1768615368425,1,1
+micro,sensor_records,timestamp_ms=1768211352862,1,1
+micro,sensor_records,timestamp_ms=1769054710245,1,1
+micro,sensor_records,timestamp_ms=1769566626715,1,1
+micro,sensor_records,timestamp_ms=1769230383897,1,1
+micro,sensor_records,timestamp_ms=1767471344348,1,1
+micro,sensor_records,timestamp_ms=1767799429474,1,1
+tpch,lineitem,l_shipdate>='1995-09-01'::DATE AND l_shipdate<'1995-10-01'::DATE,1,1
+tpcds,catalog_returns,cr_catalog_page_sk>=1 [join] AND cr_catalog_page_sk<=17108 [join] AND cr_returned_date_sk>=2451780 [join] AND cr_returned_date_sk<=2451794 [join],1,1
+tpcds,store_sales,ss_store_sk>=1 [join] AND ss_store_sk<=400 [join] AND ss_sold_date_sk>=2451911 [join] AND ss_sold_date_sk<=2452275 [join] AND ss_addr_sk>=1 [join] AND ss_addr_sk<=1000000 [join],1,1
+tpcds,store_sales,ss_quantity>=11 AND ss_quantity<=15,1,1
+tpcds,store_sales,ss_quantity>=26 AND ss_quantity<=30,1,1
+tpcds,store_sales,ss_quantity>=21 AND ss_quantity<=25,1,1
+tpcds,store_sales,ss_customer_sk>=1 [join] AND ss_customer_sk<=2000000 [join] AND ss_sold_date_sk>=2452276 [join] AND ss_sold_date_sk<=2452549 [join],1,1
+tpcds,store_sales,"ss_sold_date_sk>=2451911 [join] AND ss_sold_date_sk<=2452275 [join] AND optional:ss_store_sk IN (15, 39, 61, 75, 76, 91, 92, 93, 95, 110, 115, 124, 126, 134, 136, 140, 141, 145, 151, 160, 179, 186, 194, 199, 205, 229, 231, 243, 270, 293, 299, 301, 307, 313, 314, 316, 335, 339, 344, 354, 369, 376, 377, 391, 395) [join] AND ss_store_sk>=15 [join] AND ss_store_sk<=395 [join]",1,1

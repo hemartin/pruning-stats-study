@@ -1,0 +1,17 @@
+item,threads,config,value,unit,note
+results_identical_count,1,ng2000 vs baseline_ng,43/43,queries,pre-predicate-cache build
+results_identical_count,1,ng2000_pc vs baseline_pc (cold+warm),86/86,query executions,current build
+results_identical_check_deterministic,8,ng2000_t8,32/32,deterministic queries,11 nondeterministic queries differ among baseline runs too; row counts identical
+results_identical_check_deterministic,8,ng2000_pc_t8 (cold+warm),64/64,deterministic query executions,
+selftest_queries,1,ng3w20/ng3w200/ng3w2000,3301,queries per config,0 differences
+selftest_queries,8,ng3w20/ng3w200/ng3w2000,3301,queries per config,0 differences
+selftest_pruned_row_groups,1,ng3w2000,67379,row groups,
+selftest_pruned_row_groups,8,ng3w2000,68499,row groups,
+copy_baseline,1,baseline,8222;10783;13518,ms,
+copy_ng2000,1,ng2000,26720;26856;34497;38039;38080,ms,
+build_url,1,ng2000,14983;15015;18693;20125;20294,ms for 122 row groups,123-166 ms per row group
+build_title,1,ng2000,3631;3651;4594;4876;4879,ms for 122 row groups,30-40 ms per row group
+buffer_url_title,1,ng2000,428;460;341;350;431,ms,
+stat_bytes_url,,ng2000,1951880,bytes,
+stat_bytes_title,,ng2000,1884824,bytes,
+lookup_per_row_group,1,ng2000,20.1-24.8,us,consult_ns/consultations q21-q24

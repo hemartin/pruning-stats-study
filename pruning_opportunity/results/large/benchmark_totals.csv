@@ -1,0 +1,5 @@
+benchmark,queries,queries_ok,n_scans,total_row_groups,pruned,scanned,scanned_no_rows,scanned_no_rows_all_segments_skipped,scanned_with_rows,partial_no_rows,not_reached,incl_optional_no_rows,plan_empty_results,pct_pruned,pct_scanned_no_rows_of_scanned
+micro,16000,6466,6466,793005970,549095066,243910904,178208300,0,65702604,0,0,178208300,0,69.24,73.06
+tpch,22,22,86,2054850,128,2054722,6,0,2054716,0,0,6,0,0.01,0.0
+tpcds,99,59,421,3584879,656223,2928656,35808,0,2892848,0,0,36698,0,18.31,1.22
+clickbench,43,43,44,537108,152794,384314,58762,0,325552,0,0,59853,0,28.45,15.29

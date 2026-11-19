@@ -1,0 +1,6 @@
+config,mode,queries,identical,scan_counter_differences,invariant_violations,details
+ng200,count (threads 1),43,43,0,0,
+ng2000,count (threads 1),43,43,0,0,
+ng20000,count (threads 1),43,43,0,0,
+ng2000,check (threads 3),43,34,,,"equal to none of the baseline check runs: q18,q23,q25,q31,q32,q39,q40,q41; baseline runs disagree among themselves on: q12,q18,q19,q23,q31,q32,q33,q39,q40,q41"
+ng2000_t8,check (threads 8),43,34,,,"equal to none of the baseline check runs: q18,q19,q25,q31,q32,q33,q39,q40,q41; baseline runs disagree among themselves on: q12,q18,q19,q23,q31,q32,q33,q39,q40,q41"

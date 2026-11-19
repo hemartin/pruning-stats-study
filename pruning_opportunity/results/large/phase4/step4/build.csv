@@ -1,0 +1,5 @@
+group,config,mode,attach_wall_s,build_s,buffer_s,read_s,load_build_wall_s,threads,stats,bytes,columns
+clickbench,baseline_step4cb,count,0.013654,0.0,0.0,0.0,0.0,0,0,0,
+clickbench,baseline_step4cb,time,0.016553,0.0,0.0,0.0,0.0,0,0,0,
+clickbench,cbnew_step4,count,565.495407,3146.421737036,51.409918662,187.132961331,565.3823387589999,6,24414,381011264,title:ngram;url:ngram
+clickbench,cbnew_step4,time,562.130905,3138.188730471,51.361032454,175.561973841,562.025681246,6,24414,381011264,title:ngram;url:ngram

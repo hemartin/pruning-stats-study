@@ -1,0 +1,3 @@
+check,queries,results_equal,counters_equal,diffs
+"selective binary, all flags off vs. stock binary (counters on the stock binary's fields)",43,43,43,
+"selective binary, PRUNING_ROWID_SKIP=1 vs. the separate rowid binary with the flag on",43,43,43,

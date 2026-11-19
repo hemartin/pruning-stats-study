@@ -1,0 +1,2502 @@
+[
+ {
+  "db": "clickbench",
+  "where": "rowid = 0",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 122,
+  "pruned_rowid_range": 122,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid = 1",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 122,
+  "pruned_rowid_range": 122,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid = 8191",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 122,
+  "pruned_rowid_range": 122,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid = 8192",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 122,
+  "pruned_rowid_range": 122,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid = 8193",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 122,
+  "pruned_rowid_range": 122,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid = 16383",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 122,
+  "pruned_rowid_range": 122,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid = 499712",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 122,
+  "pruned_rowid_range": 122,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid = 499711",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 122,
+  "pruned_rowid_range": 122,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid = 999975",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 122,
+  "pruned_rowid_range": 122,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid = 999976",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 122,
+  "pruned_rowid_range": 122,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid = 999977",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 123,
+  "pruned_rowid_range": 123,
+  "expected_unpruned": 0,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid = 999982",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 123,
+  "pruned_rowid_range": 123,
+  "expected_unpruned": 0,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid = -1",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 123,
+  "pruned_rowid_range": 123,
+  "expected_unpruned": 0,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid IN (0, 8191)",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 122,
+  "pruned_rowid_range": 122,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid IN (8191, 8192)",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 121,
+  "pruned_rowid_range": 121,
+  "expected_unpruned": 2,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid IN (5, 8192, 24593, 499712, 999976)",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 118,
+  "pruned_rowid_range": 118,
+  "expected_unpruned": 5,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid IN (16383, 16384, 16385, 57344)",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 120,
+  "pruned_rowid_range": 120,
+  "expected_unpruned": 3,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid IN (999976, 999977, 1000077)",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 122,
+  "pruned_rowid_range": 122,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid IN (999977, 999978)",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 123,
+  "pruned_rowid_range": 123,
+  "expected_unpruned": 0,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid IN (-5, 3)",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 122,
+  "pruned_rowid_range": 122,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid IN (8189, 8190, 8191, 8192, 8193, 8194)",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 121,
+  "pruned_rowid_range": 121,
+  "expected_unpruned": 2,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid IN (11, 24587, 49163, 73739, 98315, 122891, 147467, 172043, 196619, 221195, 245771, 270347, 294923, 319499, 344075, 368651, 393227, 417803, 442379, 466955, 491531, 516107, 540683, 565259, 589835, 614411, 638987, 663563, 688139, 712715, 737291, 761867, 786443, 811019, 835595, 860171, 884747, 909323, 933899, 958475, 983051)",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 82,
+  "pruned_rowid_range": 82,
+  "expected_unpruned": 41,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid BETWEEN 0 AND 0",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 122,
+  "pruned_rowid_range": 122,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid BETWEEN 8191 AND 8192",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 121,
+  "pruned_rowid_range": 121,
+  "expected_unpruned": 2,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid BETWEEN 8192 AND 16383",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 122,
+  "pruned_rowid_range": 122,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid BETWEEN 8193 AND 16382",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 122,
+  "pruned_rowid_range": 122,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid BETWEEN 8190 AND 24577",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 119,
+  "pruned_rowid_range": 119,
+  "expected_unpruned": 4,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid BETWEEN 999975 AND 999982",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 122,
+  "pruned_rowid_range": 122,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid BETWEEN 999977 AND 1000077",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 123,
+  "pruned_rowid_range": 123,
+  "expected_unpruned": 0,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid BETWEEN 499711 AND 499712",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 121,
+  "pruned_rowid_range": 121,
+  "expected_unpruned": 2,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid BETWEEN -10 AND 3",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 122,
+  "pruned_rowid_range": 122,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid BETWEEN 5 AND 4",
+  "total_row_groups": 0,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid < 8192",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 122,
+  "pruned_rowid_range": 122,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid <= 8192",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 121,
+  "pruned_rowid_range": 121,
+  "expected_unpruned": 2,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid > 8192",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 1,
+  "pruned_rowid_range": 1,
+  "expected_unpruned": 122,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid >= 8192",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 1,
+  "pruned_rowid_range": 1,
+  "expected_unpruned": 122,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid < 8191",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 122,
+  "pruned_rowid_range": 122,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid <= 8191",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 122,
+  "pruned_rowid_range": 122,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid > 8191",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 1,
+  "pruned_rowid_range": 1,
+  "expected_unpruned": 122,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid >= 8191",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": 123,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid < 499712",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 62,
+  "pruned_rowid_range": 62,
+  "expected_unpruned": 61,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid <= 499712",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 61,
+  "pruned_rowid_range": 61,
+  "expected_unpruned": 62,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid > 499712",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 61,
+  "pruned_rowid_range": 61,
+  "expected_unpruned": 62,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid >= 499712",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 61,
+  "pruned_rowid_range": 61,
+  "expected_unpruned": 62,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid < 999976",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": 123,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid <= 999976",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": 123,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid > 999976",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 123,
+  "pruned_rowid_range": 123,
+  "expected_unpruned": 0,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid >= 999976",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 122,
+  "pruned_rowid_range": 122,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid < 0",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 123,
+  "pruned_rowid_range": 123,
+  "expected_unpruned": 0,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid <= 0",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 122,
+  "pruned_rowid_range": 122,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid > 0",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": 123,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid >= 0",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": 123,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid = 8191 OR rowid = 499715",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 121,
+  "pruned_rowid_range": 121,
+  "expected_unpruned": 2,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "(rowid BETWEEN 8192 AND 8202) OR rowid = 999976",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid >= 8192 AND rowid < 24576 AND rowid IN (8191, 16384, 24576)",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 122,
+  "pruned_rowid_range": 122,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid <> 8192",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid NOT IN (1, 2, 8192)",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid % 8192 = 0",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "rowid IS NOT NULL AND rowid < 8193",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 121,
+  "pruned_rowid_range": 121,
+  "expected_unpruned": 2,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "SELECT * FROM hits WHERE URL LIKE '%google%' ORDER BY EventTime, rowid LIMIT 10",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 116,
+  "pruned_rowid_range": 116,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "SELECT * FROM hits ORDER BY EventTime, rowid LIMIT 10",
+  "total_row_groups": 123,
+  "pruned_off": 92,
+  "pruned_on": 207,
+  "pruned_rowid_range": 115,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "SELECT * FROM hits ORDER BY EventTime DESC, WatchID, rowid LIMIT 7 OFFSET 3",
+  "total_row_groups": 123,
+  "pruned_off": 101,
+  "pruned_on": 218,
+  "pruned_rowid_range": 117,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "SELECT * FROM hits WHERE SearchPhrase <> '' ORDER BY EventTime, WatchID, rowid LIMIT 10",
+  "total_row_groups": 123,
+  "pruned_off": 54,
+  "pruned_on": 171,
+  "pruned_rowid_range": 117,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "SELECT * FROM hits ORDER BY WatchID, rowid LIMIT 1",
+  "total_row_groups": 123,
+  "pruned_off": 116,
+  "pruned_on": 238,
+  "pruned_rowid_range": 122,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "SELECT * FROM hits ORDER BY rowid DESC LIMIT 3",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 122,
+  "pruned_rowid_range": 122,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "SELECT * FROM hits WHERE rowid BETWEEN 8190 AND 8200 ORDER BY EventTime, rowid LIMIT 5",
+  "total_row_groups": 123,
+  "pruned_off": 0,
+  "pruned_on": 242,
+  "pruned_rowid_range": 242,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "clickbench",
+  "where": "SELECT * FROM hits WHERE rowid >= 990000 ORDER BY ResolutionWidth DESC, rowid LIMIT 4",
+  "total_row_groups": 123,
+  "pruned_off": 1,
+  "pruned_on": 242,
+  "pruned_rowid_range": 241,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid = 0",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid = 1",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid = 8191",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid = 8192",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid = 8193",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid = 16383",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid = 4997120",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid = 4997119",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid = 9999998",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid = 9999999",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid = 10000000",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1221,
+  "pruned_rowid_range": 1221,
+  "expected_unpruned": 0,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid = 10000005",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1221,
+  "pruned_rowid_range": 1221,
+  "expected_unpruned": 0,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid = -1",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1221,
+  "pruned_rowid_range": 1221,
+  "expected_unpruned": 0,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid IN (0, 8191)",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid IN (8191, 8192)",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1219,
+  "pruned_rowid_range": 1219,
+  "expected_unpruned": 2,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid IN (5, 8192, 24593, 4997120, 9999999)",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1216,
+  "pruned_rowid_range": 1216,
+  "expected_unpruned": 5,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid IN (16383, 16384, 16385, 57344)",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1218,
+  "pruned_rowid_range": 1218,
+  "expected_unpruned": 3,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid IN (9999999, 10000000, 10000100)",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid IN (10000000, 10000001)",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1221,
+  "pruned_rowid_range": 1221,
+  "expected_unpruned": 0,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid IN (-5, 3)",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid IN (8189, 8190, 8191, 8192, 8193, 8194)",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1219,
+  "pruned_rowid_range": 1219,
+  "expected_unpruned": 2,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid IN (11, 24587, 49163, 73739, 98315, 122891, 147467, 172043, 196619, 221195, 245771, 270347, 294923, 319499, 344075, 368651, 393227, 417803, 442379, 466955, 491531, 516107, 540683, 565259, 589835, 614411, 638987, 663563, 688139, 712715, 737291, 761867, 786443, 811019, 835595, 860171, 884747, 909323, 933899, 958475, 983051, 1007627, 1032203, 1056779, 1081355, 1105931, 1130507, 1155083, 1179659, 1204235, 1228811, 1253387, 1277963, 1302539, 1327115, 1351691, 1376267, 1400843, 1425419, 1449995, 1474571, 1499147, 1523723, 1548299, 1572875, 1597451, 1622027, 1646603, 1671179, 1695755, 1720331, 1744907, 1769483, 1794059, 1818635, 1843211, 1867787, 1892363, 1916939, 1941515, 1966091, 1990667, 2015243, 2039819, 2064395, 2088971, 2113547, 2138123, 2162699, 2187275, 2211851, 2236427, 2261003, 2285579, 2310155, 2334731, 2359307, 2383883, 2408459, 2433035, 2457611, 2482187, 2506763, 2531339, 2555915, 2580491, 2605067, 2629643, 2654219, 2678795, 2703371, 2727947, 2752523, 2777099, 2801675, 2826251, 2850827, 2875403, 2899979, 2924555, 2949131, 2973707, 2998283, 3022859, 3047435, 3072011, 3096587, 3121163, 3145739, 3170315, 3194891, 3219467, 3244043, 3268619, 3293195, 3317771, 3342347, 3366923, 3391499, 3416075, 3440651, 3465227, 3489803, 3514379, 3538955, 3563531, 3588107, 3612683, 3637259, 3661835, 3686411, 3710987, 3735563, 3760139, 3784715, 3809291, 3833867, 3858443, 3883019, 3907595, 3932171, 3956747, 3981323, 4005899, 4030475, 4055051, 4079627, 4104203, 4128779, 4153355, 4177931, 4202507, 4227083, 4251659, 4276235, 4300811, 4325387, 4349963, 4374539, 4399115, 4423691, 4448267, 4472843, 4497419, 4521995, 4546571, 4571147, 4595723, 4620299, 4644875, 4669451, 4694027, 4718603, 4743179, 4767755, 4792331, 4816907, 4841483, 4866059, 4890635, 4915211, 4939787, 4964363, 4988939, 5013515, 5038091, 5062667, 5087243, 5111819, 5136395, 5160971, 5185547, 5210123, 5234699, 5259275, 5283851, 5308427, 5333003, 5357579, 5382155, 5406731, 5431307, 5455883, 5480459, 5505035, 5529611, 5554187, 5578763, 5603339, 5627915, 5652491, 5677067, 5701643, 5726219, 5750795, 5775371, 5799947, 5824523, 5849099, 5873675, 5898251, 5922827, 5947403, 5971979, 5996555, 6021131, 6045707, 6070283, 6094859, 6119435, 6144011, 6168587, 6193163, 6217739, 6242315, 6266891, 6291467, 6316043, 6340619, 6365195, 6389771, 6414347, 6438923, 6463499, 6488075, 6512651, 6537227, 6561803, 6586379, 6610955, 6635531, 6660107, 6684683, 6709259, 6733835, 6758411, 6782987, 6807563, 6832139, 6856715, 6881291, 6905867, 6930443, 6955019, 6979595, 7004171, 7028747, 7053323, 7077899, 7102475, 7127051, 7151627, 7176203, 7200779, 7225355, 7249931, 7274507, 7299083, 7323659, 7348235, 7372811, 7397387, 7421963, 7446539, 7471115, 7495691, 7520267, 7544843, 7569419, 7593995, 7618571, 7643147, 7667723, 7692299, 7716875, 7741451, 7766027, 7790603, 7815179, 7839755, 7864331, 7888907, 7913483, 7938059, 7962635, 7987211, 8011787, 8036363, 8060939, 8085515, 8110091, 8134667, 8159243, 8183819, 8208395, 8232971, 8257547, 8282123, 8306699, 8331275, 8355851, 8380427, 8405003, 8429579, 8454155, 8478731, 8503307, 8527883, 8552459, 8577035, 8601611, 8626187, 8650763, 8675339, 8699915, 8724491, 8749067, 8773643, 8798219, 8822795, 8847371, 8871947, 8896523, 8921099, 8945675, 8970251, 8994827, 9019403, 9043979, 9068555, 9093131, 9117707, 9142283, 9166859, 9191435, 9216011, 9240587, 9265163, 9289739, 9314315, 9338891, 9363467, 9388043, 9412619, 9437195, 9461771, 9486347, 9510923, 9535499, 9560075, 9584651, 9609227, 9633803, 9658379, 9682955, 9707531, 9732107, 9756683, 9781259, 9805835, 9830411, 9854987, 9879563, 9904139, 9928715, 9953291, 9977867)",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 814,
+  "pruned_rowid_range": 814,
+  "expected_unpruned": 407,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid BETWEEN 0 AND 0",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid BETWEEN 8191 AND 8192",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1219,
+  "pruned_rowid_range": 1219,
+  "expected_unpruned": 2,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid BETWEEN 8192 AND 16383",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid BETWEEN 8193 AND 16382",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid BETWEEN 8190 AND 24577",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1217,
+  "pruned_rowid_range": 1217,
+  "expected_unpruned": 4,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid BETWEEN 9999998 AND 10000005",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid BETWEEN 10000000 AND 10000100",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1221,
+  "pruned_rowid_range": 1221,
+  "expected_unpruned": 0,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid BETWEEN 4997119 AND 4997120",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1219,
+  "pruned_rowid_range": 1219,
+  "expected_unpruned": 2,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid BETWEEN -10 AND 3",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid BETWEEN 5 AND 4",
+  "total_row_groups": 0,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid < 8192",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid <= 8192",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1219,
+  "pruned_rowid_range": 1219,
+  "expected_unpruned": 2,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid > 8192",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1,
+  "pruned_rowid_range": 1,
+  "expected_unpruned": 1220,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid >= 8192",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1,
+  "pruned_rowid_range": 1,
+  "expected_unpruned": 1220,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid < 8191",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid <= 8191",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid > 8191",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1,
+  "pruned_rowid_range": 1,
+  "expected_unpruned": 1220,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid >= 8191",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": 1221,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid < 4997120",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 611,
+  "pruned_rowid_range": 611,
+  "expected_unpruned": 610,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid <= 4997120",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 610,
+  "pruned_rowid_range": 610,
+  "expected_unpruned": 611,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid > 4997120",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 610,
+  "pruned_rowid_range": 610,
+  "expected_unpruned": 611,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid >= 4997120",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 610,
+  "pruned_rowid_range": 610,
+  "expected_unpruned": 611,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid < 9999999",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": 1221,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid <= 9999999",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": 1221,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid > 9999999",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1221,
+  "pruned_rowid_range": 1221,
+  "expected_unpruned": 0,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid >= 9999999",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid < 0",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1221,
+  "pruned_rowid_range": 1221,
+  "expected_unpruned": 0,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid <= 0",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid > 0",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": 1221,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid >= 0",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": 1221,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid = 8191 OR rowid = 4997123",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1219,
+  "pruned_rowid_range": 1219,
+  "expected_unpruned": 2,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "(rowid BETWEEN 8192 AND 8202) OR rowid = 9999999",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid >= 8192 AND rowid < 24576 AND rowid IN (8191, 16384, 24576)",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid <> 8192",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid NOT IN (1, 2, 8192)",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid % 8192 = 0",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "rowid IS NOT NULL AND rowid < 8193",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1219,
+  "pruned_rowid_range": 1219,
+  "expected_unpruned": 2,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "SELECT * FROM sensor_records ORDER BY timestamp_ms DESC, rowid LIMIT 10",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "micro_sorted",
+  "where": "SELECT * FROM sensor_records ORDER BY timestamp_ms, rowid LIMIT 10 OFFSET 20000",
+  "total_row_groups": 1221,
+  "pruned_off": 1218,
+  "pruned_on": 2438,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid = 0",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid = 1",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid = 8191",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid = 8192",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid = 8193",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid = 16383",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid = 4997120",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid = 4997119",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid = 9999998",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid = 9999999",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid = 10000000",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1221,
+  "pruned_rowid_range": 1221,
+  "expected_unpruned": 0,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid = 10000005",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1221,
+  "pruned_rowid_range": 1221,
+  "expected_unpruned": 0,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid = -1",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1221,
+  "pruned_rowid_range": 1221,
+  "expected_unpruned": 0,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid IN (0, 8191)",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid IN (8191, 8192)",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1219,
+  "pruned_rowid_range": 1219,
+  "expected_unpruned": 2,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid IN (5, 8192, 24593, 4997120, 9999999)",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1216,
+  "pruned_rowid_range": 1216,
+  "expected_unpruned": 5,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid IN (16383, 16384, 16385, 57344)",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1218,
+  "pruned_rowid_range": 1218,
+  "expected_unpruned": 3,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid IN (9999999, 10000000, 10000100)",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid IN (10000000, 10000001)",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1221,
+  "pruned_rowid_range": 1221,
+  "expected_unpruned": 0,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid IN (-5, 3)",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid IN (8189, 8190, 8191, 8192, 8193, 8194)",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1219,
+  "pruned_rowid_range": 1219,
+  "expected_unpruned": 2,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid IN (11, 24587, 49163, 73739, 98315, 122891, 147467, 172043, 196619, 221195, 245771, 270347, 294923, 319499, 344075, 368651, 393227, 417803, 442379, 466955, 491531, 516107, 540683, 565259, 589835, 614411, 638987, 663563, 688139, 712715, 737291, 761867, 786443, 811019, 835595, 860171, 884747, 909323, 933899, 958475, 983051, 1007627, 1032203, 1056779, 1081355, 1105931, 1130507, 1155083, 1179659, 1204235, 1228811, 1253387, 1277963, 1302539, 1327115, 1351691, 1376267, 1400843, 1425419, 1449995, 1474571, 1499147, 1523723, 1548299, 1572875, 1597451, 1622027, 1646603, 1671179, 1695755, 1720331, 1744907, 1769483, 1794059, 1818635, 1843211, 1867787, 1892363, 1916939, 1941515, 1966091, 1990667, 2015243, 2039819, 2064395, 2088971, 2113547, 2138123, 2162699, 2187275, 2211851, 2236427, 2261003, 2285579, 2310155, 2334731, 2359307, 2383883, 2408459, 2433035, 2457611, 2482187, 2506763, 2531339, 2555915, 2580491, 2605067, 2629643, 2654219, 2678795, 2703371, 2727947, 2752523, 2777099, 2801675, 2826251, 2850827, 2875403, 2899979, 2924555, 2949131, 2973707, 2998283, 3022859, 3047435, 3072011, 3096587, 3121163, 3145739, 3170315, 3194891, 3219467, 3244043, 3268619, 3293195, 3317771, 3342347, 3366923, 3391499, 3416075, 3440651, 3465227, 3489803, 3514379, 3538955, 3563531, 3588107, 3612683, 3637259, 3661835, 3686411, 3710987, 3735563, 3760139, 3784715, 3809291, 3833867, 3858443, 3883019, 3907595, 3932171, 3956747, 3981323, 4005899, 4030475, 4055051, 4079627, 4104203, 4128779, 4153355, 4177931, 4202507, 4227083, 4251659, 4276235, 4300811, 4325387, 4349963, 4374539, 4399115, 4423691, 4448267, 4472843, 4497419, 4521995, 4546571, 4571147, 4595723, 4620299, 4644875, 4669451, 4694027, 4718603, 4743179, 4767755, 4792331, 4816907, 4841483, 4866059, 4890635, 4915211, 4939787, 4964363, 4988939, 5013515, 5038091, 5062667, 5087243, 5111819, 5136395, 5160971, 5185547, 5210123, 5234699, 5259275, 5283851, 5308427, 5333003, 5357579, 5382155, 5406731, 5431307, 5455883, 5480459, 5505035, 5529611, 5554187, 5578763, 5603339, 5627915, 5652491, 5677067, 5701643, 5726219, 5750795, 5775371, 5799947, 5824523, 5849099, 5873675, 5898251, 5922827, 5947403, 5971979, 5996555, 6021131, 6045707, 6070283, 6094859, 6119435, 6144011, 6168587, 6193163, 6217739, 6242315, 6266891, 6291467, 6316043, 6340619, 6365195, 6389771, 6414347, 6438923, 6463499, 6488075, 6512651, 6537227, 6561803, 6586379, 6610955, 6635531, 6660107, 6684683, 6709259, 6733835, 6758411, 6782987, 6807563, 6832139, 6856715, 6881291, 6905867, 6930443, 6955019, 6979595, 7004171, 7028747, 7053323, 7077899, 7102475, 7127051, 7151627, 7176203, 7200779, 7225355, 7249931, 7274507, 7299083, 7323659, 7348235, 7372811, 7397387, 7421963, 7446539, 7471115, 7495691, 7520267, 7544843, 7569419, 7593995, 7618571, 7643147, 7667723, 7692299, 7716875, 7741451, 7766027, 7790603, 7815179, 7839755, 7864331, 7888907, 7913483, 7938059, 7962635, 7987211, 8011787, 8036363, 8060939, 8085515, 8110091, 8134667, 8159243, 8183819, 8208395, 8232971, 8257547, 8282123, 8306699, 8331275, 8355851, 8380427, 8405003, 8429579, 8454155, 8478731, 8503307, 8527883, 8552459, 8577035, 8601611, 8626187, 8650763, 8675339, 8699915, 8724491, 8749067, 8773643, 8798219, 8822795, 8847371, 8871947, 8896523, 8921099, 8945675, 8970251, 8994827, 9019403, 9043979, 9068555, 9093131, 9117707, 9142283, 9166859, 9191435, 9216011, 9240587, 9265163, 9289739, 9314315, 9338891, 9363467, 9388043, 9412619, 9437195, 9461771, 9486347, 9510923, 9535499, 9560075, 9584651, 9609227, 9633803, 9658379, 9682955, 9707531, 9732107, 9756683, 9781259, 9805835, 9830411, 9854987, 9879563, 9904139, 9928715, 9953291, 9977867)",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 814,
+  "pruned_rowid_range": 814,
+  "expected_unpruned": 407,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid BETWEEN 0 AND 0",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid BETWEEN 8191 AND 8192",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1219,
+  "pruned_rowid_range": 1219,
+  "expected_unpruned": 2,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid BETWEEN 8192 AND 16383",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid BETWEEN 8193 AND 16382",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid BETWEEN 8190 AND 24577",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1217,
+  "pruned_rowid_range": 1217,
+  "expected_unpruned": 4,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid BETWEEN 9999998 AND 10000005",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid BETWEEN 10000000 AND 10000100",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1221,
+  "pruned_rowid_range": 1221,
+  "expected_unpruned": 0,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid BETWEEN 4997119 AND 4997120",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1219,
+  "pruned_rowid_range": 1219,
+  "expected_unpruned": 2,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid BETWEEN -10 AND 3",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid BETWEEN 5 AND 4",
+  "total_row_groups": 0,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid < 8192",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid <= 8192",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1219,
+  "pruned_rowid_range": 1219,
+  "expected_unpruned": 2,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid > 8192",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1,
+  "pruned_rowid_range": 1,
+  "expected_unpruned": 1220,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid >= 8192",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1,
+  "pruned_rowid_range": 1,
+  "expected_unpruned": 1220,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid < 8191",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid <= 8191",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid > 8191",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1,
+  "pruned_rowid_range": 1,
+  "expected_unpruned": 1220,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid >= 8191",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": 1221,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid < 4997120",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 611,
+  "pruned_rowid_range": 611,
+  "expected_unpruned": 610,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid <= 4997120",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 610,
+  "pruned_rowid_range": 610,
+  "expected_unpruned": 611,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid > 4997120",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 610,
+  "pruned_rowid_range": 610,
+  "expected_unpruned": 611,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid >= 4997120",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 610,
+  "pruned_rowid_range": 610,
+  "expected_unpruned": 611,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid < 9999999",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": 1221,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid <= 9999999",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": 1221,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid > 9999999",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1221,
+  "pruned_rowid_range": 1221,
+  "expected_unpruned": 0,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid >= 9999999",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid < 0",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1221,
+  "pruned_rowid_range": 1221,
+  "expected_unpruned": 0,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid <= 0",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid > 0",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": 1221,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid >= 0",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": 1221,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid = 8191 OR rowid = 4997123",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1219,
+  "pruned_rowid_range": 1219,
+  "expected_unpruned": 2,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "(rowid BETWEEN 8192 AND 8202) OR rowid = 9999999",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid >= 8192 AND rowid < 24576 AND rowid IN (8191, 16384, 24576)",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1220,
+  "pruned_rowid_range": 1220,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid <> 8192",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid NOT IN (1, 2, 8192)",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid % 8192 = 0",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "rowid IS NOT NULL AND rowid < 8193",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1219,
+  "pruned_rowid_range": 1219,
+  "expected_unpruned": 2,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "SELECT * FROM sensor_records ORDER BY timestamp_ms DESC, rowid LIMIT 10",
+  "total_row_groups": 1221,
+  "pruned_off": 1174,
+  "pruned_on": 2385,
+  "pruned_rowid_range": 1211,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "micro_unsorted",
+  "where": "SELECT * FROM sensor_records ORDER BY timestamp_ms, rowid LIMIT 10 OFFSET 20000",
+  "total_row_groups": 1221,
+  "pruned_off": 0,
+  "pruned_on": 1211,
+  "pruned_rowid_range": 1211,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid = 0",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 732,
+  "pruned_rowid_range": 732,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid = 1",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 732,
+  "pruned_rowid_range": 732,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid = 8191",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 732,
+  "pruned_rowid_range": 732,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid = 8192",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 732,
+  "pruned_rowid_range": 732,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid = 8193",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 732,
+  "pruned_rowid_range": 732,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid = 16383",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 732,
+  "pruned_rowid_range": 732,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid = 2998272",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 732,
+  "pruned_rowid_range": 732,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid = 2998271",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 732,
+  "pruned_rowid_range": 732,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid = 6001213",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 732,
+  "pruned_rowid_range": 732,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid = 6001214",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 732,
+  "pruned_rowid_range": 732,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid = 6001215",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 733,
+  "pruned_rowid_range": 733,
+  "expected_unpruned": 0,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid = 6001220",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 733,
+  "pruned_rowid_range": 733,
+  "expected_unpruned": 0,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid = -1",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 733,
+  "pruned_rowid_range": 733,
+  "expected_unpruned": 0,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid IN (0, 8191)",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 732,
+  "pruned_rowid_range": 732,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid IN (8191, 8192)",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 731,
+  "pruned_rowid_range": 731,
+  "expected_unpruned": 2,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid IN (5, 8192, 24593, 2998272, 6001214)",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 728,
+  "pruned_rowid_range": 728,
+  "expected_unpruned": 5,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid IN (16383, 16384, 16385, 57344)",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 730,
+  "pruned_rowid_range": 730,
+  "expected_unpruned": 3,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid IN (6001214, 6001215, 6001315)",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 732,
+  "pruned_rowid_range": 732,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid IN (6001215, 6001216)",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 733,
+  "pruned_rowid_range": 733,
+  "expected_unpruned": 0,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid IN (-5, 3)",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 732,
+  "pruned_rowid_range": 732,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid IN (8189, 8190, 8191, 8192, 8193, 8194)",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 731,
+  "pruned_rowid_range": 731,
+  "expected_unpruned": 2,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid IN (11, 24587, 49163, 73739, 98315, 122891, 147467, 172043, 196619, 221195, 245771, 270347, 294923, 319499, 344075, 368651, 393227, 417803, 442379, 466955, 491531, 516107, 540683, 565259, 589835, 614411, 638987, 663563, 688139, 712715, 737291, 761867, 786443, 811019, 835595, 860171, 884747, 909323, 933899, 958475, 983051, 1007627, 1032203, 1056779, 1081355, 1105931, 1130507, 1155083, 1179659, 1204235, 1228811, 1253387, 1277963, 1302539, 1327115, 1351691, 1376267, 1400843, 1425419, 1449995, 1474571, 1499147, 1523723, 1548299, 1572875, 1597451, 1622027, 1646603, 1671179, 1695755, 1720331, 1744907, 1769483, 1794059, 1818635, 1843211, 1867787, 1892363, 1916939, 1941515, 1966091, 1990667, 2015243, 2039819, 2064395, 2088971, 2113547, 2138123, 2162699, 2187275, 2211851, 2236427, 2261003, 2285579, 2310155, 2334731, 2359307, 2383883, 2408459, 2433035, 2457611, 2482187, 2506763, 2531339, 2555915, 2580491, 2605067, 2629643, 2654219, 2678795, 2703371, 2727947, 2752523, 2777099, 2801675, 2826251, 2850827, 2875403, 2899979, 2924555, 2949131, 2973707, 2998283, 3022859, 3047435, 3072011, 3096587, 3121163, 3145739, 3170315, 3194891, 3219467, 3244043, 3268619, 3293195, 3317771, 3342347, 3366923, 3391499, 3416075, 3440651, 3465227, 3489803, 3514379, 3538955, 3563531, 3588107, 3612683, 3637259, 3661835, 3686411, 3710987, 3735563, 3760139, 3784715, 3809291, 3833867, 3858443, 3883019, 3907595, 3932171, 3956747, 3981323, 4005899, 4030475, 4055051, 4079627, 4104203, 4128779, 4153355, 4177931, 4202507, 4227083, 4251659, 4276235, 4300811, 4325387, 4349963, 4374539, 4399115, 4423691, 4448267, 4472843, 4497419, 4521995, 4546571, 4571147, 4595723, 4620299, 4644875, 4669451, 4694027, 4718603, 4743179, 4767755, 4792331, 4816907, 4841483, 4866059, 4890635, 4915211, 4939787, 4964363, 4988939, 5013515, 5038091, 5062667, 5087243, 5111819, 5136395, 5160971, 5185547, 5210123, 5234699, 5259275, 5283851, 5308427, 5333003, 5357579, 5382155, 5406731, 5431307, 5455883, 5480459, 5505035, 5529611, 5554187, 5578763, 5603339, 5627915, 5652491, 5677067, 5701643, 5726219, 5750795, 5775371, 5799947, 5824523, 5849099, 5873675, 5898251, 5922827, 5947403, 5971979)",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 489,
+  "pruned_rowid_range": 489,
+  "expected_unpruned": 244,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid BETWEEN 0 AND 0",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 732,
+  "pruned_rowid_range": 732,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid BETWEEN 8191 AND 8192",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 731,
+  "pruned_rowid_range": 731,
+  "expected_unpruned": 2,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid BETWEEN 8192 AND 16383",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 732,
+  "pruned_rowid_range": 732,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid BETWEEN 8193 AND 16382",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 732,
+  "pruned_rowid_range": 732,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid BETWEEN 8190 AND 24577",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 729,
+  "pruned_rowid_range": 729,
+  "expected_unpruned": 4,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid BETWEEN 6001213 AND 6001220",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 732,
+  "pruned_rowid_range": 732,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid BETWEEN 6001215 AND 6001315",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 733,
+  "pruned_rowid_range": 733,
+  "expected_unpruned": 0,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid BETWEEN 2998271 AND 2998272",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 731,
+  "pruned_rowid_range": 731,
+  "expected_unpruned": 2,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid BETWEEN -10 AND 3",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 732,
+  "pruned_rowid_range": 732,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid BETWEEN 5 AND 4",
+  "total_row_groups": 0,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid < 8192",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 732,
+  "pruned_rowid_range": 732,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid <= 8192",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 731,
+  "pruned_rowid_range": 731,
+  "expected_unpruned": 2,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid > 8192",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 1,
+  "pruned_rowid_range": 1,
+  "expected_unpruned": 732,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid >= 8192",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 1,
+  "pruned_rowid_range": 1,
+  "expected_unpruned": 732,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid < 8191",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 732,
+  "pruned_rowid_range": 732,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid <= 8191",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 732,
+  "pruned_rowid_range": 732,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid > 8191",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 1,
+  "pruned_rowid_range": 1,
+  "expected_unpruned": 732,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid >= 8191",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": 733,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid < 2998272",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 367,
+  "pruned_rowid_range": 367,
+  "expected_unpruned": 366,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid <= 2998272",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 366,
+  "pruned_rowid_range": 366,
+  "expected_unpruned": 367,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid > 2998272",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 366,
+  "pruned_rowid_range": 366,
+  "expected_unpruned": 367,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid >= 2998272",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 366,
+  "pruned_rowid_range": 366,
+  "expected_unpruned": 367,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid < 6001214",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": 733,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid <= 6001214",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": 733,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid > 6001214",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 733,
+  "pruned_rowid_range": 733,
+  "expected_unpruned": 0,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid >= 6001214",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 732,
+  "pruned_rowid_range": 732,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid < 0",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 733,
+  "pruned_rowid_range": 733,
+  "expected_unpruned": 0,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid <= 0",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 732,
+  "pruned_rowid_range": 732,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid > 0",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": 733,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid >= 0",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": 733,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid = 8191 OR rowid = 2998275",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 731,
+  "pruned_rowid_range": 731,
+  "expected_unpruned": 2,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "(rowid BETWEEN 8192 AND 8202) OR rowid = 6001214",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid >= 8192 AND rowid < 24576 AND rowid IN (8191, 16384, 24576)",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 732,
+  "pruned_rowid_range": 732,
+  "expected_unpruned": 1,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid <> 8192",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid NOT IN (1, 2, 8192)",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid % 8192 = 0",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 0,
+  "pruned_rowid_range": 0,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "rowid IS NOT NULL AND rowid < 8193",
+  "total_row_groups": 733,
+  "pruned_off": 0,
+  "pruned_on": 731,
+  "pruned_rowid_range": 731,
+  "expected_unpruned": 2,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "SELECT * FROM lineitem ORDER BY l_extendedprice DESC, rowid LIMIT 10",
+  "total_row_groups": 733,
+  "pruned_off": 687,
+  "pruned_on": 1410,
+  "pruned_rowid_range": 723,
+  "expected_unpruned": null,
+  "problems": []
+ },
+ {
+  "db": "tpch",
+  "where": "SELECT * FROM lineitem WHERE l_shipmode = 'AIR' ORDER BY l_shipdate, rowid LIMIT 10",
+  "total_row_groups": 733,
+  "pruned_off": 543,
+  "pruned_on": 1266,
+  "pruned_rowid_range": 723,
+  "expected_unpruned": null,
+  "problems": []
+ }
+]

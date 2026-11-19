@@ -1,0 +1,25 @@
+config,mode,queries,identical,details
+baseline_pc,"count, threads 1, cold pass",43,43,
+baseline_pc,"count, threads 1, warm pass",43,43,
+ng2000_pc,"count, threads 1, cold pass",43,43,
+ng2000_pc,"count, threads 1, warm pass",43,43,
+predcache,"count, threads 1, cold pass",43,43,
+predcache,"count, threads 1, warm pass",43,43,
+predcache_ng2000,"count, threads 1, cold pass",43,43,
+predcache_ng2000,"count, threads 1, warm pass",43,43,
+predcache_sub,"count, threads 1, cold pass",43,43,
+predcache_sub,"count, threads 1, warm pass",43,43,
+predcache_sub_ng2000,"count, threads 1, cold pass",43,43,
+predcache_sub_ng2000,"count, threads 1, warm pass",43,43,
+baseline_pc_t8,"check, threads 8, cold pass",43,43,equal to one of the baseline runs: 43; not equal to any: none; of these deterministic: none
+baseline_pc_t8,"check, threads 8, warm pass",43,33,equal to one of the baseline runs: 43; not equal to any: none; of these deterministic: none
+ng2000_pc_t8,"check, threads 8, cold pass",43,35,"equal to one of the baseline runs: 36; not equal to any: q18,q19,q32,q33,q39,q40,q41; of these deterministic: none"
+ng2000_pc_t8,"check, threads 8, warm pass",43,32,"equal to one of the baseline runs: 35; not equal to any: q18,q19,q23,q32,q33,q39,q40,q41; of these deterministic: none"
+predcache_t8,"check, threads 8, cold pass",43,35,"equal to one of the baseline runs: 37; not equal to any: q18,q19,q33,q39,q40,q41; of these deterministic: none"
+predcache_t8,"check, threads 8, warm pass",43,33,"equal to one of the baseline runs: 36; not equal to any: q18,q19,q32,q33,q39,q40,q41; of these deterministic: none"
+predcache_ng2000_t8,"check, threads 8, cold pass",43,35,"equal to one of the baseline runs: 37; not equal to any: q18,q19,q32,q39,q40,q41; of these deterministic: none"
+predcache_ng2000_t8,"check, threads 8, warm pass",43,33,"equal to one of the baseline runs: 36; not equal to any: q18,q19,q23,q33,q39,q40,q41; of these deterministic: none"
+predcache_sub_t8,"check, threads 8, cold pass",43,33,"equal to one of the baseline runs: 36; not equal to any: q18,q19,q23,q33,q39,q40,q41; of these deterministic: none"
+predcache_sub_t8,"check, threads 8, warm pass",43,33,"equal to one of the baseline runs: 36; not equal to any: q18,q19,q31,q32,q39,q40,q41; of these deterministic: none"
+predcache_sub_ng2000_t8,"check, threads 8, cold pass",43,34,"equal to one of the baseline runs: 37; not equal to any: q18,q19,q33,q39,q40,q41; of these deterministic: none"
+predcache_sub_ng2000_t8,"check, threads 8, warm pass",43,32,"equal to one of the baseline runs: 37; not equal to any: q19,q32,q33,q39,q40,q41; of these deterministic: none"

@@ -1,0 +1,9 @@
+config,pass,entries,bytes,lookup_ms,record_ms,recheck_ms
+predcache,cold,16,2031,0.674,0.051,0.025
+predcache,warm,16,2031,0.675,0.043,0.023
+predcache_ng2000,cold,16,2031,0.657,0.051,0.024
+predcache_ng2000,warm,16,2031,0.644,0.048,0.022
+predcache_sub,cold,16,2031,0.614,0.051,0.022
+predcache_sub,warm,16,2031,0.643,0.045,0.022
+predcache_sub_ng2000,cold,16,2031,0.743,0.05,0.025
+predcache_sub_ng2000,warm,16,2031,0.648,0.044,0.022

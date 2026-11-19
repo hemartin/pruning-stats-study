@@ -1,0 +1,5 @@
+query,filter,baseline_wasted,baseline_with_rows,wasted_full_row_groups,exact_n2,exact_n3,exact_n4,exact_n5,ng200_pruned,ng200_consultations,ng200_consult_us_per_rg,ng200_consult_ms,ng200_elapsed_ms,ng2000_pruned,ng2000_consultations,ng2000_consult_us_per_rg,ng2000_consult_ms,ng2000_elapsed_ms,ng20000_pruned,ng20000_consultations,ng20000_consult_us_per_rg,ng20000_consult_ms,ng20000_elapsed_ms,baseline_elapsed_ms,other_scans_wasted
+q21,"contains(URL, 'google')",95,28,94,0,55,86,94,36,122,5.67,0.692,47.2,55,122,20.28,2.474,32.2,55,122,347.43,42.386,91.2,39.6,0
+q22,"contains(URL, 'google') AND SearchPhrase <> ''",122,1,121,0,55,86,94,36,122,5.04,0.615,30.2,55,122,20.09,2.451,24.7,55,122,358.17,43.696,90.4,34.4,0
+q23,"contains(Title, 'Google') AND NOT contains(URL, '.google.') AND SearchPhrase <> ''",76,47,75,42,46,46,46,46,198,3.56,0.704,47.8,46,198,24.77,4.905,47.4,46,198,79.17,15.675,70.7,46.9,0
+q24,"contains(URL, 'google')",95,28,94,0,55,86,94,36,122,5.21,0.636,62.5,55,122,20.71,2.527,46.6,55,122,353.08,43.075,110.1,59.2,116

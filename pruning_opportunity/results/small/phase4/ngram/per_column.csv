@@ -1,0 +1,7 @@
+config,column,words,row_groups,built,useless,empty,distinct_min,distinct_median,distinct_max,distinct_matches_python,bytes_per_rg_mean,bytes_per_rg_max,budget_bits_per_distinct_median,stored_bits_per_distinct_median,eps_min,eps_median,eps_max,build_ms_per_rg,buffer_ms_per_rg
+ng200,title,200,122,122,0,0,1056,9945,11003,True,1598,1600,1.287,1.284,0.000287,0.428,0.463,30.39,2.04
+ng200,url,200,122,122,0,0,13160,14171,32980,True,1596,1600,0.903,0.901,0.529,0.565,0.814,34.49,1.60
+ng2000,title,2000,122,122,0,0,1056,9945,11003,True,15449,16000,12.871,12.871,5.72e-17,0.000172,0.000753,39.97,1.98
+ng2000,url,2000,122,122,0,0,13160,14171,32980,True,15999,16000,9.032,9.032,0.00142,0.00508,0.0705,166.34,1.52
+ng20000,title,20000,122,122,0,0,1056,9945,11003,True,44845,71608,128.708,52.207,5.72e-17,5.39e-16,5.96e-16,12.65,2.27
+ng20000,url,20000,122,122,0,0,13160,14171,32980,True,122936,160000,90.323,51.694,7.13e-16,7.68e-16,5.78e-12,43.71,1.96

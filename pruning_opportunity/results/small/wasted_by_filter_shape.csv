@@ -1,0 +1,31 @@
+benchmark,setup,table,filter_columns_and_kinds,scanned_no_rows
+micro,point_unsorted,sensor_records,timestamp_ms cmp=,1220992
+micro,range_seconds_unsorted,sensor_records,timestamp_ms cmp>= AND timestamp_ms cmp<=,1217129
+micro,cardinality_100000,sensor_records,user_id cmp=,1128064
+micro,range_minutes_unsorted,sensor_records,timestamp_ms cmp>= AND timestamp_ms cmp<=,1010459
+micro,cardinality_10000,sensor_records,user_id cmp=,728804
+micro,cardinality_1000,sensor_records,user_id cmp=,609351
+micro,cardinality_100,sensor_records,user_id cmp=,583734
+micro,point_outliers,sensor_records,timestamp_ms cmp=,500296
+micro,range_seconds_outliers,sensor_records,timestamp_ms cmp>= AND timestamp_ms cmp<=,499317
+micro,range_minutes_outliers,sensor_records,timestamp_ms cmp>= AND timestamp_ms cmp<=,499304
+micro,range_hours_outliers,sensor_records,timestamp_ms cmp>= AND timestamp_ms cmp<=,499304
+micro,point_sorted,sensor_records,timestamp_ms cmp=,992
+tpcds,tpcds,store_sales,ss_customer_sk cmp=,349
+clickbench,clickbench,hits,rowid optional(in) AND rowid cmp>= AND rowid cmp<=,233
+clickbench,clickbench,hits,URL expression AND SearchPhrase cmp!=,122
+tpcds,tpcds,store_sales,ss_sold_time_sk cmp>= AND ss_sold_time_sk cmp<= AND ss_hdemo_sk cmp>= AND ss_hdemo_sk cmp<= AND ss_store_sk cmp=,109
+clickbench,clickbench,hits,URL expression,95
+clickbench,clickbench,hits,URL expression AND EventTime optional(dynamic_topn) [topn],95
+clickbench,clickbench,hits,Title expression AND URL expression AND SearchPhrase cmp!=,76
+tpcds,tpcds,catalog_sales,cs_item_sk cmp=,68
+tpcds,tpcds,web_sales,ws_ship_customer_sk expression AND ws_sold_date_sk cmp>= [join] AND ws_sold_date_sk cmp<= [join] AND ws_item_sk cmp>= [join] AND ws_item_sk cmp<= [join],39
+micro,range_seconds_sorted,sensor_records,timestamp_ms cmp>= AND timestamp_ms cmp<=,13
+micro,range_hours_unsorted,sensor_records,timestamp_ms cmp>= AND timestamp_ms cmp<=,13
+clickbench,clickbench,hits,UserID cmp=,6
+tpcds,tpcds,inventory,inv_item_sk optional(in) [join] AND inv_item_sk cmp>= [join] AND inv_item_sk cmp<= [join] AND inv_date_sk cmp>= [join] AND inv_date_sk cmp<= [join] AND inv_quantity_on_hand cmp>= AND inv_quantity_on_hand cmp<=,4
+tpcds,tpcds,store_sales,ss_item_sk cmp>= AND ss_item_sk cmp<= AND ss_sold_date_sk cmp>= AND ss_sold_date_sk cmp<=,3
+tpcds,tpcds,time_dim,t_hour cmp= AND t_minute cmp>=,3
+tpcds,tpcds,store_sales,ss_sold_date_sk cmp>= [join] AND ss_sold_date_sk cmp<= [join] AND ss_item_sk optional(in) [join] AND ss_item_sk cmp>= [join] AND ss_item_sk cmp<= [join] AND ss_customer_sk cmp>= AND ss_customer_sk optional(in) [join] AND ss_customer_sk cmp>= [join] AND ss_customer_sk cmp<= [join] AND ss_ticket_number optional(in) [join] AND ss_ticket_number cmp>= [join] AND ss_ticket_number cmp<= [join],1
+tpcds,tpcds,item,i_manufact_id cmp=,1
+tpcds,tpcds,customer_address,ca_address_sk cmp>= AND ca_address_sk cmp<= AND ca_county optional(in) AND ca_county cmp= AND ca_state optional(in) AND ca_state cmp=,1

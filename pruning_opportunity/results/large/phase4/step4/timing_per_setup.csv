@@ -1,0 +1,3 @@
+group,setup,config,queries,sum_ms,cold_sum_ms,speedup,lookup_ms_per_query
+clickbench,clickbench,baseline_step4cb,43,506431.4,540125.7,1.0,0.0
+clickbench,clickbench,cbnew_step4,43,486520.7,509780.2,1.041,221.204

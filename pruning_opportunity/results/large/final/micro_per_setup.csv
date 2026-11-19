@@ -1,0 +1,13 @@
+setup,config,queries,partitions,pruned,pruned_by_statistic,wasted,with_rows,minmax_wasted,pct_wasted_pruned,with_rows_equal_minmax
+point_unsorted,minmax (stock),100,12207100,0,0,12207057,43,12207057,0.0,True
+point_unsorted,occupancy@200,100,12207100,6388987,6388987,5818070,43,12207057,52.3,True
+point_unsorted,nullspace@200,100,12207100,7887521,7887521,4319536,43,12207057,64.6,True
+range_seconds_unsorted,minmax (stock),100,12207100,0,0,12168631,38469,12168631,0.0,True
+range_seconds_unsorted,occupancy@200,100,12207100,6388986,6388986,5779645,38469,12168631,52.5,True
+range_seconds_unsorted,nullspace@200,100,12207100,0,0,12168631,38469,12168631,0.0,True
+range_minutes_unsorted,minmax (stock),100,12207100,0,0,10099231,2107869,10099231,0.0,True
+range_minutes_unsorted,occupancy@200,100,12207100,5475689,5475689,4623542,2107869,10099231,54.2,True
+range_minutes_unsorted,nullspace@200,100,12207100,0,0,10099231,2107869,10099231,0.0,True
+range_hours_unsorted,minmax (stock),100,12207100,0,0,134,12206966,134,0.0,True
+range_hours_unsorted,occupancy@200,100,12207100,69,69,65,12206966,134,51.5,True
+range_hours_unsorted,nullspace@200,5,610355,0,0,6,610349,6,0.0,True

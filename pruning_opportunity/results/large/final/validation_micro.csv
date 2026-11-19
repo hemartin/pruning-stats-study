@@ -1,0 +1,81 @@
+setup,tag,predicate,true_partitions_with_rows,counter_with_rows,pruned,wasted,total,sql_partitions,invariants,ok
+point_unsorted,point_unsorted/0000,timestamp_ms = 1769545723552,2,2,0,122069,122071,122071,True,True
+point_unsorted,point_unsorted/0050,timestamp_ms = 1769496341792,0,0,0,122071,122071,122071,True,True
+point_unsorted,point_unsorted/0100,timestamp_ms = 1767363865364,0,0,0,122071,122071,122071,True,True
+point_unsorted,point_unsorted/0150,timestamp_ms = 1769764258013,3,3,0,122068,122071,122071,True,True
+point_unsorted,point_unsorted/0200,timestamp_ms = 1768906259274,0,0,0,122071,122071,122071,True,True
+point_unsorted,point_unsorted/0250,timestamp_ms = 1769046628610,0,0,0,122071,122071,122071,True,True
+point_unsorted,point_unsorted/0300,timestamp_ms = 1768353761608,0,0,0,122071,122071,122071,True,True
+point_unsorted,point_unsorted/0350,timestamp_ms = 1769074639391,0,0,0,122071,122071,122071,True,True
+point_unsorted,point_unsorted/0400,timestamp_ms = 1767438707567,1,1,0,122070,122071,122071,True,True
+point_unsorted,point_unsorted/0450,timestamp_ms = 1767999012246,1,1,0,122070,122071,122071,True,True
+point_unsorted,point_unsorted/0500,timestamp_ms = 1769389997419,0,0,0,122071,122071,122071,True,True
+point_unsorted,point_unsorted/0550,timestamp_ms = 1769592515567,1,1,0,122070,122071,122071,True,True
+point_unsorted,point_unsorted/0600,timestamp_ms = 1769601877916,1,1,0,122070,122071,122071,True,True
+point_unsorted,point_unsorted/0650,timestamp_ms = 1767413021823,1,1,0,122070,122071,122071,True,True
+point_unsorted,point_unsorted/0700,timestamp_ms = 1768305277531,0,0,0,122071,122071,122071,True,True
+point_unsorted,point_unsorted/0750,timestamp_ms = 1767291062929,0,0,0,122071,122071,122071,True,True
+point_unsorted,point_unsorted/0800,timestamp_ms = 1767869443840,3,3,0,122068,122071,122071,True,True
+point_unsorted,point_unsorted/0850,timestamp_ms = 1768249377584,0,0,0,122071,122071,122071,True,True
+point_unsorted,point_unsorted/0900,timestamp_ms = 1769216436725,0,0,0,122071,122071,122071,True,True
+point_unsorted,point_unsorted/0950,timestamp_ms = 1768003161505,0,0,0,122071,122071,122071,True,True
+range_seconds_unsorted,range_seconds_unsorted/0000,timestamp_ms >= 1769545723552 AND timestamp_ms <= 1769545724552,361,361,0,121710,122071,122071,True,True
+range_seconds_unsorted,range_seconds_unsorted/0050,timestamp_ms >= 1769496341792 AND timestamp_ms <= 1769496342792,397,397,0,121674,122071,122071,True,True
+range_seconds_unsorted,range_seconds_unsorted/0100,timestamp_ms >= 1767363865364 AND timestamp_ms <= 1767363866364,392,392,0,121679,122071,122071,True,True
+range_seconds_unsorted,range_seconds_unsorted/0150,timestamp_ms >= 1769764258013 AND timestamp_ms <= 1769764259013,413,413,0,121658,122071,122071,True,True
+range_seconds_unsorted,range_seconds_unsorted/0200,timestamp_ms >= 1768906259274 AND timestamp_ms <= 1768906260274,416,416,0,121655,122071,122071,True,True
+range_seconds_unsorted,range_seconds_unsorted/0250,timestamp_ms >= 1769046628610 AND timestamp_ms <= 1769046629610,375,375,0,121696,122071,122071,True,True
+range_seconds_unsorted,range_seconds_unsorted/0300,timestamp_ms >= 1768353761608 AND timestamp_ms <= 1768353762608,349,349,0,121722,122071,122071,True,True
+range_seconds_unsorted,range_seconds_unsorted/0350,timestamp_ms >= 1769074639391 AND timestamp_ms <= 1769074640391,381,381,0,121690,122071,122071,True,True
+range_seconds_unsorted,range_seconds_unsorted/0400,timestamp_ms >= 1767438707567 AND timestamp_ms <= 1767438708567,391,391,0,121680,122071,122071,True,True
+range_seconds_unsorted,range_seconds_unsorted/0450,timestamp_ms >= 1767999012246 AND timestamp_ms <= 1767999013246,412,412,0,121659,122071,122071,True,True
+range_seconds_unsorted,range_seconds_unsorted/0500,timestamp_ms >= 1769389997419 AND timestamp_ms <= 1769389998419,327,327,0,121744,122071,122071,True,True
+range_seconds_unsorted,range_seconds_unsorted/0550,timestamp_ms >= 1769592515567 AND timestamp_ms <= 1769592516567,379,379,0,121692,122071,122071,True,True
+range_seconds_unsorted,range_seconds_unsorted/0600,timestamp_ms >= 1769601877916 AND timestamp_ms <= 1769601878916,386,386,0,121685,122071,122071,True,True
+range_seconds_unsorted,range_seconds_unsorted/0650,timestamp_ms >= 1767413021823 AND timestamp_ms <= 1767413022823,405,405,0,121666,122071,122071,True,True
+range_seconds_unsorted,range_seconds_unsorted/0700,timestamp_ms >= 1768305277531 AND timestamp_ms <= 1768305278531,391,391,0,121680,122071,122071,True,True
+range_seconds_unsorted,range_seconds_unsorted/0750,timestamp_ms >= 1767291062929 AND timestamp_ms <= 1767291063929,368,368,0,121703,122071,122071,True,True
+range_seconds_unsorted,range_seconds_unsorted/0800,timestamp_ms >= 1767869443840 AND timestamp_ms <= 1767869444840,390,390,0,121681,122071,122071,True,True
+range_seconds_unsorted,range_seconds_unsorted/0850,timestamp_ms >= 1768249377584 AND timestamp_ms <= 1768249378584,382,382,0,121689,122071,122071,True,True
+range_seconds_unsorted,range_seconds_unsorted/0900,timestamp_ms >= 1769216436725 AND timestamp_ms <= 1769216437725,373,373,0,121698,122071,122071,True,True
+range_seconds_unsorted,range_seconds_unsorted/0950,timestamp_ms >= 1768003161505 AND timestamp_ms <= 1768003162505,429,429,0,121642,122071,122071,True,True
+range_minutes_unsorted,range_minutes_unsorted/0000,timestamp_ms >= 1769545723552 AND timestamp_ms <= 1769545783552,20983,20983,0,101088,122071,122071,True,True
+range_minutes_unsorted,range_minutes_unsorted/0050,timestamp_ms >= 1769496341792 AND timestamp_ms <= 1769496401792,21151,21151,0,100920,122071,122071,True,True
+range_minutes_unsorted,range_minutes_unsorted/0100,timestamp_ms >= 1767363865364 AND timestamp_ms <= 1767363925364,21146,21146,0,100925,122071,122071,True,True
+range_minutes_unsorted,range_minutes_unsorted/0150,timestamp_ms >= 1769764258013 AND timestamp_ms <= 1769764318013,20810,20810,0,101261,122071,122071,True,True
+range_minutes_unsorted,range_minutes_unsorted/0200,timestamp_ms >= 1768906259274 AND timestamp_ms <= 1768906319274,21133,21133,0,100938,122071,122071,True,True
+range_minutes_unsorted,range_minutes_unsorted/0250,timestamp_ms >= 1769046628610 AND timestamp_ms <= 1769046688610,21147,21147,0,100924,122071,122071,True,True
+range_minutes_unsorted,range_minutes_unsorted/0300,timestamp_ms >= 1768353761608 AND timestamp_ms <= 1768353821608,20821,20821,0,101250,122071,122071,True,True
+range_minutes_unsorted,range_minutes_unsorted/0350,timestamp_ms >= 1769074639391 AND timestamp_ms <= 1769074699391,21083,21083,0,100988,122071,122071,True,True
+range_minutes_unsorted,range_minutes_unsorted/0400,timestamp_ms >= 1767438707567 AND timestamp_ms <= 1767438767567,21198,21198,0,100873,122071,122071,True,True
+range_minutes_unsorted,range_minutes_unsorted/0450,timestamp_ms >= 1767999012246 AND timestamp_ms <= 1767999072246,21043,21043,0,101028,122071,122071,True,True
+range_minutes_unsorted,range_minutes_unsorted/0500,timestamp_ms >= 1769389997419 AND timestamp_ms <= 1769390057419,20814,20814,0,101257,122071,122071,True,True
+range_minutes_unsorted,range_minutes_unsorted/0550,timestamp_ms >= 1769592515567 AND timestamp_ms <= 1769592575567,21167,21167,0,100904,122071,122071,True,True
+range_minutes_unsorted,range_minutes_unsorted/0600,timestamp_ms >= 1769601877916 AND timestamp_ms <= 1769601937916,20930,20930,0,101141,122071,122071,True,True
+range_minutes_unsorted,range_minutes_unsorted/0650,timestamp_ms >= 1767413021823 AND timestamp_ms <= 1767413081823,20951,20951,0,101120,122071,122071,True,True
+range_minutes_unsorted,range_minutes_unsorted/0700,timestamp_ms >= 1768305277531 AND timestamp_ms <= 1768305337531,21121,21121,0,100950,122071,122071,True,True
+range_minutes_unsorted,range_minutes_unsorted/0750,timestamp_ms >= 1767291062929 AND timestamp_ms <= 1767291122929,21078,21078,0,100993,122071,122071,True,True
+range_minutes_unsorted,range_minutes_unsorted/0800,timestamp_ms >= 1767869443840 AND timestamp_ms <= 1767869503840,20993,20993,0,101078,122071,122071,True,True
+range_minutes_unsorted,range_minutes_unsorted/0850,timestamp_ms >= 1768249377584 AND timestamp_ms <= 1768249437584,20986,20986,0,101085,122071,122071,True,True
+range_minutes_unsorted,range_minutes_unsorted/0900,timestamp_ms >= 1769216436725 AND timestamp_ms <= 1769216496725,21292,21292,0,100779,122071,122071,True,True
+range_minutes_unsorted,range_minutes_unsorted/0950,timestamp_ms >= 1768003161505 AND timestamp_ms <= 1768003221505,21267,21267,0,100804,122071,122071,True,True
+range_hours_unsorted,range_hours_unsorted/0000,timestamp_ms >= 1769545723552 AND timestamp_ms <= 1769549323552,122070,122070,0,1,122071,122071,True,True
+range_hours_unsorted,range_hours_unsorted/0050,timestamp_ms >= 1769496341792 AND timestamp_ms <= 1769499941792,122070,122070,0,1,122071,122071,True,True
+range_hours_unsorted,range_hours_unsorted/0100,timestamp_ms >= 1767363865364 AND timestamp_ms <= 1767367465364,122071,122071,0,0,122071,122071,True,True
+range_hours_unsorted,range_hours_unsorted/0150,timestamp_ms >= 1769764258013 AND timestamp_ms <= 1769767858013,122069,122069,0,2,122071,122071,True,True
+range_hours_unsorted,range_hours_unsorted/0200,timestamp_ms >= 1768906259274 AND timestamp_ms <= 1768909859274,122070,122070,0,1,122071,122071,True,True
+range_hours_unsorted,range_hours_unsorted/0250,timestamp_ms >= 1769046628610 AND timestamp_ms <= 1769050228610,122069,122069,0,2,122071,122071,True,True
+range_hours_unsorted,range_hours_unsorted/0300,timestamp_ms >= 1768353761608 AND timestamp_ms <= 1768357361608,122070,122070,0,1,122071,122071,True,True
+range_hours_unsorted,range_hours_unsorted/0350,timestamp_ms >= 1769074639391 AND timestamp_ms <= 1769078239391,122068,122068,0,3,122071,122071,True,True
+range_hours_unsorted,range_hours_unsorted/0400,timestamp_ms >= 1767438707567 AND timestamp_ms <= 1767442307567,122070,122070,0,1,122071,122071,True,True
+range_hours_unsorted,range_hours_unsorted/0450,timestamp_ms >= 1767999012246 AND timestamp_ms <= 1768002612246,122067,122067,0,4,122071,122071,True,True
+range_hours_unsorted,range_hours_unsorted/0500,timestamp_ms >= 1769389997419 AND timestamp_ms <= 1769393597419,122071,122071,0,0,122071,122071,True,True
+range_hours_unsorted,range_hours_unsorted/0550,timestamp_ms >= 1769592515567 AND timestamp_ms <= 1769596115567,122070,122070,0,1,122071,122071,True,True
+range_hours_unsorted,range_hours_unsorted/0600,timestamp_ms >= 1769601877916 AND timestamp_ms <= 1769605477916,122070,122070,0,1,122071,122071,True,True
+range_hours_unsorted,range_hours_unsorted/0650,timestamp_ms >= 1767413021823 AND timestamp_ms <= 1767416621823,122070,122070,0,1,122071,122071,True,True
+range_hours_unsorted,range_hours_unsorted/0700,timestamp_ms >= 1768305277531 AND timestamp_ms <= 1768308877531,122068,122068,0,3,122071,122071,True,True
+range_hours_unsorted,range_hours_unsorted/0750,timestamp_ms >= 1767291062929 AND timestamp_ms <= 1767294662929,122069,122069,0,2,122071,122071,True,True
+range_hours_unsorted,range_hours_unsorted/0800,timestamp_ms >= 1767869443840 AND timestamp_ms <= 1767873043840,122069,122069,0,2,122071,122071,True,True
+range_hours_unsorted,range_hours_unsorted/0850,timestamp_ms >= 1768249377584 AND timestamp_ms <= 1768252977584,122070,122070,0,1,122071,122071,True,True
+range_hours_unsorted,range_hours_unsorted/0900,timestamp_ms >= 1769216436725 AND timestamp_ms <= 1769220036725,122070,122070,0,1,122071,122071,True,True
+range_hours_unsorted,range_hours_unsorted/0950,timestamp_ms >= 1768003161505 AND timestamp_ms <= 1768006761505,122071,122071,0,0,122071,122071,True,True
