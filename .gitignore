@@ -96,3 +96,14 @@ out_clickbench.txt
 out_tpcds.txt
 out_tpch.txt
 experiments_results/*
+.venv/
+__pycache__/
+
+# pruning-opportunity study (large / derived files)
+pruning_opportunity/stock/
+pruning_opportunity/rowid/
+pruning_opportunity/data/
+pruning_opportunity/db/
+pruning_opportunity/results/raw/
+*.Zone.Identifier
+*:Zone.Identifier
