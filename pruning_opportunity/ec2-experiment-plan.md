@@ -72,6 +72,10 @@ Both binaries are built release, with `-DOVERRIDE_GIT_DESCRIBE=v1.4.4`, without 
 
   In C3 the warm-up run fills the predicate cache, so all 100 timed runs are repeat runs.
 
+  Added during the run (20 Nov): **C2b, Q19 only: Bloom filter@200 on `hits.UserID`**, the configuration of the
+  paper's Table 3 (local check with the counting binary: 9,458 + 2,291 = 11,749 pruned partitions; paper: 11,748). It
+  runs in M1 and M2 after the main run.
+
 ### 3.3 Memory configurations
 
 Every cell above runs in both configurations:

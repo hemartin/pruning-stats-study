@@ -20,7 +20,7 @@ MICRO_LABEL = {"point_unsorted": "point", "range_seconds_unsorted": "1 s", "rang
                "range_hours_unsorted": "1 h"}
 CB_ORDER = ["Q19", "Q21", "Q23"]
 CONFIG_ORDER = ["stock_baseline", "timing_baseline", "timing_bloom200", "timing_occupancy200", "timing_nullspace200",
-                "stock_C1_baseline", "timing_C1_baseline", "timing_C2_statistic", "timing_C3_all_repeat"]
+                "stock_C1_baseline", "timing_C1_baseline", "timing_C2_statistic", "timing_C2_bloom200", "timing_C3_all_repeat"]
 
 
 def stats(values):

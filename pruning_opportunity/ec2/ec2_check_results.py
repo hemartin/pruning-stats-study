@@ -60,7 +60,7 @@ def main():
             queries = [("%s/%s" % (setup, qid), sql) for setup in items for qid, sql in t.micro_queries(setup, args.sample)]
             passes = 1
         else:
-            queries = [(t.CB_NAMES[qid], sql) for qid, sql in t.clickbench_queries()]
+            queries = [(t.CB_NAMES[qid], sql) for qid, sql in t.clickbench_queries(t.CB_QIDS)]
             passes = 2
         binary = args.stock_binary if binary_key == "stock" else args.timing_binary
         got = answers(binary, env, db_file, queries, passes, args.build_threads)

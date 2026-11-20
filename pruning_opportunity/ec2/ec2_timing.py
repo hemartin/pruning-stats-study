@@ -75,6 +75,8 @@ def sessions():
     result.append(("clickbench", "timing", "C2_statistic", stats_env(CB_STATS), CB_QIDS))
     result.append(("clickbench", "timing", "C3_all_repeat",
                    dict(stats_env(CB_STATS), PRUNING_ROWID_SKIP="1", PRUNING_PREDICATE_CACHE="1"), CB_QIDS))
+    # Q19 with the paper's Bloom filter at 100x (Table 3 of the DBTest paper), added after M1 had run
+    result.append(("clickbench", "timing", "C2_bloom200", stats_env("hits.UserID:bloom:200"), ["q20"]))
     return result
 
 
@@ -89,11 +91,11 @@ def micro_queries(setup_name, sample):
     return items[::sample] if sample > 1 else items
 
 
-def clickbench_queries():
+def clickbench_queries(qids):
     setup = [s for s in common.established_setups() if s.name == "clickbench"][0]
     qs = setup.queries()
     by_id = dict(zip(setup.qids(len(qs)), qs))
-    return [(qid, by_id[qid]) for qid in CB_QIDS]
+    return [(qid, by_id[qid]) for qid in qids]
 
 
 # ----------------------------------------------------------------------------------------------------------------
@@ -478,7 +480,7 @@ def run_session(args, mode, dataset, binary_key, config, env_extra, items):
                     setup, len(done), time.time() - t_setup,
                     statistics.median([r["wall_ms"] for r in done]) if done else float("nan")), flush=True)
         else:
-            queries = clickbench_queries()
+            queries = clickbench_queries(items)
             for qid, sql in queries:  # round 0: untimed warm-up run of every query (fills the predicate cache)
                 timed(CB_NAMES[qid], -1, qid, sql, True)
             t_all = time.time()
