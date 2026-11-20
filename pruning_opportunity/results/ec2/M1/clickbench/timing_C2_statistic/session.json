@@ -1,0 +1,34 @@
+{
+ "mode": "M1",
+ "dataset": "clickbench",
+ "binary": "timing",
+ "binary_path": "/home/ubuntu/repo/duckdb/build/timing/duckdb",
+ "config": "C2_statistic",
+ "env": {
+  "PRUNING_STATS_COLUMNS": "hits.UserID:nullspace:200,hits.URL:ngram:2000,hits.Title:ngram:2000",
+  "PRUNING_STATS_BUILD_ON_LOAD": "16"
+ },
+ "db": "/home/ubuntu/data/db/large/clickbench.db",
+ "threads": 16,
+ "memory_limit": "50GB",
+ "runs": 100,
+ "sample": 10,
+ "start": "2026-11-20T09:56:21+0000",
+ "done": true,
+ "errors": [],
+ "attach": {
+  "real_s": 108.59,
+  "wall_s": 108.58976743800008,
+  "read_bytes": 0,
+  "build_on_load": [
+   "PRUNING_STATS_BUILD_ON_LOAD {\"type\":\"load_build\",\"table\":\"hits\",\"row_groups\":12207,\"threads\":16,\"wall_ms\":108585.127456,\"read_ms\":8303.078870,\"columns\":[{\"column\":\"title\",\"kind\":\"ngram\",\"words\":2000,\"row_groups_built_total\":12207,\"bytes_total\":188618176,\"build_ns_total\":493524753621,\"buffer_ns_total\":8714523840},{\"column\":\"url\",\"kind\":\"ngram\",\"words\":2000,\"row_groups_built_total\":12207,\"bytes_total\":192393088,\"build_ns_total\":1084110657964,\"buffer_ns_total\":7898831973},{\"column\":\"userid\",\"kind\":\"nullspace\",\"words\":200,\"row_groups_built_total\":12207,\"bytes_total\":19484904,\"build_ns_total\":130503215238,\"buffer_ns_total\":134988425}],\"error\":null}"
+  ]
+ },
+ "warmup": {
+  "sql": "SELECT max(hash(COLUMNS(*))) FROM hits;",
+  "real_s": 3.501,
+  "wall_s": 3.50077066200015,
+  "read_bytes": 0
+ },
+ "end": "2026-11-20T09:58:42+0000"
+}

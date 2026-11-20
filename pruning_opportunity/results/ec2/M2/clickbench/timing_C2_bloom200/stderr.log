@@ -1,0 +1,1 @@
+PRUNING_STATS_BUILD_ON_LOAD {"type":"load_build","table":"hits","row_groups":12207,"threads":16,"wall_ms":2371.349308,"read_ms":23324.708223,"columns":[{"column":"userid","kind":"bloom","words":200,"row_groups_built_total":12207,"bytes_total":19531200,"build_ns_total":430830952,"buffer_ns_total":130402217}],"error":null}

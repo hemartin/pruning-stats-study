@@ -1,0 +1,47 @@
+{
+ "mode": "M2",
+ "dataset": "micro",
+ "binary": "stock",
+ "binary_path": "/home/ubuntu/duckdb-stock/build/release/duckdb",
+ "config": "baseline",
+ "env": {},
+ "db": "/home/ubuntu/data/db/large/micro_unsorted.db",
+ "threads": 16,
+ "memory_limit": "2GB",
+ "runs": 100,
+ "sample": 10,
+ "start": "2026-11-20T10:00:47+0000",
+ "done": true,
+ "errors": [],
+ "drop_caches": {
+  "ok": true,
+  "message": ""
+ },
+ "evict_db_file": true,
+ "cgroup": {
+  "cgroup": "/system.slice/run-rc4a93fa222d44434b0d84f4202781a08.scope",
+  "memory.max": "6442450944",
+  "memory.swap.max": "0"
+ },
+ "attach": {
+  "real_s": 0.025,
+  "wall_s": 0.025112596999861125,
+  "read_bytes": 2318336,
+  "build_on_load": []
+ },
+ "cgroup_memory": {
+  "after_attach": {
+   "current": 27594752,
+   "anon": 6168576,
+   "file": 18395136,
+   "peak": 27594752
+  },
+  "end": {
+   "current": 6392598528,
+   "anon": 5072269312,
+   "file": 1279397888,
+   "peak": 6442450944
+  }
+ },
+ "end": "2026-11-20T11:09:21+0000"
+}

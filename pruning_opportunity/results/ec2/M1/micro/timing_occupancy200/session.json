@@ -1,0 +1,34 @@
+{
+ "mode": "M1",
+ "dataset": "micro",
+ "binary": "timing",
+ "binary_path": "/home/ubuntu/repo/duckdb/build/timing/duckdb",
+ "config": "occupancy200",
+ "env": {
+  "PRUNING_STATS_COLUMNS": "sensor_records.timestamp_ms:occupancy:200",
+  "PRUNING_STATS_BUILD_ON_LOAD": "16"
+ },
+ "db": "/home/ubuntu/data/db/large/micro_unsorted.db",
+ "threads": 16,
+ "memory_limit": "50GB",
+ "runs": 100,
+ "sample": 10,
+ "start": "2026-11-20T09:45:52+0000",
+ "done": true,
+ "errors": [],
+ "attach": {
+  "real_s": 37.035,
+  "wall_s": 37.03514991299994,
+  "read_bytes": 0,
+  "build_on_load": [
+   "PRUNING_STATS_BUILD_ON_LOAD {\"type\":\"load_build\",\"table\":\"sensor_records\",\"row_groups\":122071,\"threads\":16,\"wall_ms\":37033.008934,\"read_ms\":11755.708609,\"columns\":[{\"column\":\"timestamp_ms\",\"kind\":\"occupancy\",\"words\":200,\"row_groups_built_total\":122071,\"bytes_total\":194337040,\"build_ns_total\":577485171658,\"buffer_ns_total\":1256474595}],\"error\":null}"
+  ]
+ },
+ "warmup": {
+  "sql": "SELECT max(hash(COLUMNS(*))) FROM sensor_records;",
+  "real_s": 0.275,
+  "wall_s": 0.2752197629999955,
+  "read_bytes": 0
+ },
+ "end": "2026-11-20T09:50:56+0000"
+}

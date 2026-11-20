@@ -1,0 +1,34 @@
+{
+ "mode": "M1",
+ "dataset": "clickbench",
+ "binary": "timing",
+ "binary_path": "/home/ubuntu/repo/duckdb/build/timing/duckdb",
+ "config": "C2_bloom200",
+ "env": {
+  "PRUNING_STATS_COLUMNS": "hits.UserID:bloom:200",
+  "PRUNING_STATS_BUILD_ON_LOAD": "16"
+ },
+ "db": "/home/ubuntu/data/db/large/clickbench.db",
+ "threads": 16,
+ "memory_limit": "50GB",
+ "runs": 100,
+ "sample": 10,
+ "start": "2026-11-20T14:34:42+0000",
+ "done": true,
+ "errors": [],
+ "attach": {
+  "real_s": 1.711,
+  "wall_s": 1.7116593790015031,
+  "read_bytes": 2676813824,
+  "build_on_load": [
+   "PRUNING_STATS_BUILD_ON_LOAD {\"type\":\"load_build\",\"table\":\"hits\",\"row_groups\":12207,\"threads\":16,\"wall_ms\":1699.434879,\"read_ms\":23697.033769,\"columns\":[{\"column\":\"userid\",\"kind\":\"bloom\",\"words\":200,\"row_groups_built_total\":12207,\"bytes_total\":19531200,\"build_ns_total\":427962080,\"buffer_ns_total\":139219469}],\"error\":null}"
+  ]
+ },
+ "warmup": {
+  "sql": "SELECT max(hash(COLUMNS(*))) FROM hits;",
+  "real_s": 18.904,
+  "wall_s": 18.904056227998808,
+  "read_bytes": 19846184960
+ },
+ "end": "2026-11-20T14:35:06+0000"
+}

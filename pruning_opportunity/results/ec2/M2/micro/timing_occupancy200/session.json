@@ -1,0 +1,52 @@
+{
+ "mode": "M2",
+ "dataset": "micro",
+ "binary": "timing",
+ "binary_path": "/home/ubuntu/repo/duckdb/build/timing/duckdb",
+ "config": "occupancy200",
+ "env": {
+  "PRUNING_STATS_COLUMNS": "sensor_records.timestamp_ms:occupancy:200",
+  "PRUNING_STATS_BUILD_ON_LOAD": "16"
+ },
+ "db": "/home/ubuntu/data/db/large/micro_unsorted.db",
+ "threads": 16,
+ "memory_limit": "2GB",
+ "runs": 100,
+ "sample": 10,
+ "start": "2026-11-20T12:28:26+0000",
+ "done": true,
+ "errors": [],
+ "drop_caches": {
+  "ok": true,
+  "message": ""
+ },
+ "evict_db_file": true,
+ "cgroup": {
+  "cgroup": "/system.slice/run-rbdaf47d0b07c461a850e990e840365db.scope",
+  "memory.max": "6442450944",
+  "memory.swap.max": "0"
+ },
+ "attach": {
+  "real_s": 38.438,
+  "wall_s": 38.43807052900047,
+  "read_bytes": 8050622464,
+  "build_on_load": [
+   "PRUNING_STATS_BUILD_ON_LOAD {\"type\":\"load_build\",\"table\":\"sensor_records\",\"row_groups\":122071,\"threads\":16,\"wall_ms\":38414.680730,\"read_ms\":39291.176561,\"columns\":[{\"column\":\"timestamp_ms\",\"kind\":\"occupancy\",\"words\":200,\"row_groups_built_total\":122071,\"bytes_total\":194337040,\"build_ns_total\":570167245414,\"buffer_ns_total\":1253789244}],\"error\":null}"
+  ]
+ },
+ "cgroup_memory": {
+  "after_attach": {
+   "current": 6441431040,
+   "anon": 2594942976,
+   "file": 3837599744,
+   "peak": 6442450944
+  },
+  "end": {
+   "current": 6349287424,
+   "anon": 5276942336,
+   "file": 1030664192,
+   "peak": 6442450944
+  }
+ },
+ "end": "2026-11-20T13:18:52+0000"
+}

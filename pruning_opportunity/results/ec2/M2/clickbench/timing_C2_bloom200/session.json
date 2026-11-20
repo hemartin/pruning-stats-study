@@ -1,0 +1,52 @@
+{
+ "mode": "M2",
+ "dataset": "clickbench",
+ "binary": "timing",
+ "binary_path": "/home/ubuntu/repo/duckdb/build/timing/duckdb",
+ "config": "C2_bloom200",
+ "env": {
+  "PRUNING_STATS_COLUMNS": "hits.UserID:bloom:200",
+  "PRUNING_STATS_BUILD_ON_LOAD": "16"
+ },
+ "db": "/home/ubuntu/data/db/large/clickbench.db",
+ "threads": 16,
+ "memory_limit": "2GB",
+ "runs": 100,
+ "sample": 10,
+ "start": "2026-11-20T14:35:07+0000",
+ "done": true,
+ "errors": [],
+ "drop_caches": {
+  "ok": true,
+  "message": ""
+ },
+ "evict_db_file": true,
+ "cgroup": {
+  "cgroup": "/system.slice/run-r5217a6ee36d04350a57cc4d6a1ff34e9.scope",
+  "memory.max": "6442450944",
+  "memory.swap.max": "0"
+ },
+ "attach": {
+  "real_s": 2.404,
+  "wall_s": 2.4041507379988616,
+  "read_bytes": 3382292480,
+  "build_on_load": [
+   "PRUNING_STATS_BUILD_ON_LOAD {\"type\":\"load_build\",\"table\":\"hits\",\"row_groups\":12207,\"threads\":16,\"wall_ms\":2371.349308,\"read_ms\":23324.708223,\"columns\":[{\"column\":\"userid\",\"kind\":\"bloom\",\"words\":200,\"row_groups_built_total\":12207,\"bytes_total\":19531200,\"build_ns_total\":430830952,\"buffer_ns_total\":130402217}],\"error\":null}"
+  ]
+ },
+ "cgroup_memory": {
+  "after_attach": {
+   "current": 5563625472,
+   "anon": 2141392896,
+   "file": 3398549504,
+   "peak": 5563887616
+  },
+  "end": {
+   "current": 5579513856,
+   "anon": 2157240320,
+   "file": 3399397376,
+   "peak": 5579513856
+  }
+ },
+ "end": "2026-11-20T14:35:13+0000"
+}

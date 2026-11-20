@@ -1,0 +1,47 @@
+{
+ "mode": "M2",
+ "dataset": "clickbench",
+ "binary": "stock",
+ "binary_path": "/home/ubuntu/duckdb-stock/build/release/duckdb",
+ "config": "C1_baseline",
+ "env": {},
+ "db": "/home/ubuntu/data/db/large/clickbench.db",
+ "threads": 16,
+ "memory_limit": "2GB",
+ "runs": 100,
+ "sample": 10,
+ "start": "2026-11-20T13:31:39+0000",
+ "done": true,
+ "errors": [],
+ "drop_caches": {
+  "ok": true,
+  "message": ""
+ },
+ "evict_db_file": true,
+ "cgroup": {
+  "cgroup": "/system.slice/run-r28baea3352154910bedcd7f8a1125069.scope",
+  "memory.max": "6442450944",
+  "memory.swap.max": "0"
+ },
+ "attach": {
+  "real_s": 0.026,
+  "wall_s": 0.0264624539995566,
+  "read_bytes": 3616768,
+  "build_on_load": []
+ },
+ "cgroup_memory": {
+  "after_attach": {
+   "current": 31166464,
+   "anon": 8335360,
+   "file": 19693568,
+   "peak": 31186944
+  },
+  "end": {
+   "current": 6437883904,
+   "anon": 3872841728,
+   "file": 2515730432,
+   "peak": 6442450944
+  }
+ },
+ "end": "2026-11-20T13:55:16+0000"
+}

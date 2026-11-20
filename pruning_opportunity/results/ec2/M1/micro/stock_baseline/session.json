@@ -1,0 +1,29 @@
+{
+ "mode": "M1",
+ "dataset": "micro",
+ "binary": "stock",
+ "binary_path": "/home/ubuntu/duckdb-stock/build/release/duckdb",
+ "config": "baseline",
+ "env": {},
+ "db": "/home/ubuntu/data/db/large/micro_unsorted.db",
+ "threads": 16,
+ "memory_limit": "50GB",
+ "runs": 100,
+ "sample": 10,
+ "start": "2026-11-20T09:37:10+0000",
+ "done": true,
+ "errors": [],
+ "attach": {
+  "real_s": 0.002,
+  "wall_s": 0.001967138999987128,
+  "read_bytes": 0,
+  "build_on_load": []
+ },
+ "warmup": {
+  "sql": "SELECT max(hash(COLUMNS(*))) FROM sensor_records;",
+  "real_s": 1.179,
+  "wall_s": 1.1793667830000345,
+  "read_bytes": 0
+ },
+ "end": "2026-11-20T09:41:25+0000"
+}

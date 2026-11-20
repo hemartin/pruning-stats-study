@@ -1,0 +1,1 @@
+PRUNING_STATS_BUILD_ON_LOAD {"type":"load_build","table":"sensor_records","row_groups":122071,"threads":16,"wall_ms":234555.101249,"read_ms":25877.438591,"columns":[{"column":"timestamp_ms","kind":"nullspace","words":200,"row_groups_built_total":122071,"bytes_total":194467736,"build_ns_total":3722146342695,"buffer_ns_total":1239200252}],"error":null}

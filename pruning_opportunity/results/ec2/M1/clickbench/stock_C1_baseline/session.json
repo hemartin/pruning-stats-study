@@ -1,0 +1,29 @@
+{
+ "mode": "M1",
+ "dataset": "clickbench",
+ "binary": "stock",
+ "binary_path": "/home/ubuntu/duckdb-stock/build/release/duckdb",
+ "config": "C1_baseline",
+ "env": {},
+ "db": "/home/ubuntu/data/db/large/clickbench.db",
+ "threads": 16,
+ "memory_limit": "50GB",
+ "runs": 100,
+ "sample": 10,
+ "start": "2026-11-20T09:54:58+0000",
+ "done": true,
+ "errors": [],
+ "attach": {
+  "real_s": 0.004,
+  "wall_s": 0.004351549999910276,
+  "read_bytes": 0,
+  "build_on_load": []
+ },
+ "warmup": {
+  "sql": "SELECT max(hash(COLUMNS(*))) FROM hits;",
+  "real_s": 4.025,
+  "wall_s": 4.025641414999882,
+  "read_bytes": 0
+ },
+ "end": "2026-11-20T09:55:39+0000"
+}
